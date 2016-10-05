@@ -2,6 +2,7 @@
   "name": "madeon",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://billyzkid.github.io/madeon/",
   "devDependencies": {
     "react-scripts": "0.6.1"
   },
