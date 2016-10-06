@@ -1,0 +1,55 @@
+.main-bg {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: 500ms ease-in-out all;
+  background: #000 url("../images/background.jpg") right bottom/cover no-repeat;
+}
+
+.main-bg.active {
+  opacity: 1;
+}
+
+album-art {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform-origin: 50% 50%;
+}
+
+@media (max-width: 900px), (max-height: 600px) {
+  album-art {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 750px), (max-height: 510px) {
+  album-art {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 550px), (max-height: 425px) {
+  album-art {
+    transform: scale(0.4);
+  }
+}
+
+@media (max-width: 370px), (max-height: 330px) {
+  album-art {
+    transform: scale(0.3);
+  }
+}
+
+@media (max-width: 300px), (max-height: 280px) {
+  album-art {
+    transform: scale(0.25);
+  }
+}
