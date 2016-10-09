@@ -6,23 +6,22 @@
   font: medium "Lato", helvetica, arial, sans-serif;
 }
 
-.main-bg {
+.app-bg {
   position: absolute;
-  z-index: 1;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   opacity: 0;
   transition: 500ms ease-in-out all;
-  background: #000 url("../images/background.jpg") right bottom/cover no-repeat;
+  background: url("../images/background.jpg") right bottom/cover no-repeat;
 }
 
-.main-bg.active {
+.app-bg.active {
   opacity: 1;
 }
 
-.album-art {
+.app-art {
   position: absolute;
   top: 0;
   right: 0;
@@ -32,31 +31,31 @@
 }
 
 @media (max-width: 900px), (max-height: 600px) {
-  .album-art {
+  .app-art {
     transform: scale(0.8);
   }
 }
 
 @media (max-width: 750px), (max-height: 510px) {
-  .album-art {
+  .app-art {
     transform: scale(0.6);
   }
 }
 
 @media (max-width: 550px), (max-height: 425px) {
-  .album-art {
+  .app-art {
     transform: scale(0.4);
   }
 }
 
 @media (max-width: 370px), (max-height: 330px) {
-  .album-art {
+  .app-art {
     transform: scale(0.3);
   }
 }
 
 @media (max-width: 300px), (max-height: 280px) {
-  .album-art {
+  .app-art {
     transform: scale(0.25);
   }
 }

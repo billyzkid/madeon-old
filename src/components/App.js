@@ -2,44 +2,73 @@ import React from "react";
 import classnames from "classnames";
 import "./App.css";
 
+const LoadState = {
+  default: 0,
+  loading: 1,
+  loaded: 2,
+  failed: 3
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      touchSupport: false,
-      loading: true,
-      bgLoaded: false,
-      animate: false,
-      isLooperActive: false,
-      hasError: false
+      loadState: LoadState.default
     };
   }
 
-  onMainBgClick(e) {
-    this.setState({ bgLoaded: true });
+  componentDidMount() {
+    this.createBackgroundLoader();
+  }
+
+  componentWillUnmount() {
+    this.destroyBackgroundLoader();
+  }
+
+  createBackgroundLoader() {
+    this.backgroundImage = new Image();
+    this.backgroundImage.onload = this.onBackgroundImageLoad.bind(this);
+    this.backgroundImage.onerror = this.onBackgroundImageError.bind(this);
+    this.backgroundImage.src = require("../images/background.jpg");
+    this.setState({ loadState: LoadState.loading });
+  }
+
+  destroyBackgroundLoader() {
+    if (this.backgroundImage) {
+      this.backgroundImage.onload = null;
+      this.backgroundImage.onerror = null;
+      this.backgroundImage = null;
+    }
+  }
+
+  onBackgroundImageLoad(e) {
+    this.destroyBackgroundLoader();
+    this.setState({ loadState: LoadState.loaded });
+  }
+
+  onBackgroundImageError(e) {
+    this.destroyBackgroundLoader();
+    this.setState({ loadState: LoadState.failed });
   }
 
   render() {
     let appClassNames = classnames({
       "app": true,
-      "no-touch": !this.state.touchSupport,
-      "loading": this.state.loading,
-      "bgLoaded": this.state.bgLoaded,
-      "animate": this.state.animate,
-      "looper-active": this.state.isLooperActive,
-      "error": this.state.hasError
+      "loading": this.state.loadState === LoadState.loading,
+      "loaded": this.state.loadState === LoadState.loaded,
+      "failed": this.state.loadState === LoadState.failed
     });
 
-    let mainBgClassNames = classnames({
-      "main-bg": true,
-      "active": this.state.bgLoaded
+    let appBackgroundClassNames = classnames({
+      "app-bg": true,
+      "active": this.state.loadState === LoadState.loaded
     });
 
     return (
       <div className={appClassNames}>
-        <div className={mainBgClassNames} onClick={this.onMainBgClick.bind(this)}></div>
-        <div className="album-art"></div>
-        <div className="madeon-ui"></div>
+        <div className={appBackgroundClassNames}></div>
+        <div className="app-art"></div>
+        <div className="app-ui"></div>
       </div>
     );
   }
