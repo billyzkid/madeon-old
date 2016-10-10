@@ -1,6 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 import "./App.css";
+import Interface from "./Interface";
+import Chrome from "./Chrome";
 
 const LoadState = {
   default: 0,
@@ -67,8 +69,8 @@ class App extends React.Component {
     return (
       <div className={appClassNames}>
         <div className={appBackgroundClassNames}></div>
-        <div className="app-art"></div>
-        <div className="app-ui"></div>
+        <Interface/>
+        <Chrome/>
       </div>
     );
   }
