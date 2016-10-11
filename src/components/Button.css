@@ -1,0 +1,9 @@
+.button {
+  width: 51px;
+  height: 51px;
+  margin: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  box-sizing: border-box;
+  cursor: pointer;
+  pointer-events: auto;
+}

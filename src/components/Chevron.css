@@ -1,0 +1,34 @@
+.chevron {
+  width: 233px;
+  height: 420.2px;
+}
+
+.chevron:nth-child(1) {
+  transform: scaleX(1);
+  transform-origin: 50% 50%;
+  background: red url("../images/chevron-background.png") left center/contain no-repeat;
+}
+
+.chevron:nth-child(2) {
+  transform: scaleX(-1);
+  transform-origin: 50% 50%;
+  background: blue url("../images/chevron-background.png") left center/contain no-repeat;
+}
+
+/*.chevron-top {
+  position: absolute;
+  bottom: 50%;
+  right: 0;
+  left: 0;
+  height: 0;
+  background: url("../images/chevron-top.png") center bottom/100% auto no-repeat;
+}
+
+.chevron-bottom {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 0;
+  background: url("../images/chevron-bottom.png") center top/100% auto no-repeat;
+}*/
