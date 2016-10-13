@@ -8,11 +8,11 @@
 }
 
 .chevron:nth-child(1) {
-  transform: translateX(27.5px);
+  transform: translateX(28px);
 }
 
 .chevron:nth-child(2) {
-  transform: translateX(-27.5px) scaleX(-1);
+  transform: translateX(-28px) scaleX(-1);
 }
 
 .chevron-top {
