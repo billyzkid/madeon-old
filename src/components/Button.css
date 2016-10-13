@@ -6,3 +6,106 @@
   cursor: pointer;
   pointer-events: auto;
 }
+
+.button.active {
+  border: 1px solid transparent;
+}
+
+.button.inactive,
+.button.inactive:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.loading .button {
+  pointer-events: none;
+}
+
+.button.bass {
+  background: rgba(175, 46, 80, 0.47);
+}
+
+.button.bass.active {
+  background: #D4214F;
+}
+
+.button.bass.waiting {
+  animation: 400ms blink-red infinite;
+}
+
+.no-touch .button.bass:not(.inactive):hover {
+  background: rgba(212, 33, 79, 0.64);
+}
+
+.button.drum {
+  background: rgba(56, 75, 107, 0.32);
+}
+
+.button.drum.active {
+  background: #2C64C4;
+}
+
+.button.drum.waiting {
+  animation: 400ms blink-yellow infinite;
+}
+
+.no-touch .button.drum:not(.inactive):hover {
+  background: rgba(44, 100, 196, 0.64);
+}
+
+.button.sound {
+  background: rgba(33, 208, 168, 0.37);
+}
+
+.button.sound.active {
+  background: #0AFDCC;
+}
+
+.button.sound.waiting {
+  animation: 400ms blink-green infinite;
+}
+
+.no-touch .button.sound:not(.inactive):hover {
+  background: rgba(10, 253, 204, 0.64);
+}
+
+@keyframes blink-red {
+  0% {
+    background: rgba(175, 46, 80, 0.47);
+  }
+
+  50% {
+    background: #D4214F;
+  }
+
+  100% {
+    background: rgba(175, 46, 80, 0.47);
+  }
+}
+
+@keyframes blink-green {
+  0% {
+    background: rgba(33, 208, 168, 0.37);
+  }
+
+  50% {
+    background: #0AFDCC;
+  }
+
+  100% {
+    background: rgba(33, 208, 168, 0.37);
+  }
+}
+
+@keyframes blink-yellow {
+  0% {
+    background: rgba(56, 75, 107, 0.32);
+  }
+
+  50% {
+    background: #2C64C4;
+  }
+
+  100% {
+    background: rgba(56, 75, 107, 0.32);
+  }
+}

@@ -1,15 +1,9 @@
 import React from "react";
 import classnames from "classnames";
-import "./App.css";
 import Interface from "./Interface";
 import Chrome from "./Chrome";
-
-const LoadState = {
-  default: 0,
-  loading: 1,
-  loaded: 2,
-  failed: 3
-};
+import LoadState from "../constants/LoadState";
+import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
