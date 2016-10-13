@@ -1,6 +1,6 @@
 .chevron {
   position: relative;
-  width: 238px;
+  width: 233px;
   height: 420px;
   background: url("../images/chevron-background.png") center/contain no-repeat;
   /*background-color: red;*/
@@ -8,11 +8,11 @@
 }
 
 .chevron:nth-child(1) {
-  transform: translateX(28px);
+  transform: translateX(23px);
 }
 
 .chevron:nth-child(2) {
-  transform: translateX(-28px) scaleX(-1);
+  transform: translateX(-23px) scaleX(-1);
 }
 
 .chevron-top {

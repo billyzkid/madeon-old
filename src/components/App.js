@@ -2,14 +2,14 @@ import React from "react";
 import classnames from "classnames";
 import Interface from "./Interface";
 import Chrome from "./Chrome";
-import LoadState from "../constants/LoadState";
+import AppState from "../constants/AppState";
 import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadState: LoadState.default
+      appState: AppState.default
     };
   }
 
@@ -26,7 +26,7 @@ class App extends React.Component {
     this.backgroundImage.onload = this.onBackgroundImageLoad.bind(this);
     this.backgroundImage.onerror = this.onBackgroundImageError.bind(this);
     this.backgroundImage.src = require("../images/background.jpg");
-    this.setState({ loadState: LoadState.loading });
+    this.setState({ loadState: AppState.loading });
   }
 
   destroyBackgroundLoader() {
@@ -39,25 +39,25 @@ class App extends React.Component {
 
   onBackgroundImageLoad(e) {
     this.destroyBackgroundLoader();
-    this.setState({ loadState: LoadState.loaded });
+    this.setState({ appState: AppState.loaded });
   }
 
   onBackgroundImageError(e) {
     this.destroyBackgroundLoader();
-    this.setState({ loadState: LoadState.failed });
+    this.setState({ appState: AppState.failed });
   }
 
   render() {
     let appClassNames = classnames({
       "app": true,
-      "loading": this.state.loadState === LoadState.loading,
-      "loaded": this.state.loadState === LoadState.loaded,
-      "failed": this.state.loadState === LoadState.failed
+      "loading": this.state.appState === AppState.loading,
+      "loaded": this.state.appState === AppState.loaded,
+      "failed": this.state.appState === AppState.failed
     });
 
     let appBackgroundClassNames = classnames({
       "app-bg": true,
-      "active": this.state.loadState === LoadState.loaded
+      "active": this.state.appState === AppState.loaded
     });
 
     return (

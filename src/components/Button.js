@@ -1,18 +1,18 @@
 import React from "react";
 import classnames from "classnames";
-import ButtonType from "../constants/ButtonType";
+import AudioType from "../constants/AudioType";
 import "./Button.css";
 
 class Button extends React.Component {
   render() {
     let buttonClassNames = classnames({
       "button": true,
-      "bass": this.props.type === ButtonType.bass,
-      "drum": this.props.type === ButtonType.drum,
-      "sound": this.props.type === ButtonType.sound,
+      "bass": this.props.audioType === AudioType.bass,
+      "drum": this.props.audioType === AudioType.drum,
+      "sound": this.props.audioType === AudioType.sound,
       "active": false,
       "inactive": false,
-      "waiting": true
+      "waiting": false
     });
     
     return (
