@@ -2,7 +2,8 @@ import React from "react";
 import classnames from "classnames";
 import Interface from "./Interface";
 import Chrome from "./Chrome";
-import AppState from "../constants/AppState";
+import { AppState } from "../scripts/constants";
+import { loadImageAsync } from "../scripts/functions";
 import "./App.css";
 
 class App extends React.Component {
@@ -14,59 +15,42 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.createBackgroundLoader();
+    this.setState({ appState: AppState.loading });
+    this._loadAsync().done(
+      e => this.setState({ appState: AppState.loaded }),
+      e => this.setState({ appState: AppState.failed })
+    );
   }
 
-  componentWillUnmount() {
-    this.destroyBackgroundLoader();
-  }
-
-  createBackgroundLoader() {
-    this.backgroundImage = new Image();
-    this.backgroundImage.onload = this.onBackgroundImageLoad.bind(this);
-    this.backgroundImage.onerror = this.onBackgroundImageError.bind(this);
-    this.backgroundImage.src = require("../images/background.jpg");
-    this.setState({ loadState: AppState.loading });
-  }
-
-  destroyBackgroundLoader() {
-    if (this.backgroundImage) {
-      this.backgroundImage.onload = null;
-      this.backgroundImage.onerror = null;
-      this.backgroundImage = null;
-    }
-  }
-
-  onBackgroundImageLoad(e) {
-    this.destroyBackgroundLoader();
-    this.setState({ appState: AppState.loaded });
-  }
-
-  onBackgroundImageError(e) {
-    this.destroyBackgroundLoader();
-    this.setState({ appState: AppState.failed });
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return this.state.appState !== nextState.appState;
   }
 
   render() {
-    let appClassNames = classnames({
+    let classNames = classnames({
       "app": true,
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
-      "failed": this.state.appState === AppState.failed
-    });
-
-    let appBackgroundClassNames = classnames({
-      "app-bg": true,
-      "active": this.state.appState === AppState.loaded
+      "failed": this.state.appState === AppState.failed,
+      "looping": this.state.appState === AppState.looping
     });
 
     return (
-      <div className={appClassNames}>
-        <div className={appBackgroundClassNames}></div>
-        <Interface/>
-        <Chrome/>
+      <div className={classNames}>
+        <Interface />
+        <Chrome />
       </div>
     );
+  }
+
+  _loadAsync() {
+    return window.WinJS.Promise.join([
+      loadImageAsync(require("../images/background.jpg")),
+      loadImageAsync(require("../images/chevron-background.png")),
+      loadImageAsync(require("../images/chevron-bottom.png")),
+      loadImageAsync(require("../images/chevron-top.png")),
+      loadImageAsync(require("../images/logo.png"))
+    ]);
   }
 }
 

@@ -2,21 +2,17 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: #000;
   font: medium "Lato", helvetica, arial, sans-serif;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
 }
 
-.app-bg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  transition: 500ms ease-in-out all;
+.app.loaded {
+  opacity: 1;
   background: url("../images/background.jpg") right bottom/cover no-repeat;
 }
 
-.app-bg.active {
+.app.failed {
   opacity: 1;
+  background: red;
 }

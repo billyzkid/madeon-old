@@ -1,7 +1,7 @@
 import React from "react";
 import Chevron from "./Chevron";
 import Button from "./Button";
-import AudioType from "../constants/AudioType";
+import { AudioType } from "../scripts/constants";
 import "./Interface.css";
 
 class Interface extends React.Component {

@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import AudioType from "../constants/AudioType";
+import { AudioType } from "../scripts/constants";
 import "./Button.css";
 
 class Button extends React.Component {
