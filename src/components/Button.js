@@ -5,7 +5,7 @@ import "./Button.css";
 
 class Button extends React.Component {
   render() {
-    let buttonClassNames = classnames({
+    let classNames = classnames({
       "button": true,
       "bass": this.props.audioType === AudioType.bass,
       "drum": this.props.audioType === AudioType.drum,
@@ -14,9 +14,9 @@ class Button extends React.Component {
       "inactive": false,
       "waiting": false
     });
-    
+
     return (
-      <div className={buttonClassNames}/>
+      <div className={classNames} />
     );
   }
 }
