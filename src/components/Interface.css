@@ -52,12 +52,13 @@
   flex-flow: row wrap;
   justify-content: space-between;
   align-content: space-between;
-  width: 330px;
-  height: 330px;
+  width: 326px;
+  height: 326px;
+  padding: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%) rotate(45deg) scale(0.9);
   transform-origin: 50% 50%;
-  /*background: black;*/
+  /*background: yellow;*/
 }

@@ -5,8 +5,8 @@ class Chevron extends React.Component {
   render() {
     return (
       <div className="chevron">
-        <div className="chevron-top"/>
-        <div className="chevron-bottom"/>
+        <div className="chevron-part"/>
+        <div className="chevron-part"/>
       </div>
     );
   }

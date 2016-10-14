@@ -52,7 +52,9 @@ class App extends React.Component {
       "app": true,
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
-      "failed": this.state.appState === AppState.failed
+      "failed": this.state.appState === AppState.failed,
+      "animate": false,
+      "looping": false
     });
 
     let appBackgroundClassNames = classnames({
