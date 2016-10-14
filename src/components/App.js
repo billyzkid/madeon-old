@@ -16,7 +16,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.setState({ appState: AppState.loading });
-    this._loadAsync().done(
+    this._loadAsync().then(
       e => this.setState({ appState: AppState.loaded }),
       e => this.setState({ appState: AppState.failed })
     );
@@ -44,7 +44,7 @@ class App extends React.Component {
   }
 
   _loadAsync() {
-    return window.WinJS.Promise.join([
+    return Promise.all([
       loadImageAsync(require("../images/background.jpg")),
       loadImageAsync(require("../images/chevron-background.png")),
       loadImageAsync(require("../images/chevron-bottom.png")),
