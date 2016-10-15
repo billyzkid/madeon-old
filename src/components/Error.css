@@ -1,0 +1,23 @@
+.error {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  background: #d4214f;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.error p {
+  margin: 0;
+}
+
+.error a {
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+}

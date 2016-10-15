@@ -1,29 +1,39 @@
 import React from "react";
 import classnames from "classnames";
-import Interface from "./Interface";
 import Chrome from "./Chrome";
-import { AppState } from "../scripts/constants";
-import { loadImageAsync } from "../scripts/functions";
+import Error from "./Error";
+import Interface from "./Interface";
+import { AppState, ErrorType } from "../scripts/constants";
+import { loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      appState: AppState.default
+      appState: AppState.default,
+      errorType: ErrorType.none
     };
   }
 
   componentDidMount() {
-    this.setState({ appState: AppState.loading });
-    this._loadAsync().then(
-      e => this.setState({ appState: AppState.loaded }),
-      e => this.setState({ appState: AppState.failed })
+    this._load().then(
+      () => this.setState({
+        appState: AppState.loaded,
+        errorType: ErrorType.none
+      }),
+      (errorType) => {
+        this.setState({
+          appState: AppState.failed,
+          errorType: errorType
+        });
+      }
     );
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.state.appState !== nextState.appState;
+    return this.state.appState !== nextState.appState || this.state.errorType !== nextState.errorType;
   }
 
   render() {
@@ -39,18 +49,19 @@ class App extends React.Component {
       <div className={classNames}>
         <Interface />
         <Chrome />
+        <Error type={this.state.errorType} />
       </div>
     );
   }
 
-  _loadAsync() {
+  _load() {
     return Promise.all([
-      loadImageAsync(require("../images/background.jpg")),
-      loadImageAsync(require("../images/chevron-background.png")),
-      loadImageAsync(require("../images/chevron-bottom.png")),
-      loadImageAsync(require("../images/chevron-top.png")),
-      loadImageAsync(require("../images/logo.png"))
-    ]);
+      loadImage(require("../images/background.jpg")),
+      loadImage(require("../images/chevron-background.png")),
+      loadImage(require("../images/chevron-bottom.png")),
+      loadImage(require("../images/chevron-top.png")),
+      loadImage(require("../images/logo.png"))
+    ]).then(loadAudioContext);
   }
 }
 
