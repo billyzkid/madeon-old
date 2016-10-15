@@ -1,0 +1,81 @@
+.wizard {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(14, 34, 54, 0.61);
+  color: #f8e9db;
+  font-size: 10px;
+  text-align: center;
+  pointer-events: none;
+  /*opacity: 0;*/
+  transform-origin: 50% 50%;
+  transition: all 200ms linear;
+}
+
+.wizard.active {
+  opacity: 1;
+}
+
+.wizard h1,
+.wizard h2 {
+  margin: 0 0 0.5em 0;
+  padding: 0;
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+  transform: translateY(-50px);
+}
+
+.wizard h1 {
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+.wizard.step-1 h1,
+.wizard.step-1 h2:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.wizard.step-2 h1,
+.wizard.step-2 h2:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.wizard.step-2 h2:nth-child(-n+2) {
+  transform: translateY(50px);
+}
+
+.wizard.step-3 h1,
+.wizard.step-3 h2:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.wizard.step-3 h2:nth-child(-n+3) {
+  transform: translateY(50px);
+}
+
+.wizard.step-4 h1,
+.wizard.step-4 h2:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.wizard.step-4 h2:nth-child(-n+4) {
+  transform: translateY(50px);
+}
+
+@media (min-width: 1500px) and (min-height: 900px) {
+  .wizard {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1500px) and (min-height: 1400px) {
+  .wizard {
+    font-size: 18px;
+  }
+}

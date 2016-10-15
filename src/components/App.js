@@ -3,6 +3,7 @@ import classnames from "classnames";
 import Chrome from "./Chrome";
 import Error from "./Error";
 import Interface from "./Interface";
+import Wizard from "./Wizard";
 import { AppState, ErrorType } from "../scripts/constants";
 import { loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
@@ -18,16 +19,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this._load().then(
-      () => this.setState({
-        appState: AppState.loaded,
-        errorType: ErrorType.none
-      }),
+    Promise.all([
+      loadImage(require("../images/background.jpg")),
+      loadImage(require("../images/chevron-background.png")),
+      loadImage(require("../images/chevron-bottom.png")),
+      loadImage(require("../images/chevron-top.png")),
+      loadImage(require("../images/logo.png"))
+    ]).then(loadAudioContext).then(
+      (audioContext) => {
+        this._audioContext = audioContext;
+        this.setState({ appState: AppState.loaded, errorType: ErrorType.none });
+      },
       (errorType) => {
-        this.setState({
-          appState: AppState.failed,
-          errorType: errorType
-        });
+        this._audioContext = null;
+        this.setState({ appState: AppState.failed, errorType: errorType });
       }
     );
   }
@@ -48,20 +53,11 @@ class App extends React.Component {
     return (
       <div className={classNames}>
         <Interface />
+        <Wizard />
         <Chrome />
         <Error type={this.state.errorType} />
       </div>
     );
-  }
-
-  _load() {
-    return Promise.all([
-      loadImage(require("../images/background.jpg")),
-      loadImage(require("../images/chevron-background.png")),
-      loadImage(require("../images/chevron-bottom.png")),
-      loadImage(require("../images/chevron-top.png")),
-      loadImage(require("../images/logo.png"))
-    ]).then(loadAudioContext);
   }
 }
 
