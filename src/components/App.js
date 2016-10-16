@@ -11,11 +11,7 @@ import "./App.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      appState: AppState.default,
-      errorType: ErrorType.none
-    };
+    this.state = { appState: AppState.default, errorType: ErrorType.none };
   }
 
   componentDidMount() {
@@ -47,7 +43,9 @@ class App extends React.Component {
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
-      "looping": this.state.appState === AppState.looping
+      "looping": this.state.appState === AppState.looping,
+      "show-wizard": false,
+      "show-error": false
     });
 
     return (
