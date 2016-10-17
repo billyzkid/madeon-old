@@ -3,6 +3,7 @@ import classnames from "classnames";
 import Chrome from "./Chrome";
 import Error from "./Error";
 import Interface from "./Interface";
+import Looper from "./Looper";
 import Wizard from "./Wizard";
 import { AppState, ErrorType } from "../scripts/constants";
 import { loadAudioContext, loadImage } from "../scripts/functions";
@@ -51,6 +52,7 @@ class App extends React.Component {
     return (
       <div className={classNames}>
         <Interface />
+        <Looper />
         <Wizard />
         <Chrome />
         <Error type={this.state.errorType} />

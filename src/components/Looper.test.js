@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Interface from "./Interface";
+import Looper from "./Looper";
 
 it("renders without crashing", () => {
-  ReactDOM.render(<Interface />, document.createElement("div"));
+  ReactDOM.render(<Looper />, document.createElement("div"));
 });
