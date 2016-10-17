@@ -5,7 +5,7 @@
   background: url("../images/background.jpg") right bottom/cover no-repeat;
   font: 16px "Lato", helvetica, arial, sans-serif;
   opacity: 0;
-  transition: opacity 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
 }
 
 .app.loaded,

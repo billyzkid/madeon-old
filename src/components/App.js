@@ -57,6 +57,10 @@ class App extends React.Component {
       </div>
     );
   }
+
+  _alert() {
+    alert(123);
+  }
 }
 
 export default App;

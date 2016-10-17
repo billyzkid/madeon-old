@@ -4,11 +4,11 @@
   bottom: 0;
   left: 0;
   right: 0;
+  pointer-events: none;
   background: rgba(14, 34, 54, 0.61);
   color: #f8e9db;
   font-size: 10px;
   text-align: center;
-  pointer-events: none;
   opacity: 0;
   transition: all 200ms linear;
 }
