@@ -6,8 +6,8 @@ export const AppState = {
 };
 
 export const AudioType = {
-  bass: 0,
-  drum: 1,
+  drum: 0,
+  bass: 1,
   sound: 2
 };
 

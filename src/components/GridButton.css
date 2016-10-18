@@ -19,22 +19,6 @@
   background: rgba(0, 0, 0, 0.1) !important;
 }
 
-.grid-button.bass {
-  background: rgba(175, 46, 80, 0.47);
-}
-
-.grid-button.bass.active {
-  background: #d4214f;
-}
-
-.grid-button.bass.waiting {
-  animation: grid-button-blink-red 400ms infinite;
-}
-
-.app.no-touch .grid-button.bass:not(.inactive):hover {
-  background: rgba(212, 33, 79, 0.64);
-}
-
 .grid-button.drum {
   background: rgba(56, 75, 107, 0.32);
 }
@@ -44,11 +28,27 @@
 }
 
 .grid-button.drum.waiting {
-  animation: grid-button-blink-blue 400ms infinite;
+  animation: grid-button-drum-blink 400ms infinite;
 }
 
 .app.no-touch .grid-button.drum:not(.inactive):hover {
   background: rgba(44, 100, 196, 0.64);
+}
+
+.grid-button.bass {
+  background: rgba(175, 46, 80, 0.47);
+}
+
+.grid-button.bass.active {
+  background: #d4214f;
+}
+
+.grid-button.bass.waiting {
+  animation: grid-button-bass-blink 400ms infinite;
+}
+
+.app.no-touch .grid-button.bass:not(.inactive):hover {
+  background: rgba(212, 33, 79, 0.64);
 }
 
 .grid-button.sound {
@@ -60,28 +60,14 @@
 }
 
 .grid-button.sound.waiting {
-  animation: grid-button-blink-green 400ms infinite;
+  animation: grid-button-sound-blink 400ms infinite;
 }
 
 .app.no-touch .grid-button.sound:not(.inactive):hover {
   background: rgba(10, 253, 204, 0.64);
 }
 
-@keyframes grid-button-blink-red {
-  0% {
-    background: rgba(175, 46, 80, 0.47);
-  }
-
-  50% {
-    background: #d4214f;
-  }
-
-  100% {
-    background: rgba(175, 46, 80, 0.47);
-  }
-}
-
-@keyframes grid-button-blink-blue {
+@keyframes grid-button-drum-blink {
   0% {
     background: rgba(56, 75, 107, 0.32);
   }
@@ -95,7 +81,21 @@
   }
 }
 
-@keyframes grid-button-blink-green {
+@keyframes grid-button-bass-blink {
+  0% {
+    background: rgba(175, 46, 80, 0.47);
+  }
+
+  50% {
+    background: #d4214f;
+  }
+
+  100% {
+    background: rgba(175, 46, 80, 0.47);
+  }
+}
+
+@keyframes grid-button-sound-blink {
   0% {
     background: rgba(33, 208, 168, 0.37);
   }
