@@ -3,17 +3,14 @@
   width: 233px;
   height: 426px;
   background: url("../images/chevron-background.png") center/contain no-repeat;
-  /*background-color: red;*/
 }
 
 .chevron:nth-child(1) {
-  transform: translateX(20px);
-  /*transform: translateX(-210px)*/
+  transform: translateX(-210px);
 }
 
 .chevron:nth-child(2) {
-  transform: translateX(-20px) scaleX(-1);
-  /*transform: translateX(210px) scaleX(-1);*/
+  transform: translateX(210px) scaleX(-1);
 }
 
 .chevron-part {
@@ -33,15 +30,15 @@
   background: url("../images/chevron-bottom.png") top/100% no-repeat;
 }
 
-.animate .chevron-part {
+.loaded .chevron-part {
   height: 50%;
 }
 
-.looping .chevron-part {
-  animation: chevron-part-bounce 4363.6363636364ms infinite ease-out;
+.playing .chevron-part {
+  animation: dance 4363.6363636364ms infinite ease-out;
 }
 
-@keyframes chevron-part-bounce {
+@keyframes dance {
   0% {
     height: 50%;
     animation-timing-function: ease-out;

@@ -11,6 +11,7 @@ class Chrome extends React.Component {
         <div className="chrome-footer">
           <a href="http://wmas.it" target="_blank">We Made This</a>
         </div>
+        <div className="looper" />
       </div>
     );
   }

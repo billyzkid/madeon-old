@@ -2,9 +2,10 @@
   position: relative;
   width: 100%;
   height: 100%;
+  background: url("../images/background.jpg") right bottom/cover no-repeat;
   font: 16px "Lato", helvetica, arial, sans-serif;
   opacity: 0;
-  transition: all 500ms ease-in-out;
+  transition: opacity 500ms ease-in-out;
 }
 
 .app.loaded,

@@ -1,13 +1,13 @@
 import React from "react";
-import Button from "./Button";
 import Chevron from "./Chevron";
+import Button from "./Button";
 import { AudioType } from "../scripts/constants";
-import "./Interface.css";
+import "./Player.css";
 
-class Interface extends React.Component {
+class Player extends React.Component {
   render() {
     return (
-      <div className="interface">
+      <div className="player">
         <div className="chevrons">
           <Chevron />
           <Chevron />
@@ -55,4 +55,4 @@ class Interface extends React.Component {
   }
 }
 
-export default Interface;
+export default Player;

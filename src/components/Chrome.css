@@ -4,15 +4,12 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: url("../images/background.jpg") right bottom/cover no-repeat;
-  pointer-events: none;
 }
 
 .chrome-header {
   position: absolute;
   top: 35px;
   left: 50%;
-  z-index: 99999999;
   transform: translateX(-50%);
 }
 
@@ -21,8 +18,83 @@
   width: 162px;
   height: 48px;
   overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
   text-align: center;
-  text-indent:-9999em;
+  text-decoration: none;
   background: url("../images/logo.png") center/contain no-repeat;
-  color: transparent;
+  color: #fff;
+}
+
+.chrome-footer {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.chrome-footer a {
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgba(14, 34, 54, 0.61);
+  font-weight: bold;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.chrome-footer a:hover {
+  color: #f8e9db;
+}
+
+.looper {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: #f8e9db;
+  transform: translateX(-100%);
+}
+
+.playing .looper {
+  animation: loop 4363.6363636364ms infinite ease-out;
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  12.5% {
+    transform: translateX(-87.5%);
+  }
+
+  25% {
+    transform: translateX(-75%);
+  }
+
+  37.5% {
+    transform: translateX(-62.5%);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  62.5% {
+    transform: translateX(-37.5%);
+  }
+
+  75% {
+    transform: translateX(-25%);
+  }
+
+  87.5% {
+    transform: translateX(-12.5%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
 }

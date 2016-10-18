@@ -1,11 +1,9 @@
 import React from "react";
 import classnames from "classnames";
+import Player from "./Player";
 import Chrome from "./Chrome";
-import Controls from "./Controls";
-import Errors from "./Errors";
-import Interface from "./Interface";
-import Looper from "./Looper";
 import Wizard from "./Wizard";
+import Errors from "./Errors";
 import { AppState, ErrorType } from "../scripts/constants";
 import { loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
@@ -45,7 +43,7 @@ class App extends React.Component {
       "app": true,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
-      "show-looper": false,
+      "playing": true,
       "show-wizard-step-1": false,
       "show-wizard-step-2": false,
       "show-wizard-step-3": false,
@@ -56,10 +54,8 @@ class App extends React.Component {
 
     return (
       <div className={classNames}>
+        <Player />
         <Chrome />
-        <Interface />
-        <Controls />
-        <Looper />
         <Wizard />
         <Errors onReload={this._reload} />
       </div>
