@@ -6,14 +6,14 @@
   left: 0;
 }
 
-.chrome-header {
+.chrome .header {
   position: absolute;
   top: 35px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.chrome-header a {
+.chrome .header a {
   display: block;
   width: 162px;
   height: 48px;
@@ -22,34 +22,34 @@
   text-indent: 100%;
   text-align: center;
   text-decoration: none;
-  background: url("../images/logo.png") center/contain no-repeat;
   color: #fff;
+  background: url("../images/logo.png") center/contain no-repeat;
 }
 
-.chrome-footer {
+.chrome .footer {
   position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.chrome-footer a {
+.chrome .footer a {
   display: block;
   white-space: nowrap;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  color: rgba(14, 34, 54, 0.61);
   font-weight: bold;
   font-size: 10px;
   letter-spacing: 1px;
+  color: rgba(14, 34, 54, 0.61);
 }
 
-.chrome-footer a:hover {
+.chrome .footer a:hover {
   color: #f8e9db;
 }
 
-.looper {
+.chrome .looper {
   position: absolute;
   width: 100%;
   height: 3px;
@@ -57,7 +57,7 @@
   transform: translateX(-100%);
 }
 
-.playing .looper {
+.app.playing .chrome .looper {
   animation: loop 4363.6363636364ms infinite ease-out;
 }
 
@@ -97,4 +97,30 @@
   100% {
     transform: translateX(0%);
   }
+}
+
+
+
+.chrome .button {
+  position: relative;
+
+  display: inline-block;
+  vertical-align: middle;
+  width: 44px;
+  height: 44px;
+  padding: 3px 0px;
+  margin: 11px;
+  box-sizing: border-box;
+
+  font-weight: bold;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #f8e9db;
+  cursor: pointer;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 500ms ease-in-out 4700ms, transform 700ms ease-in-out 4700ms;
 }

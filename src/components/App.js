@@ -16,6 +16,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ appState: AppState.loading });
+
     Promise.all([
       loadImage(require("../images/background.jpg")),
       loadImage(require("../images/chevron-background.png")),
@@ -25,7 +27,7 @@ class App extends React.Component {
     ]).then(loadAudioContext).then(
       (audioContext) => {
         this._audioContext = audioContext;
-        this.setState({ appState: AppState.loaded, errorType: ErrorType.none });
+        this.setState({ appState: AppState.loaded });
       },
       (errorType) => {
         this._audioContext = null;
@@ -41,6 +43,7 @@ class App extends React.Component {
   render() {
     let classNames = classnames({
       "app": true,
+      "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
       "playing": true,
@@ -49,7 +52,8 @@ class App extends React.Component {
       "show-wizard-step-3": false,
       "show-wizard-step-4": false,
       "show-error-1": false,
-      "show-error-2": false
+      "show-error-2": false,
+      "no-touch": false
     });
 
     return (

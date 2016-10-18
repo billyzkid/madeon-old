@@ -1,8 +1,8 @@
 export const AppState = {
   default: 0,
+  loading: 1,
   loaded: 2,
-  failed: 3,
-  looping: 4
+  failed: 3
 };
 
 export const AudioType = {
@@ -12,7 +12,7 @@ export const AudioType = {
 };
 
 export const ErrorType = {
-  none: "none",
-  audioContextUnsupported: "audioContextUnsupported",
-  imageError: "imageError"
+  none: 0,
+  audioContextUnsupported: 1,
+  imageError: 2
 };
