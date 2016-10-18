@@ -1,12 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 import { AudioType } from "../scripts/constants";
-import "./Button.css";
+import "./GridButton.css";
 
-class Button extends React.Component {
+class GridButton extends React.Component {
   render() {
     let classNames = classnames({
-      "button": true,
+      "grid-button": true,
       "bass": this.props.audioType === AudioType.bass,
       "drum": this.props.audioType === AudioType.drum,
       "sound": this.props.audioType === AudioType.sound,
@@ -21,4 +21,4 @@ class Button extends React.Component {
   }
 }
 
-export default Button;
+export default GridButton;

@@ -1,4 +1,4 @@
-.button {
+.grid-button {
   width: 51px;
   height: 51px;
   border: 1px solid rgba(0, 0, 0, 0.17);
@@ -6,68 +6,68 @@
   cursor: pointer;
 }
 
-.app.loading .button {
+.app.loading .grid-button {
   pointer-events: none;
 }
 
-.button.active {
+.grid-button.active {
   border: 1px solid transparent;
 }
 
-.button.inactive,
-.button.inactive:hover {
+.grid-button.inactive,
+.grid-button.inactive:hover {
   background: rgba(0, 0, 0, 0.1) !important;
 }
 
-.button.bass {
+.grid-button.bass {
   background: rgba(175, 46, 80, 0.47);
 }
 
-.button.bass.active {
+.grid-button.bass.active {
   background: #d4214f;
 }
 
-.button.bass.waiting {
-  animation: button-blink-bass 400ms infinite;
+.grid-button.bass.waiting {
+  animation: grid-button-blink-red 400ms infinite;
 }
 
-.app.no-touch .button.bass:not(.inactive):hover {
+.app.no-touch .grid-button.bass:not(.inactive):hover {
   background: rgba(212, 33, 79, 0.64);
 }
 
-.button.drum {
+.grid-button.drum {
   background: rgba(56, 75, 107, 0.32);
 }
 
-.button.drum.active {
+.grid-button.drum.active {
   background: #2c64c4;
 }
 
-.button.drum.waiting {
-  animation: button-blink-drum 400ms infinite;
+.grid-button.drum.waiting {
+  animation: grid-button-blink-blue 400ms infinite;
 }
 
-.app.no-touch .button.drum:not(.inactive):hover {
+.app.no-touch .grid-button.drum:not(.inactive):hover {
   background: rgba(44, 100, 196, 0.64);
 }
 
-.button.sound {
+.grid-button.sound {
   background: rgba(33, 208, 168, 0.37);
 }
 
-.button.sound.active {
+.grid-button.sound.active {
   background: #0afdcc;
 }
 
-.button.sound.waiting {
-  animation: button-blink-sound 400ms infinite;
+.grid-button.sound.waiting {
+  animation: grid-button-blink-green 400ms infinite;
 }
 
-.app.no-touch .button.sound:not(.inactive):hover {
+.app.no-touch .grid-button.sound:not(.inactive):hover {
   background: rgba(10, 253, 204, 0.64);
 }
 
-@keyframes button-blink-bass {
+@keyframes grid-button-blink-red {
   0% {
     background: rgba(175, 46, 80, 0.47);
   }
@@ -81,7 +81,7 @@
   }
 }
 
-@keyframes button-blink-drum {
+@keyframes grid-button-blink-blue {
   0% {
     background: rgba(56, 75, 107, 0.32);
   }
@@ -95,7 +95,7 @@
   }
 }
 
-@keyframes button-blink-sound {
+@keyframes grid-button-blink-green {
   0% {
     background: rgba(33, 208, 168, 0.37);
   }

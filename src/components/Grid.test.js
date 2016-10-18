@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Player from "./Player";
+import Grid from "./Grid";
 
 it("renders without crashing", () => {
-  ReactDOM.render(<Player />, document.createElement("div"));
+  ReactDOM.render(<Grid />, document.createElement("div"));
 });
