@@ -4,5 +4,25 @@
   right: 0;
   bottom: 0;
   left: 0;
+  background: url("../images/background.jpg") right bottom/cover no-repeat;
   pointer-events: none;
+}
+
+.chrome-header {
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  z-index: 99999999;
+  transform: translateX(-50%);
+}
+
+.chrome-header a {
+  display: block;
+  width: 162px;
+  height: 48px;
+  overflow: hidden;
+  text-align: center;
+  text-indent:-9999em;
+  background: url("../images/logo.png") center/contain no-repeat;
+  color: transparent;
 }

@@ -22,6 +22,10 @@
   transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
 }
 
+.errors p {
+  margin: 0;
+}
+
 .errors a {
   color: #fff;
   text-decoration: underline;

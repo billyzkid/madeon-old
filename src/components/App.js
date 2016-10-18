@@ -1,7 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 import Chrome from "./Chrome";
-import Error from "./Error";
+import Controls from "./Controls";
+import Errors from "./Errors";
 import Interface from "./Interface";
 import Looper from "./Looper";
 import Wizard from "./Wizard";
@@ -12,6 +13,7 @@ import "./App.css";
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this._reload = this._reload.bind(this);
     this.state = { appState: AppState.default, errorType: ErrorType.none };
   }
 
@@ -41,27 +43,32 @@ class App extends React.Component {
   render() {
     let classNames = classnames({
       "app": true,
-      "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
-      "looping": this.state.appState === AppState.looping,
-      "show-wizard": false,
-      "show-error": false
+      "show-looper": false,
+      "show-wizard-step-1": false,
+      "show-wizard-step-2": false,
+      "show-wizard-step-3": false,
+      "show-wizard-step-4": false,
+      "show-error-1": false,
+      "show-error-2": false
     });
 
     return (
       <div className={classNames}>
+        <Chrome />
         <Interface />
+        <Controls />
         <Looper />
         <Wizard />
-        <Chrome />
-        <Error type={this.state.errorType} />
+        <Errors onReload={this._reload} />
       </div>
     );
   }
 
-  _alert() {
-    alert(123);
+  _reload(e) {
+    e.preventDefault();
+    window.location.reload(true);
   }
 }
 

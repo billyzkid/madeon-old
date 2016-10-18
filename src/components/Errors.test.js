@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Error from "./Error";
+import Errors from "./Errors";
 
 it("renders without crashing", () => {
-  ReactDOM.render(<Error />, document.createElement("div"));
+  ReactDOM.render(<Errors />, document.createElement("div"));
 });
