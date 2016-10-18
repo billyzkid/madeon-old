@@ -16,7 +16,7 @@ class Button extends React.Component {
     });
 
     return (
-      <div className={classNames}  onClick={alert} />
+      <div className={classNames} onClick={alert} />
     );
   }
 }
