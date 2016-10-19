@@ -29,13 +29,12 @@ class App extends React.Component {
       (errorType) => {
         this._audioContext = null;
         this.setState({ appState: AppState.failed, errorType: errorType });
-      }
-    );
+      });
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.state.appState !== nextState.appState || this.state.errorType !== nextState.errorType;
-  }
+  // shouldComponentUpdate(nextProps, nextState, nextContext) {
+  //   return this.state.appState !== nextState.appState || this.state.errorType !== nextState.errorType;
+  // }
 
   render() {
     let classNames = classnames({
@@ -55,33 +54,34 @@ class App extends React.Component {
 
     return (
       <div className={classNames}>
-        <div className="background" />
-        <div className="chevrons">
-          <div className="chevron">
-            <div className="chevron-part" />
-            <div className="chevron-part" />
+        <div className="player">
+          <div className="chevrons">
+            <div className="chevron">
+              <div className="chevron-part" />
+              <div className="chevron-part" />
+            </div>
+            <div className="chevron">
+              <div className="chevron-part" />
+              <div className="chevron-part" />
+            </div>
           </div>
-          <div className="chevron">
-            <div className="chevron-part" />
-            <div className="chevron-part" />
-          </div>
+          <Grid />
         </div>
-        <Grid />
-        <div className="info">
+        <div className="info-buttons">
           <div className="button info"><span>Info</span></div>
-          <div className="button about"><span>About</span></div>
-          <div className="button help"><span>Help</span></div>
+          <div className="button icon about"><span>About</span></div>
+          <div className="button icon help"><span>Help</span></div>
         </div>
-        <div className="share">
+        <div className="share-buttons">
           <div className="button share"><span>Share</span></div>
-          <div className="button copy"><span>Copy URL</span></div>
-          <div className="button twitter"><span>Twitter</span></div>
-          <div className="button facebook"><span>Facebook</span></div>
+          <div className="button icon copy"><span>Copy URL</span></div>
+          <div className="button icon twitter"><span>Twitter</span></div>
+          <div className="button icon facebook"><span>Facebook</span></div>
         </div>
-        <div className="controls">
-          <div className="button play"><span>Play</span></div>
-          <div className="button pause"><span>Pause</span></div>
-          <div className="button stop"><span>Stop</span></div>
+        <div className="control-buttons">
+          <div className="button icon play"><span>Play</span></div>
+          <div className="button icon pause"><span>Pause</span></div>
+          <div className="button icon stop"><span>Stop</span></div>
         </div>
         <div className="header">
           <a href="http://madeon.fr" target="_blank">Madeon - Adventure</a>

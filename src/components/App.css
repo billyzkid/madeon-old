@@ -2,7 +2,9 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   font: 16px "Lato", helvetica, arial, sans-serif;
+  background: url("../images/background.jpg") right bottom/cover no-repeat;
   opacity: 0;
   transition: opacity 500ms ease-in-out;
 }
@@ -12,13 +14,42 @@
   opacity: 1;
 }
 
-.background {
+.player {
   position: absolute;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background: url("../images/background.jpg") right bottom/cover no-repeat;
+}
+
+@media (max-width: 900px), (max-height: 600px) {
+  .player {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 750px), (max-height: 510px) {
+  .player {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 550px), (max-height: 425px) {
+  .player {
+    transform: scale(0.4);
+  }
+}
+
+@media (max-width: 370px), (max-height: 330px) {
+  .player {
+    transform: scale(0.3);
+  }
+}
+
+@media (max-width: 300px), (max-height: 280px) {
+  .player {
+    transform: scale(0.25);
+  }
 }
 
 .chevrons {
@@ -172,24 +203,136 @@
   }
 }
 
+.info-buttons {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  flex-flow: column;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
+}
+
+.share-buttons {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
+  flex-flow: row;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
+}
+
+.control-buttons {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  display: flex;
+  flex-flow: row;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
+}
+
+.app.loaded .info-buttons,
+.app.loaded .share-buttons,
+.app.loaded .control-buttons {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
 .button {
   position: relative;
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
   width: 44px;
   height: 44px;
-  padding: 3px 0px;
-  box-sizing: border-box;
+  margin: 13px;
   font-weight: bold;
-  font-size: 10px;
+  font-size: 9px;
+  line-height: 11px;
   letter-spacing: 2px;
   text-align: center;
   text-transform: uppercase;
   color: #f8e9db;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 500ms ease-in-out 4700ms, transform 700ms ease-in-out 4700ms;
+}
+
+.button:before {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  content: "";
+  background: rgba(14, 34, 54, 0.61);
+  transform: rotate(45deg);
+  transition: all 200ms linear;
+}
+
+.button:hover {
+  color: #0e2236;
+}
+
+.button:hover:before {
+  background: #f8e9db;
+}
+
+.button span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button.icon span {
+  display: block;
+  width: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.button.icon:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font: 14px FontAwesome;
+  letter-spacing: 0px;
+  transform: translate(-50%, -50%);
+}
+
+.button.icon.about:after {
+  content: "\f129";
+}
+
+.button.icon.help:after {
+  content: "\f128";
+}
+
+.button.icon.copy:after {
+  content: "\f0ea";
+}
+
+.button.icon.twitter:after {
+  content: "\f099";
+}
+
+.button.icon.facebook:after {
+  content: "\f09a";
+}
+
+.button.icon.play:after {
+  content: "\f04b";
+}
+
+.button.icon.pause:after {
+  content: "\f04c";
+}
+
+.button.icon.stop:after {
+  content: "\f04d";
 }
 
 .header {
@@ -413,33 +556,3 @@
   text-decoration: underline;
   cursor: pointer;
 }
-
-/*@media (max-width: 900px), (max-height: 600px) {
-  .player {
-    transform: scale(0.8);
-  }
-}
-
-@media (max-width: 750px), (max-height: 510px) {
-  .player {
-    transform: scale(0.6);
-  }
-}
-
-@media (max-width: 550px), (max-height: 425px) {
-  .player {
-    transform: scale(0.4);
-  }
-}
-
-@media (max-width: 370px), (max-height: 330px) {
-  .player {
-    transform: scale(0.3);
-  }
-}
-
-@media (max-width: 300px), (max-height: 280px) {
-  .player {
-    transform: scale(0.25);
-  }
-}*/
