@@ -33,16 +33,28 @@
 .chevron {
   position: relative;
   width: 233px;
-  height: 426px;
+  height: 420px;
   background: url("../images/chevron-background.png") center/contain no-repeat;
   backface-visibility: hidden;
+  opacity: 0;
+  transition: all 500ms ease-out 3840ms;
 }
 
 .chevron:nth-child(1) {
-  transform: translateX(-210px);
+  transform: translateX(24px);
 }
 
 .chevron:nth-child(2) {
+  transform: translateX(-24px) scaleX(-1);
+}
+
+.app.loaded .chevron:nth-child(1) {
+  opacity: 1;
+  transform: translateX(-210px);
+}
+
+.app.loaded .chevron:nth-child(2) {
+  opacity: 1;
   transform: translateX(210px) scaleX(-1);
 }
 
@@ -50,7 +62,9 @@
   position: absolute;
   left: 0px;
   right: 0px;
+  height: 0%;
   opacity: 0.3;
+  transition: all 500ms ease-out 4840ms;
 }
 
 .chevron-part:nth-child(1) {

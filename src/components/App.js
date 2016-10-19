@@ -40,17 +40,17 @@ class App extends React.Component {
   render() {
     let classNames = classnames({
       "app": true,
+      "no-touch": true,
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
-      "playing": true,
-      "show-wizard-step-1": true,
+      "playing": false,
+      "show-wizard-step-1": false,
       "show-wizard-step-2": false,
       "show-wizard-step-3": false,
       "show-wizard-step-4": false,
       "show-error-1": false,
-      "show-error-2": false,
-      "no-touch": true
+      "show-error-2": false
     });
 
     return (
