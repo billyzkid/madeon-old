@@ -309,7 +309,7 @@
 }
 
 .wizard-header {
-  margin: 100px 0px 0.5em;
+  margin: 100px 10px 0.5em;
   font-weight: 200;
   font-size: 2em;
   text-transform: uppercase;
@@ -319,6 +319,7 @@
   position: absolute;
   left: 0px;
   right: 0px;
+  margin: 0px 10px;
   font-weight: bold;
   font-size: 1.5em;
 }
