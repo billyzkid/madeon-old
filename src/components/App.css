@@ -263,12 +263,24 @@
   text-transform: uppercase;
   color: #f8e9db;
   cursor: pointer;
+  opacity: 0;
 }
 
 .button:hover,
-.app.show-button-group-1 .button.share,
-.app.show-button-group-2 .button.info {
+.show-button-group-1 .button.share,
+.show-button-group-2 .button.info {
   color: #0e2236;
+}
+
+.button.share,
+.button.info,
+.button.play,
+.button.stop,
+.show-button-group-1 .button-group-1 .button,
+.show-button-group-2 .button-group-2 .button,
+.show-button-group-3 .button-group-3 .button,
+.show-button-group-4 .button-group-4 .button {
+  opacity: 1;
 }
 
 .button::before {
@@ -284,8 +296,8 @@
 }
 
 .button:hover::before,
-.app.show-button-group-1 .button.share::before,
-.app.show-button-group-2 .button.info::before {
+.show-button-group-1 .button.share::before,
+.show-button-group-2 .button.info::before {
   background: #f8e9db;
 }
 
@@ -293,7 +305,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%,-50%);
 }
 
 .button.icon span {
@@ -310,7 +322,7 @@
   left: 50%;
   font: 14px FontAwesome;
   letter-spacing: 0px;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%,-50%);
 }
 
 .button.icon.twitter::after {
