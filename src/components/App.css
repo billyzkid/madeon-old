@@ -203,42 +203,48 @@
   }
 }
 
-.info-buttons {
+.buttons-1,
+.buttons-2,
+.buttons-3,
+.buttons-4 {
   position: absolute;
+  display: flex;
+  opacity: 0;
+  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
+}
+
+.buttons-1 {
+  top: 18px;
+  left: 18px;
+  flex-flow: column;
+  transform: translateY(-10px);
+}
+
+.buttons-2 {
   top: 18px;
   right: 18px;
-  display: flex;
   flex-flow: column;
-  opacity: 0;
   transform: translateY(-10px);
-  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
 }
 
-.share-buttons {
-  position: absolute;
+.buttons-3 {
   bottom: 18px;
   left: 18px;
-  display: flex;
   flex-flow: row;
-  opacity: 0;
   transform: translateY(10px);
-  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
 }
 
-.control-buttons {
-  position: absolute;
+.buttons-4 {
   bottom: 18px;
   right: 18px;
-  display: flex;
   flex-flow: row;
-  opacity: 0;
   transform: translateY(10px);
-  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
 }
 
-.app.loaded .info-buttons,
-.app.loaded .share-buttons,
-.app.loaded .control-buttons {
+.loaded .buttons-1,
+.loaded .buttons-2,
+.loaded .buttons-3,
+.loaded .buttons-4 {
   opacity: 1;
   transform: translateY(0px);
 }
@@ -259,7 +265,13 @@
   cursor: pointer;
 }
 
-.button:before {
+.button:hover,
+.show-buttons-1 .button.share,
+.show-buttons-2 .button.info {
+  color: #0e2236;
+}
+
+.button::before {
   position: absolute;
   top: 0px;
   bottom: 0px;
@@ -271,11 +283,9 @@
   transition: all 200ms linear;
 }
 
-.button:hover {
-  color: #0e2236;
-}
-
-.button:hover:before {
+.button:hover::before,
+.show-buttons-1 .button.share::before,
+.show-buttons-2 .button.info::before {
   background: #f8e9db;
 }
 
@@ -294,7 +304,7 @@
   overflow: hidden;
 }
 
-.button.icon:after {
+.button.icon::after {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -303,35 +313,23 @@
   transform: translate(-50%, -50%);
 }
 
-.button.icon.about:after {
-  content: "\f129";
-}
-
-.button.icon.help:after {
-  content: "\f128";
-}
-
-.button.icon.copy:after {
-  content: "\f0ea";
-}
-
-.button.icon.twitter:after {
+.button.icon.twitter::after {
   content: "\f099";
 }
 
-.button.icon.facebook:after {
+.button.icon.facebook::after {
   content: "\f09a";
 }
 
-.button.icon.play:after {
+.button.icon.play::after {
   content: "\f04b";
 }
 
-.button.icon.pause:after {
+.button.icon.pause::after {
   content: "\f04c";
 }
 
-.button.icon.stop:after {
+.button.icon.stop::after {
   content: "\f04d";
 }
 

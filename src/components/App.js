@@ -44,6 +44,10 @@ class App extends React.Component {
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
       "playing": false,
+      "show-buttons-1": true,
+      "show-buttons-2": true,
+      "show-buttons-3": true,
+      "show-buttons-4": true,
       "show-wizard-step-1": false,
       "show-wizard-step-2": false,
       "show-wizard-step-3": false,
@@ -67,27 +71,29 @@ class App extends React.Component {
           </div>
           <Grid />
         </div>
-        <div className="info-buttons">
-          <div className="button info"><span>Info</span></div>
-          <div className="button icon about"><span>About</span></div>
-          <div className="button icon help"><span>Help</span></div>
-        </div>
-        <div className="share-buttons">
+        <div className="buttons-1">
           <div className="button share"><span>Share</span></div>
-          <div className="button icon copy"><span>Copy URL</span></div>
+          <div className="button copy"><span>Copy URL</span></div>
           <div className="button icon twitter"><span>Twitter</span></div>
           <div className="button icon facebook"><span>Facebook</span></div>
         </div>
-        <div className="control-buttons">
+        <div className="buttons-2">
+          <div className="button info"><span>Info</span></div>
+          <div className="button about"><span>About</span></div>
+          <div className="button help"><span>Help</span></div>
+        </div>
+        <div className="buttons-3">
           <div className="button icon play"><span>Play</span></div>
           <div className="button icon pause"><span>Pause</span></div>
-          <div className="button icon stop"><span>Stop</span></div>
         </div>
-        <div className="header">
-          <a href="http://madeon.fr" target="_blank">Madeon - Adventure</a>
+        <div className="buttons-4">
+          <div className="button icon stop"><span>Stop</span></div>
         </div>
         <div className="footer">
           <a href="http://wmas.it" target="_blank">We Made This</a>
+        </div>
+        <div className="header">
+          <a href="http://madeon.fr" target="_blank">Madeon - Adventure</a>
         </div>
         <div className="looper" />
         <div className="wizard">
