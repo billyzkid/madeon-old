@@ -1,7 +1,15 @@
 import { ErrorType } from "./enums";
 
+export function delay(ms, value) {
+  return function (value) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(value), ms);
+    });
+  };
+}
+
 export function loadAudioContext() {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (typeof window.AudioContext !== "undefined") {
       resolve(new window.AudioContext());
     } else if (typeof window.webkitAudioContext !== "undefined") {
@@ -14,9 +22,9 @@ export function loadAudioContext() {
 
 export function loadImage(src) {
   let image = new Image();
-  return new Promise(function (resolve, reject) {
-    image.onload = e => resolve(image);
-    image.onerror = e => reject(ErrorType.loadImage);
+  return new Promise((resolve, reject) => {
+    image.onload = (event) => resolve(image);
+    image.onerror = (event) => reject(ErrorType.loadImage);
     image.src = src;
   }, function () {
     image.onload = null;

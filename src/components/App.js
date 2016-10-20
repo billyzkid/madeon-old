@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
 import { AppState, ErrorType } from "../scripts/enums";
-import { loadAudioContext, loadImage } from "../scripts/functions";
+import { delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
 class App extends React.Component {
@@ -10,7 +10,12 @@ class App extends React.Component {
     super(props);
     
     this._reload = this._reload.bind(this);
-    this.state = { appState: AppState.default, errorType: ErrorType.none };
+
+    this.state = {
+      appState: AppState.default,
+      animate: false,
+      errorType: ErrorType.none
+    };
   }
 
   componentDidMount() {
@@ -22,10 +27,12 @@ class App extends React.Component {
       loadImage(require("../images/chevron-bottom.png")),
       loadImage(require("../images/chevron-top.png")),
       loadImage(require("../images/logo.png"))
-    ]).then(loadAudioContext).then(audioContext => {
+    ]).then(loadAudioContext).then((audioContext) => {
       this._audioContext = audioContext;
       this.setState({ appState: AppState.loaded });
-    }).catch(error => {
+    }).then(delay(5000)).then(() => {
+      this.setState({ animate: true });
+    }).catch((error) => {
       let errorType = ErrorType[error] || ErrorType.other;
       this.setState({ appState: AppState.failed, errorType: errorType });
     });
@@ -42,11 +49,12 @@ class App extends React.Component {
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
+      "animate": this.state.animate,
       "playing": false,
-      "show-button-group-1": true,
-      "show-button-group-2": true,
-      "show-button-group-3": true,
-      "show-button-group-4": true,
+      "show-button-group-1": false,
+      "show-button-group-2": false,
+      "show-button-group-3": false,
+      "show-button-group-4": false,
       "show-wizard-step-1": false,
       "show-wizard-step-2": false,
       "show-wizard-step-3": false,
