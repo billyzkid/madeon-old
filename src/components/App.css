@@ -203,48 +203,48 @@
   }
 }
 
-.buttons-1,
-.buttons-2,
-.buttons-3,
-.buttons-4 {
+.button-group-1,
+.button-group-2,
+.button-group-3,
+.button-group-4 {
   position: absolute;
   display: flex;
   opacity: 0;
   transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
 }
 
-.buttons-1 {
+.button-group-1 {
   top: 18px;
   left: 18px;
   flex-flow: column;
   transform: translateY(-10px);
 }
 
-.buttons-2 {
+.button-group-2 {
   top: 18px;
   right: 18px;
   flex-flow: column;
   transform: translateY(-10px);
 }
 
-.buttons-3 {
+.button-group-3 {
   bottom: 18px;
   left: 18px;
   flex-flow: row;
   transform: translateY(10px);
 }
 
-.buttons-4 {
+.button-group-4 {
   bottom: 18px;
   right: 18px;
   flex-flow: row;
   transform: translateY(10px);
 }
 
-.loaded .buttons-1,
-.loaded .buttons-2,
-.loaded .buttons-3,
-.loaded .buttons-4 {
+.app.loaded .button-group-1,
+.app.loaded .button-group-2,
+.app.loaded .button-group-3,
+.app.loaded .button-group-4 {
   opacity: 1;
   transform: translateY(0px);
 }
@@ -266,8 +266,8 @@
 }
 
 .button:hover,
-.show-buttons-1 .button.share,
-.show-buttons-2 .button.info {
+.app.show-button-group-1 .button.share,
+.app.show-button-group-2 .button.info {
   color: #0e2236;
 }
 
@@ -284,8 +284,8 @@
 }
 
 .button:hover::before,
-.show-buttons-1 .button.share::before,
-.show-buttons-2 .button.info::before {
+.app.show-button-group-1 .button.share::before,
+.app.show-button-group-2 .button.info::before {
   background: #f8e9db;
 }
 
