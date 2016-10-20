@@ -1,4 +1,4 @@
-import { ErrorType } from "./constants";
+import { ErrorType } from "./enums";
 
 export function loadAudioContext() {
   return new Promise(function (resolve, reject) {
@@ -7,7 +7,7 @@ export function loadAudioContext() {
     } else if (typeof window.webkitAudioContext !== "undefined") {
       resolve(new window.webkitAudioContext());
     } else {
-      reject(ErrorType.audioContextUnsupported);
+      reject(ErrorType.loadAudioContext);
     }
   });
 }
@@ -15,8 +15,8 @@ export function loadAudioContext() {
 export function loadImage(src) {
   let image = new Image();
   return new Promise(function (resolve, reject) {
-    image.onload = function (e) { resolve(); };
-    image.onerror = function (e) { reject(ErrorType.imageError); };
+    image.onload = e => resolve(image);
+    image.onerror = e => reject(ErrorType.loadImage);
     image.src = src;
   }, function () {
     image.onload = null;

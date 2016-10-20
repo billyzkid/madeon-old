@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { AudioType } from "../scripts/constants";
+import { AudioType } from "../scripts/enums";
 import "./GridButton.css";
 
 class GridButton extends React.Component {

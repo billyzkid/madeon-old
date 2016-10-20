@@ -1,13 +1,14 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { AppState, ErrorType } from "../scripts/constants";
+import { AppState, ErrorType } from "../scripts/enums";
 import { loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    
     this._reload = this._reload.bind(this);
     this.state = { appState: AppState.default, errorType: ErrorType.none };
   }
@@ -21,15 +22,13 @@ class App extends React.Component {
       loadImage(require("../images/chevron-bottom.png")),
       loadImage(require("../images/chevron-top.png")),
       loadImage(require("../images/logo.png"))
-    ]).then(loadAudioContext).then(
-      (audioContext) => {
-        this._audioContext = audioContext;
-        this.setState({ appState: AppState.loaded });
-      },
-      (errorType) => {
-        this._audioContext = null;
-        this.setState({ appState: AppState.failed, errorType: errorType });
-      });
+    ]).then(loadAudioContext).then(audioContext => {
+      this._audioContext = audioContext;
+      this.setState({ appState: AppState.loaded });
+    }).catch(error => {
+      let errorType = ErrorType[error] || ErrorType.other;
+      this.setState({ appState: AppState.failed, errorType: errorType });
+    });
   }
 
   // shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -52,8 +51,8 @@ class App extends React.Component {
       "show-wizard-step-2": false,
       "show-wizard-step-3": false,
       "show-wizard-step-4": false,
-      "show-error-1": false,
-      "show-error-2": false
+      "show-error-1": this.state.errorType === ErrorType.loadAudioContext,
+      "show-error-2": this.state.errorType === ErrorType.loadImage || this.state.errorType === ErrorType.other
     });
 
     return (
