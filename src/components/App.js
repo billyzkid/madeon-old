@@ -163,13 +163,15 @@ class App extends React.Component {
           <div className="player">
             <Grid onPlay={this._onWizardPlay} />
           </div>
-          <h1>Welcome to Madeon's Adventure Machine</h1>
-          <ol>
-            <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
-            <li>Now, press one of the red squares, these are the bass loops, only one will play at a time.</li>
-            <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
-            <li>Done, now go make some music!</li>
-          </ol>
+          <div className="instructions">
+            <h1>Welcome to Madeon's Adventure Machine</h1>
+            <ol>
+              <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
+              <li>Now, press one of the red squares, these are the bass loops, only one will play at a time.</li>
+              <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
+              <li>Done, now go make some music!</li>
+            </ol>
+          </div>
         </div>
         <div className="errors">
           <div className="error">

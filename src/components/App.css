@@ -445,9 +445,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  font-size: 10px;
-  text-align: center;
-  color: #f8e9db;
   background: rgba(14, 34, 54, 0.61);
   opacity: 0;
   visibility: hidden;
@@ -463,20 +460,28 @@
   transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
 }
 
+.instructions {
+  position: relative;
+  margin: 100px 10px;
+  font-size: 10px;
+  text-align: center;
+  color: #f8e9db;
+}
+
 @media (min-width: 1500px) and (min-height: 900px) {
-  .wizard {
+  .instructions {
     font-size: 14px;
   }
 }
 
 @media (min-width: 1500px) and (min-height: 1400px) {
-  .wizard {
+  .instructions {
     font-size: 18px;
   }
 }
 
 .wizard h1 {
-  margin: 100px 10px 0.5em;
+  margin: 0px 0px 0.5em;
   font-weight: 200;
   font-size: 2em;
   text-transform: uppercase;
@@ -486,15 +491,14 @@
   list-style: none;
   padding: 0px;
   margin: 0px;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 .wizard li {
   position: absolute;
   left: 0px;
   right: 0px;
-  margin: 0px 10px;
-  font-weight: bold;
-  font-size: 1.5em;
 }
 
 .wizard h1,
