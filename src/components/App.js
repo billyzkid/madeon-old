@@ -12,11 +12,16 @@ class App extends React.Component {
     this._audioContext = null;
     this._onGridPlay = this._onGridPlay.bind(this);
     this._onShareClick = this._onShareClick.bind(this);
+    this._onCopyClick = this._onCopyClick.bind(this);
+    this._onTwitterClick = this._onTwitterClick.bind(this);
+    this._onFacebookClick = this._onFacebookClick.bind(this);
     this._onInfoClick = this._onInfoClick.bind(this);
-    this._onReloadClick = this._onReloadClick.bind(this);
+    this._onAboutClick = this._onAboutClick.bind(this);
+    this._onHelpClick = this._onHelpClick.bind(this);
     this._onPlayClick = this._onPlayClick.bind(this);
     this._onPauseClick = this._onPauseClick.bind(this);
     this._onStopClick = this._onStopClick.bind(this);
+    this._onReloadClick = this._onReloadClick.bind(this);
 
     this.state = {
       support: getSupport(),
@@ -51,8 +56,8 @@ class App extends React.Component {
     }).then(delay(1000)).then(() => {
       this.setState({ errorType: ErrorType.none });
     })*/.then(delay(500)).then(() => {
-      this.setState({ animate: true });
-    })/*.then(delay(5500)).then(() => {
+        this.setState({ animate: true });
+      })/*.then(delay(5500)).then(() => {
       this.setState({ wizardStep: WizardStep.first });
     }).then(delay(2000)).then(() => {
       this.setState({ wizardStep: WizardStep.second });
@@ -63,11 +68,11 @@ class App extends React.Component {
     }).then(delay(2000)).then(() => {
       this.setState({ wizardStep: WizardStep.none });
     })*/.then(delay(500)).then(() => {
-      this.setState({ playerState: PlayerState.playing });
-    }).catch((error) => {
-      let errorType = ErrorType[error] || ErrorType.unknown;
-      this.setState({ appState: AppState.failed, errorType: errorType });
-    });
+        this.setState({ playerState: PlayerState.playing });
+      }).catch((error) => {
+        let errorType = ErrorType[error] || ErrorType.unknown;
+        this.setState({ appState: AppState.failed, errorType: errorType });
+      });
   }
 
   // shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -116,14 +121,14 @@ class App extends React.Component {
         <div className="buttons">
           <div className="button-group-1">
             <div className="button share" onClick={this._onShareClick}><span>Share</span></div>
-            <div className="button copy"><span>Copy URL</span></div>
-            <div className="button icon twitter"><span>Twitter</span></div>
-            <div className="button icon facebook"><span>Facebook</span></div>
+            <div className="button copy" onClick={this._onCopyClick}><span>Copy URL</span></div>
+            <div className="button icon twitter" onClick={this._onTwitterClick}><span>Twitter</span></div>
+            <div className="button icon facebook" onClick={this._onFacebookClick}><span>Facebook</span></div>
           </div>
           <div className="button-group-2">
             <div className="button info" onClick={this._onInfoClick}><span>Info</span></div>
-            <div className="button about"><span>About</span></div>
-            <div className="button help"><span>Help</span></div>
+            <div className="button about" onClick={this._onAboutClick}><span>About</span></div>
+            <div className="button help" onClick={this._onHelpClick}><span>Help</span></div>
           </div>
           <div className="button-group-3">
             <div className="button icon play" onClick={this._onPlayClick}><span>Play</span></div>
@@ -170,8 +175,28 @@ class App extends React.Component {
     this.setState({ showButtonGroup1: !this.state.showButtonGroup1 });
   }
 
+  _onCopyClick(event) {
+    debugger;
+  }
+
+  _onTwitterClick(event) {
+    debugger;
+  }
+
+  _onFacebookClick(event) {
+    debugger;
+  }
+
   _onInfoClick(event) {
     this.setState({ showButtonGroup2: !this.state.showButtonGroup2 });
+  }
+
+  _onAboutClick(event) {
+    debugger;
+  }
+
+  _onHelpClick(event) {
+    debugger;
   }
 
   _onPlayClick(event) {
