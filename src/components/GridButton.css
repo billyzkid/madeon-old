@@ -417,3 +417,7 @@
   visibility: visible;
   transition-delay: 0ms;
 }
+
+.paused .grid-button.waiting {
+  animation-play-state: paused;
+}

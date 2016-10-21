@@ -267,6 +267,7 @@ class App extends React.Component {
   }
 
   _onStopButtonClick(event) {
+    this.props.song.forEach((item) => item.state = GridButtonState.default);
     this.setState({ playerState: PlayerState.default });
   }
 

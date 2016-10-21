@@ -113,8 +113,13 @@
   height: 50%;
 }
 
-.playing .chevron-part {
+.playing .chevron-part,
+.paused .chevron-part {
   animation: chevron-part-dance 4363.6363636364ms ease-out infinite;
+}
+
+.paused .chevron-part {
+  animation-play-state: paused;
 }
 
 @keyframes chevron-part-dance {
@@ -396,8 +401,13 @@
   transform: translateX(-100%);
 }
 
-.playing .looper {
-  animation: looper-loop 4363.6363636364ms infinite ease-out;
+.playing .looper,
+.paused .looper {
+  animation: looper-loop 4363.6363636364ms ease-out infinite;
+}
+
+.paused .looper {
+  animation-play-state: paused;
 }
 
 @keyframes looper-loop {
