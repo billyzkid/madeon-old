@@ -1,3 +1,9 @@
+export const SupportFlags = {
+  none: 0,
+  audio: 1,
+  touch: 2
+};
+
 export const AppState = {
   default: "default",
   loading: "loading",
@@ -15,5 +21,13 @@ export const ErrorType = {
   none: "none",
   loadAudioContext: "loadAudioContext",
   loadImage: "loadImage",
-  other: "other"
+  unknown: "unknown"
+};
+
+export const WizardStep = {
+  none: "none",
+  first: "first",
+  second: "second",
+  third: "third",
+  last: "last"
 };

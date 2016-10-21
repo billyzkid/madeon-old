@@ -1,20 +1,24 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { AppState, ErrorType } from "../scripts/enums";
-import { delay, loadAudioContext, loadImage } from "../scripts/functions";
+import { SupportFlags, AppState, ErrorType, WizardStep } from "../scripts/enums";
+import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    
+
+    this._audioContext = null;
     this._reload = this._reload.bind(this);
 
     this.state = {
+      support: getSupport(),
       appState: AppState.default,
+      errorType: ErrorType.none,
+      wizardStep: WizardStep.none,
       animate: false,
-      errorType: ErrorType.none
+      playing: false
     };
   }
 
@@ -31,36 +35,59 @@ class App extends React.Component {
       this._audioContext = audioContext;
       this.setState({ appState: AppState.loaded });
     }).then(delay(500)).then(() => {
+      this.setState({ errorType: ErrorType.loadAudioContext });
+    }).then(delay(2000)).then(() => {
+      this.setState({ errorType: ErrorType.loadImage });
+    }).then(delay(2000)).then(() => {
+      this.setState({ errorType: ErrorType.unknown });
+    }).then(delay(2000)).then(() => {
+      this.setState({ errorType: ErrorType.none });
+    }).then(delay(500)).then(() => {
       this.setState({ animate: true });
+    }).then(delay(5500)).then(() => {
+      this.setState({ wizardStep: WizardStep.first });
+    }).then(delay(2000)).then(() => {
+      this.setState({ wizardStep: WizardStep.second });
+    }).then(delay(2000)).then(() => {
+      this.setState({ wizardStep: WizardStep.third });
+    }).then(delay(2000)).then(() => {
+      this.setState({ wizardStep: WizardStep.last });
+    }).then(delay(2000)).then(() => {
+      this.setState({ wizardStep: WizardStep.none });
+    }).then(delay(500)).then(() => {
+      this.setState({ playing: true });
     }).catch((error) => {
-      let errorType = ErrorType[error] || ErrorType.other;
+      let errorType = ErrorType[error] || ErrorType.unknown;
       this.setState({ appState: AppState.failed, errorType: errorType });
     });
   }
 
   // shouldComponentUpdate(nextProps, nextState, nextContext) {
-  //   return this.state.appState !== nextState.appState || this.state.errorType !== nextState.errorType;
+  //   return this.state.support !== nextState.support
+  //     || this.state.appState !== nextState.appState
+  //     || this.state.errorType !== nextState.errorType
+  //     || this.state.wizardStep !== nextState.wizardStep;
   // }
 
   render() {
-    let classNames = classnames({
-      "app": true,
-      "no-touch": true,
+    let classNames = classnames("app", {
+      "no-audio": (this.state.support & SupportFlags.audio) !== SupportFlags.audio,
+      "no-touch": (this.state.support & SupportFlags.touch) !== SupportFlags.touch,
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
-      "animate": this.state.animate,
-      "playing": false,
+      "show-error-1": this.state.errorType === ErrorType.loadAudioContext,
+      "show-error-2": this.state.errorType === ErrorType.loadImage || this.state.errorType === ErrorType.unknown,
+      "show-wizard-step-1": this.state.wizardStep === WizardStep.first,
+      "show-wizard-step-2": this.state.wizardStep === WizardStep.second,
+      "show-wizard-step-3": this.state.wizardStep === WizardStep.third,
+      "show-wizard-step-4": this.state.wizardStep === WizardStep.last,
       "show-button-group-1": false,
       "show-button-group-2": false,
       "show-button-group-3": false,
       "show-button-group-4": false,
-      "show-wizard-step-1": false,
-      "show-wizard-step-2": false,
-      "show-wizard-step-3": false,
-      "show-wizard-step-4": false,
-      "show-error-1": this.state.errorType === ErrorType.loadAudioContext,
-      "show-error-2": this.state.errorType === ErrorType.loadImage || this.state.errorType === ErrorType.other
+      "animate": this.state.animate,
+      "playing": this.state.playing
     });
 
     return (
@@ -127,8 +154,8 @@ class App extends React.Component {
     );
   }
 
-  _reload(e) {
-    e.preventDefault();
+  _reload(event) {
+    event.preventDefault();
     window.location.reload(true);
   }
 }

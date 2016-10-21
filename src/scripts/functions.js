@@ -1,4 +1,18 @@
-import { ErrorType } from "./enums";
+import { SupportFlags, ErrorType } from "./enums";
+
+export function getSupport() {
+  let support = SupportFlags.none;
+
+  if (window.AudioContext || window.webkitAudioContext) {
+    support |= SupportFlags.audio;
+  }
+
+  if (window.ontouchstart || window.onmsgesturechange) {
+    support |= SupportFlags.touch;
+  }
+  
+  return support;
+}
 
 export function delay(ms, value) {
   return function (value) {
@@ -10,9 +24,9 @@ export function delay(ms, value) {
 
 export function loadAudioContext() {
   return new Promise((resolve, reject) => {
-    if (typeof window.AudioContext !== "undefined") {
+    if (window.AudioContext) {
       resolve(new window.AudioContext());
-    } else if (typeof window.webkitAudioContext !== "undefined") {
+    } else if (window.webkitAudioContext) {
       resolve(new window.webkitAudioContext());
     } else {
       reject(ErrorType.loadAudioContext);

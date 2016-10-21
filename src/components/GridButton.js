@@ -5,8 +5,7 @@ import "./GridButton.css";
 
 class GridButton extends React.Component {
   render() {
-    let classNames = classnames({
-      "grid-button": true,
+    let classNames = classnames("grid-button", {
       "bass": this.props.audioType === AudioType.bass,
       "drum": this.props.audioType === AudioType.drum,
       "sound": this.props.audioType === AudioType.sound,
