@@ -1,28 +1,67 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { SupportFlags, AppState, PlayerState, WizardState, ErrorType } from "../scripts/enums";
+import { SupportFlags, AppState, PlayerState, WizardState, ErrorType, GridButtonState } from "../scripts/enums";
 import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
+
+var song = [
+  { id: "1", type: "sound", key: 1, tempo: 3, level: 1, index: 1, state: GridButtonState.default },
+  { id: "2", type: "sound", key: 1, tempo: 2, level: 1, index: 2, state: GridButtonState.default },
+  { id: "3", type: "bass", key: 2, tempo: 2, level: 1, index: 1, state: GridButtonState.default },
+  { id: "4", type: "bass", key: 1, tempo: 2, level: 1, index: 2, state: GridButtonState.default },
+  { id: "5", type: "bass", key: 1, tempo: 1, level: 1, index: 3, state: GridButtonState.default },
+  { id: "6", type: "bass", key: 1, tempo: 3, level: 4, index: 8, state: GridButtonState.default },
+  { id: "7", type: "sound", key: 2, tempo: 2, level: 1, index: 3, state: GridButtonState.default },
+  { id: "8", type: "sound", key: 3, tempo: 2, level: 1, index: 4, state: GridButtonState.default },
+  { id: "9", type: "sound", key: 2, tempo: 2, level: 1, index: 5, state: GridButtonState.default },
+  { id: "10", type: "bass", key: 2, tempo: 2, level: 1, index: 5, state: GridButtonState.default },
+  { id: "11", type: "bass", key: 2, tempo: 3, level: 3, index: 4, state: GridButtonState.default },
+  { id: "12", type: "bass", key: 2, tempo: 1, level: 4, index: 7, state: GridButtonState.default },
+  { id: "13", type: "drum", level: 1, index: 1, state: GridButtonState.default },
+  { id: "14", type: "sound", key: 1, tempo: 2, level: 1, index: 6, state: GridButtonState.default },
+  { id: "15", type: "sound", key: 2, tempo: 1, level: 1, index: 7, state: GridButtonState.default },
+  { id: "16", type: "sound", key: 2, tempo: 3, level: 2, index: 8, state: GridButtonState.default },
+  { id: "17", type: "bass", key: 3, tempo: 2, level: 3, index: 6, state: GridButtonState.default },
+  { id: "18", type: "bass", key: 3, tempo: 1, level: 4, index: 9, state: GridButtonState.default },
+  { id: "19", type: "drum", level: 1, index: 2, state: GridButtonState.default },
+  { id: "20", type: "drum", level: 1, index: 3, state: GridButtonState.default },
+  { id: "21", type: "sound", key: 2, tempo: 3, level: 2, index: 9, state: GridButtonState.default },
+  { id: "22", type: "sound", key: 2, tempo: 3, level: 2, index: 10, state: GridButtonState.default },
+  { id: "23", type: "sound", key: 1, tempo: 1, level: 3, index: 11, state: GridButtonState.default },
+  { id: "24", type: "bass", key: 1, tempo: 3, level: 4, index: 10, state: GridButtonState.default },
+  { id: "25", type: "drum", level: 1, index: 4, state: GridButtonState.default },
+  { id: "26", type: "drum", level: 2, index: 5, state: GridButtonState.default },
+  { id: "27", type: "drum", level: 2, index: 6, state: GridButtonState.default },
+  { id: "28", type: "sound", key: 1, tempo: 1, level: 3, index: 12, state: GridButtonState.default },
+  { id: "29", type: "sound", key: 2, tempo: 2, level: 4, index: 13, state: GridButtonState.default },
+  { id: "30", type: "sound", key: 3, tempo: 2, level: 4, index: 14, state: GridButtonState.default },
+  { id: "31", type: "drum", level: 4, index: 7, state: GridButtonState.default },
+  { id: "32", type: "drum", level: 4, index: 8, state: GridButtonState.default },
+  { id: "33", type: "drum", level: 4, index: 9, state: GridButtonState.default },
+  { id: "34", type: "drum", level: 4, index: 10, state: GridButtonState.default },
+  { id: "35", type: "sound", key: 2, tempo: 2, level: 4, index: 15, state: GridButtonState.default },
+  { id: "36", type: "sound", key: 3, tempo: 2, level: 4, index: 16, state: GridButtonState.default }
+];
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this._audioContext = null;
-    this._onPlayerPlay = this._onPlayerPlay.bind(this);
-    this._onWizardPlay = this._onWizardPlay.bind(this);
-    this._onShareClick = this._onShareClick.bind(this);
-    this._onCopyClick = this._onCopyClick.bind(this);
-    this._onTwitterClick = this._onTwitterClick.bind(this);
-    this._onFacebookClick = this._onFacebookClick.bind(this);
-    this._onInfoClick = this._onInfoClick.bind(this);
-    this._onAboutClick = this._onAboutClick.bind(this);
-    this._onHelpClick = this._onHelpClick.bind(this);
-    this._onPlayClick = this._onPlayClick.bind(this);
-    this._onPauseClick = this._onPauseClick.bind(this);
-    this._onStopClick = this._onStopClick.bind(this);
-    this._onReloadClick = this._onReloadClick.bind(this);
+    this._onPlayerGridClick = this._onPlayerGridClick.bind(this);
+    this._onWizardGridClick = this._onWizardGridClick.bind(this);
+    this._onShareButtonClick = this._onShareButtonClick.bind(this);
+    this._onCopyButtonClick = this._onCopyButtonClick.bind(this);
+    this._onTwitterButtonClick = this._onTwitterButtonClick.bind(this);
+    this._onFacebookButtonClick = this._onFacebookButtonClick.bind(this);
+    this._onInfoButtonClick = this._onInfoButtonClick.bind(this);
+    this._onAboutButtonClick = this._onAboutButtonClick.bind(this);
+    this._onHelpButtonClick = this._onHelpButtonClick.bind(this);
+    this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
+    this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
+    this._onStopButtonClick = this._onStopButtonClick.bind(this);
+    this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
       support: getSupport(),
@@ -124,32 +163,27 @@ class App extends React.Component {
               <div className="chevron-part" />
             </div>
           </div>
-          <Grid onPlay={this._onPlayerPlay} />
+          <Grid song={song} onClick={this._onPlayerGridClick} />
         </div>
         <div className="chrome">
           <div className="buttons">
-            <div className="button text share" onClick={this._onShareClick}><span>Share</span></div>
-            <div className="button text copy" onClick={this._onCopyClick}><span>Copy URL</span></div>
-            <div className="button icon twitter" onClick={this._onTwitterClick}><span>Twitter</span></div>
-            <div className="button icon facebook" onClick={this._onFacebookClick}><span>Facebook</span></div>
+            <div className="button text share" onClick={this._onShareButtonClick}><span>Share</span></div>
+            <div className="button text copy" onClick={this._onCopyButtonClick}><span>Copy URL</span></div>
+            <div className="button icon twitter" onClick={this._onTwitterButtonClick}><span>Twitter</span></div>
+            <div className="button icon facebook" onClick={this._onFacebookButtonClick}><span>Facebook</span></div>
           </div>
           <div className="buttons">
-            <div className="button text info" onClick={this._onInfoClick}><span>Info</span></div>
-            <div className="button text about" onClick={this._onAboutClick}><span>About</span></div>
-            <div className="button text help" onClick={this._onHelpClick}><span>Help</span></div>
+            <div className="button text info" onClick={this._onInfoButtonClick}><span>Info</span></div>
+            <div className="button text about" onClick={this._onAboutButtonClick}><span>About</span></div>
+            <div className="button text help" onClick={this._onHelpButtonClick}><span>Help</span></div>
           </div>
           <div className="buttons">
-            {(() => {
-              switch (this.state.playerState) {
-                case PlayerState.playing:
-                  return <div className="button icon pause" onClick={this._onPauseClick}><span>Pause</span></div>;
-                default:
-                  return <div className="button icon play" onClick={this._onPlayClick}><span>Play</span></div>;
-              }
-            })()}
+            {(this.state.playerState === PlayerState.playing) ?
+              <div className="button icon pause" onClick={this._onPauseButtonClick}><span>Pause</span></div> :
+              <div className="button icon play" onClick={this._onPlayButtonClick}><span>Play</span></div>}
           </div>
           <div className="buttons">
-            <div className="button icon stop" onClick={this._onStopClick}><span>Stop</span></div>
+            <div className="button icon stop" onClick={this._onStopButtonClick}><span>Stop</span></div>
           </div>
           <div className="footer">
             <a href="http://wmas.it" target="_blank">We Made This</a>
@@ -161,7 +195,7 @@ class App extends React.Component {
         </div>
         <div className="wizard">
           <div className="player">
-            <Grid onPlay={this._onWizardPlay} />
+            <Grid song={song} onClick={this._onWizardGridClick} />
           </div>
           <div className="instructions">
             <h1>Welcome to Madeon's Adventure Machine</h1>
@@ -180,18 +214,20 @@ class App extends React.Component {
           </div>
           <div className="error">
             <p>Something went horribly wrong.</p>
-            <p>Please <a onClick={this._onReloadClick}>reload</a> the page or try back later.</p>
+            <p>Please <a onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
           </div>
         </div>
       </div>
     );
   }
 
-  _onPlayerPlay(event) {
+  _onPlayerGridClick(item) {
+    debugger;
     this.setState({ playerState: PlayerState.playing });
   }
 
-  _onWizardPlay(event) {
+  _onWizardGridClick(item) {
+    debugger;
     this.setState({ playerState: PlayerState.playing });
 
     switch (this.state.wizardState) {
@@ -213,47 +249,47 @@ class App extends React.Component {
     }
   }
 
-  _onShareClick(event) {
+  _onShareButtonClick(event) {
     this.setState({ showShareButtons: !this.state.showShareButtons });
   }
 
-  _onCopyClick(event) {
+  _onCopyButtonClick(event) {
     debugger;
   }
 
-  _onTwitterClick(event) {
+  _onTwitterButtonClick(event) {
     debugger;
   }
 
-  _onFacebookClick(event) {
+  _onFacebookButtonClick(event) {
     debugger;
   }
 
-  _onInfoClick(event) {
+  _onInfoButtonClick(event) {
     this.setState({ showInfoButtons: !this.state.showInfoButtons });
   }
 
-  _onAboutClick(event) {
+  _onAboutButtonClick(event) {
     debugger;
   }
 
-  _onHelpClick(event) {
+  _onHelpButtonClick(event) {
     this.setState({ wizardState: WizardState.step1 });
   }
 
-  _onPlayClick(event) {
+  _onPlayButtonClick(event) {
     this.setState({ playerState: PlayerState.playing });
   }
 
-  _onPauseClick(event) {
+  _onPauseButtonClick(event) {
     this.setState({ playerState: PlayerState.paused });
   }
 
-  _onStopClick(event) {
+  _onStopButtonClick(event) {
     this.setState({ playerState: PlayerState.default });
   }
 
-  _onReloadClick(event) {
+  _onReloadLinkClick(event) {
     event.preventDefault();
     window.location.reload(true);
   }

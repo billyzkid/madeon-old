@@ -26,15 +26,16 @@ export const WizardState = {
   step4: "step4"
 };
 
-export const AudioType = {
-  drum: "drum",
-  bass: "bass",
-  sound: "sound"
-};
-
 export const ErrorType = {
   none: "none",
   loadAudioContext: "loadAudioContext",
   loadImage: "loadImage",
   unknown: "unknown"
+};
+
+export const GridButtonState = {
+  default: "default",
+  active: "active",
+  inactive: "inactive",
+  waiting: "waiting"
 };
