@@ -10,3 +10,423 @@
   left: 50%;
   transform: translate(-50%,-50%) rotate(45deg);
 }
+
+.grid-button {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.grid-button.active {
+  border: 1px solid transparent;
+}
+
+.grid-button.inactive,
+.grid-button.inactive:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  pointer-events: none;
+}
+
+.grid-button.drum {
+  background: rgba(56, 75, 107, 0.32);
+}
+
+.no-touch .grid-button.drum:hover {
+  background: rgba(44, 100, 196, 0.64);
+}
+
+.grid-button.drum.active,
+.wizard .grid-button.drum {
+  background: #2c64c4;
+}
+
+.grid-button.drum.waiting {
+  animation: grid-button-drum-wait 400ms infinite;
+}
+
+@keyframes grid-button-drum-wait {
+  0% {
+    background: rgba(56, 75, 107, 0.32);
+  }
+
+  50% {
+    background: #2c64c4;
+  }
+
+  100% {
+    background: rgba(56, 75, 107, 0.32);
+  }
+}
+
+.grid-button.bass {
+  background: rgba(175, 46, 80, 0.47);
+}
+
+.no-touch .grid-button.bass:hover {
+  background: rgba(212, 33, 79, 0.64);
+}
+
+.grid-button.bass.active,
+.wizard .grid-button.bass {
+  background: #d4214f;
+}
+
+.grid-button.bass.waiting {
+  animation: grid-button-bass-wait 400ms infinite;
+}
+
+@keyframes grid-button-bass-wait {
+  0% {
+    background: rgba(175, 46, 80, 0.47);
+  }
+
+  50% {
+    background: #d4214f;
+  }
+
+  100% {
+    background: rgba(175, 46, 80, 0.47);
+  }
+}
+
+.grid-button.sound {
+  background: rgba(33, 208, 168, 0.37);
+}
+
+.no-touch .grid-button.sound:hover {
+  background: rgba(10, 253, 204, 0.64);
+}
+
+.grid-button.sound.active,
+.wizard .grid-button.sound {
+  background: #0afdcc;
+}
+
+.grid-button.sound.waiting {
+  animation: grid-button-sound-wait 400ms infinite;
+}
+
+@keyframes grid-button-sound-wait {
+  0% {
+    background: rgba(33, 208, 168, 0.37);
+  }
+
+  50% {
+    background: #0afdcc;
+  }
+
+  100% {
+    background: rgba(33, 208, 168, 0.37);
+  }
+}
+
+.grid-button:nth-child(27) {
+  transition: opacity 140ms linear 200ms, visibility 0ms linear 340ms;
+}
+
+.grid-button:nth-child(14) {
+  transition: opacity 140ms linear 300ms, visibility 0ms linear 440ms;
+}
+
+.grid-button:nth-child(2) {
+  transition: opacity 140ms linear 400ms, visibility 0ms linear 540ms;
+}
+
+.grid-button:nth-child(13) {
+  transition: opacity 140ms linear 500ms, visibility 0ms linear 640ms;
+}
+
+.grid-button:nth-child(17) {
+  transition: opacity 140ms linear 600ms, visibility 0ms linear 740ms;
+}
+
+.grid-button:nth-child(21) {
+  transition: opacity 140ms linear 700ms, visibility 0ms linear 840ms;
+}
+
+.grid-button:nth-child(34) {
+  transition: opacity 140ms linear 800ms, visibility 0ms linear 940ms;
+}
+
+.grid-button:nth-child(4) {
+  transition: opacity 140ms linear 900ms, visibility 0ms linear 1040ms;
+}
+
+.grid-button:nth-child(6) {
+  transition: opacity 140ms linear 1000ms, visibility 0ms linear 1140ms;
+}
+
+.grid-button:nth-child(30) {
+  transition: opacity 140ms linear 1100ms, visibility 0ms linear 1240ms;
+}
+
+.grid-button:nth-child(7) {
+  transition: opacity 140ms linear 1200ms, visibility 0ms linear 1340ms;
+}
+
+.grid-button:nth-child(5) {
+  transition: opacity 140ms linear 1300ms, visibility 0ms linear 1440ms;
+}
+
+.grid-button:nth-child(33) {
+  transition: opacity 140ms linear 1400ms, visibility 0ms linear 1540ms;
+}
+
+.grid-button:nth-child(31) {
+  transition: opacity 140ms linear 1500ms, visibility 0ms linear 1640ms;
+}
+
+.grid-button:nth-child(15) {
+  transition: opacity 140ms linear 1600ms, visibility 0ms linear 1740ms;
+}
+
+.grid-button:nth-child(8) {
+  transition: opacity 140ms linear 1700ms, visibility 0ms linear 1840ms;
+}
+
+.grid-button:nth-child(25) {
+  transition: opacity 140ms linear 1800ms, visibility 0ms linear 1940ms;
+}
+
+.grid-button:nth-child(9) {
+  transition: opacity 140ms linear 1900ms, visibility 0ms linear 2040ms;
+}
+
+.grid-button:nth-child(16) {
+  transition: opacity 140ms linear 2000ms, visibility 0ms linear 2140ms;
+}
+
+.grid-button:nth-child(19) {
+  transition: opacity 140ms linear 2100ms, visibility 0ms linear 2240ms;
+}
+
+.grid-button:nth-child(1) {
+  transition: opacity 140ms linear 2200ms, visibility 0ms linear 2340ms;
+}
+
+.grid-button:nth-child(3) {
+  transition: opacity 140ms linear 2300ms, visibility 0ms linear 2440ms;
+}
+
+.grid-button:nth-child(11) {
+  transition: opacity 140ms linear 2400ms, visibility 0ms linear 2540ms;
+}
+
+.grid-button:nth-child(23) {
+  transition: opacity 140ms linear 2500ms, visibility 0ms linear 2640ms;
+}
+
+.grid-button:nth-child(26) {
+  transition: opacity 140ms linear 2600ms, visibility 0ms linear 2740ms;
+}
+
+.grid-button:nth-child(24) {
+  transition: opacity 140ms linear 2700ms, visibility 0ms linear 2840ms;
+}
+
+.grid-button:nth-child(10) {
+  transition: opacity 140ms linear 2800ms, visibility 0ms linear 2940ms;
+}
+
+.grid-button:nth-child(29) {
+  transition: opacity 140ms linear 2900ms, visibility 0ms linear 3040ms;
+}
+
+.grid-button:nth-child(36) {
+  transition: opacity 140ms linear 3000ms, visibility 0ms linear 3140ms;
+}
+
+.grid-button:nth-child(35) {
+  transition: opacity 140ms linear 3100ms, visibility 0ms linear 3240ms;
+}
+
+.grid-button:nth-child(28) {
+  transition: opacity 140ms linear 3200ms, visibility 0ms linear 3340ms;
+}
+
+.grid-button:nth-child(32) {
+  transition: opacity 140ms linear 3300ms, visibility 0ms linear 3440ms;
+}
+
+.grid-button:nth-child(22) {
+  transition: opacity 140ms linear 3400ms, visibility 0ms linear 3540ms;
+}
+
+.grid-button:nth-child(12) {
+  transition: opacity 140ms linear 3500ms, visibility 0ms linear 3640ms;
+}
+
+.grid-button:nth-child(20) {
+  transition: opacity 140ms linear 3600ms, visibility 0ms linear 3740ms;
+}
+
+.grid-button:nth-child(18) {
+  transition: opacity 140ms linear 3700ms, visibility 0ms linear 3840ms;
+}
+
+.ready .grid-button:nth-child(27) {
+  transition: opacity 140ms linear 200ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(14) {
+  transition: opacity 140ms linear 300ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(2) {
+  transition: opacity 140ms linear 400ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(13) {
+  transition: opacity 140ms linear 500ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(17) {
+  transition: opacity 140ms linear 600ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(21) {
+  transition: opacity 140ms linear 700ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(34) {
+  transition: opacity 140ms linear 800ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(4) {
+  transition: opacity 140ms linear 900ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(6) {
+  transition: opacity 140ms linear 1000ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(30) {
+  transition: opacity 140ms linear 1100ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(7) {
+  transition: opacity 140ms linear 1200ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(5) {
+  transition: opacity 140ms linear 1300ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(33) {
+  transition: opacity 140ms linear 1400ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(31) {
+  transition: opacity 140ms linear 1500ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(15) {
+  transition: opacity 140ms linear 1600ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(8) {
+  transition: opacity 140ms linear 1700ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(25) {
+  transition: opacity 140ms linear 1800ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(9) {
+  transition: opacity 140ms linear 1900ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(16) {
+  transition: opacity 140ms linear 2000ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(19) {
+  transition: opacity 140ms linear 2100ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(1) {
+  transition: opacity 140ms linear 2200ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(3) {
+  transition: opacity 140ms linear 2300ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(11) {
+  transition: opacity 140ms linear 2400ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(23) {
+  transition: opacity 140ms linear 2500ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(26) {
+  transition: opacity 140ms linear 2600ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(24) {
+  transition: opacity 140ms linear 2700ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(10) {
+  transition: opacity 140ms linear 2800ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(29) {
+  transition: opacity 140ms linear 2900ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(36) {
+  transition: opacity 140ms linear 3000ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(35) {
+  transition: opacity 140ms linear 3100ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(28) {
+  transition: opacity 140ms linear 3200ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(32) {
+  transition: opacity 140ms linear 3300ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(22) {
+  transition: opacity 140ms linear 3400ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(12) {
+  transition: opacity 140ms linear 3500ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(20) {
+  transition: opacity 140ms linear 3600ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button:nth-child(18) {
+  transition: opacity 140ms linear 3700ms, visibility 0ms linear 0ms;
+}
+
+.ready .grid-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ready .wizard .grid-button {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.show-wizard-step-1 .wizard .grid-button.drum,
+.show-wizard-step-2 .wizard .grid-button.bass,
+.show-wizard-step-3 .wizard .grid-button.sound {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0ms;
+}
