@@ -30,8 +30,7 @@ class App extends React.Component {
       errorType: ErrorType.none,
       wizardStep: WizardStep.none,
       showShareButtons: false,
-      showInfoButtons: false,
-      animate: false
+      showInfoButtons: false
     };
   }
 
@@ -47,41 +46,23 @@ class App extends React.Component {
     ]).then(loadAudioContext).then((audioContext) => {
       this._audioContext = audioContext;
       this.setState({ appState: AppState.loaded });
-    })/*.then(delay(500)).then(() => {
-      this.setState({ errorType: ErrorType.loadAudioContext });
-    }).then(delay(2000)).then(() => {
-      this.setState({ errorType: ErrorType.loadImage });
-    }).then(delay(1000)).then(() => {
-      this.setState({ errorType: ErrorType.unknown });
-    }).then(delay(1000)).then(() => {
-      this.setState({ errorType: ErrorType.none });
-    })*/.then(delay(500)).then(() => {
-        this.setState({ animate: true });
-      })/*.then(delay(5500)).then(() => {
-      this.setState({ wizardStep: WizardStep.first });
-    }).then(delay(2000)).then(() => {
-      this.setState({ wizardStep: WizardStep.second });
-    }).then(delay(2000)).then(() => {
-      this.setState({ wizardStep: WizardStep.third });
-    }).then(delay(2000)).then(() => {
-      this.setState({ wizardStep: WizardStep.last });
-    }).then(delay(2000)).then(() => {
-      this.setState({ wizardStep: WizardStep.none });
-    })*/.then(delay(500)).then(() => {
-        this.setState({ playerState: PlayerState.playing });
-      }).catch((error) => {
-        let errorType = ErrorType[error] || ErrorType.unknown;
-        this.setState({ appState: AppState.failed, errorType: errorType });
-      });
+    }).then(delay(500)).then(() => {
+      this.setState({ appState: AppState.ready });
+    }).catch((error) => {
+      let errorType = ErrorType[error] || ErrorType.unknown;
+      this.setState({ appState: AppState.failed, errorType: errorType });
+    });
   }
 
-  // shouldComponentUpdate(nextProps, nextState, nextContext) {
-  //   return this.state.support !== nextState.support
-  //     || this.state.appState !== nextState.appState
-  //     || this.state.playerState !== nextState.playerState
-  //     || this.state.errorType !== nextState.errorType
-  //     || this.state.wizardStep !== nextState.wizardStep;
-  // }
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return this.state.support !== nextState.support
+      || this.state.appState !== nextState.appState
+      || this.state.playerState !== nextState.playerState
+      || this.state.errorType !== nextState.errorType
+      || this.state.wizardStep !== nextState.wizardStep
+      || this.state.showShareButtons !== nextState.showShareButtons
+      || this.state.showInfoButtons !== nextState.showInfoButtons;
+  }
 
   render() {
     let classNames = classnames("app", {
@@ -89,6 +70,7 @@ class App extends React.Component {
       "no-touch": (this.state.support & SupportFlags.touch) !== SupportFlags.touch,
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
+      "ready": this.state.appState === AppState.ready,
       "failed": this.state.appState === AppState.failed,
       "playing": this.state.playerState === PlayerState.playing,
       "paused": this.state.playerState === PlayerState.paused,
@@ -99,8 +81,7 @@ class App extends React.Component {
       "show-wizard-step-3": this.state.wizardStep === WizardStep.third,
       "show-wizard-step-4": this.state.wizardStep === WizardStep.last,
       "show-buttons-1": this.state.showShareButtons,
-      "show-buttons-2": this.state.showInfoButtons,
-      "animate": this.state.animate
+      "show-buttons-2": this.state.showInfoButtons
     });
 
     return (
@@ -202,7 +183,7 @@ class App extends React.Component {
   }
 
   _onHelpClick(event) {
-    debugger;
+    this.setState({ wizardStep: WizardStep.first });
   }
 
   _onPlayClick(event) {

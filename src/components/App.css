@@ -10,6 +10,7 @@
 }
 
 .loaded,
+.ready,
 .failed {
   opacity: 1;
 }
@@ -79,12 +80,12 @@
   transform: translateX(-24px) scaleX(-1);
 }
 
-.animate .chevron:nth-child(1) {
+.ready .chevron:nth-child(1) {
   opacity: 1;
   transform: translateX(-210px);
 }
 
-.animate .chevron:nth-child(2) {
+.ready .chevron:nth-child(2) {
   opacity: 1;
   transform: translateX(210px) scaleX(-1);
 }
@@ -108,7 +109,7 @@
   background: url("../images/chevron-bottom.png") top/100% no-repeat;
 }
 
-.animate .chevron-part {
+.ready .chevron-part {
   height: 50%;
 }
 
@@ -238,7 +239,7 @@
   transform: translateY(10px);
 }
 
-.animate .buttons {
+.ready .buttons {
   opacity: 1;
   transform: translateY(0px);
 }

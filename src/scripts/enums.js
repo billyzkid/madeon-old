@@ -8,6 +8,7 @@ export const AppState = {
   default: "default",
   loading: "loading",
   loaded: "loaded",
+  ready: "ready",
   failed: "failed"
 };
 
