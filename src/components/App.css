@@ -203,48 +203,42 @@
   }
 }
 
-.button-group-1,
-.button-group-2,
-.button-group-3,
-.button-group-4 {
+.buttons {
   position: absolute;
   display: flex;
   opacity: 0;
   transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
 }
 
-.button-group-1 {
+.buttons:nth-child(1) {
   top: 18px;
   left: 18px;
   flex-flow: column;
   transform: translateY(-10px);
 }
 
-.button-group-2 {
+.buttons:nth-child(2) {
   top: 18px;
   right: 18px;
   flex-flow: column;
   transform: translateY(-10px);
 }
 
-.button-group-3 {
+.buttons:nth-child(3) {
   bottom: 18px;
   left: 18px;
   flex-flow: row;
   transform: translateY(10px);
 }
 
-.button-group-4 {
+.buttons:nth-child(4) {
   bottom: 18px;
   right: 18px;
   flex-flow: row;
   transform: translateY(10px);
 }
 
-.animate .button-group-1,
-.animate .button-group-2,
-.animate .button-group-3,
-.animate .button-group-4 {
+.animate .buttons {
   opacity: 1;
   transform: translateY(0px);
 }
@@ -268,10 +262,6 @@
   visibility: hidden;
 }
 
-.button.pause {
-  position: absolute;
-}
-
 .button:hover,
 .show-button-group-1 .button.share,
 .show-button-group-2 .button.info {
@@ -284,8 +274,8 @@
 .playing .button.stop,
 .paused .button.play,
 .paused .button.stop,
-.show-button-group-1 .button-group-1 .button,
-.show-button-group-2 .button-group-2 .button {
+.show-button-group-1 .buttons:nth-child(1) .button,
+.show-button-group-2 .buttons:nth-child(2) .button {
   opacity: 1;
   visibility: visible;
 }
@@ -308,16 +298,20 @@
   background: #f8e9db;
 }
 
-.button span {
+.button.text span {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
 }
 
+.button.icon {
+  font: 14px FontAwesome;
+  letter-spacing: 0px;
+}
+
 .button.icon span {
   display: block;
-  width: 100%;
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -327,8 +321,6 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  font: 14px FontAwesome;
-  letter-spacing: 0px;
   transform: translate(-50%,-50%);
 }
 

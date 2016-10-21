@@ -103,6 +103,14 @@ class App extends React.Component {
       "animate": this.state.animate
     });
 
+    let playPauseButton;
+
+    if (this.state.playerState === PlayerState.playing) {
+      playPauseButton = <div className="button icon pause" onClick={this._onPauseClick}><span>Pause</span></div>;
+    } else {
+      playPauseButton = <div className="button icon play" onClick={this._onPlayClick}><span>Play</span></div>;
+    }
+
     return (
       <div className={classNames}>
         <div className="player">
@@ -118,33 +126,32 @@ class App extends React.Component {
           </div>
           <Grid onPlay={this._onGridPlay} />
         </div>
-        <div className="buttons">
-          <div className="button-group-1">
-            <div className="button share" onClick={this._onShareClick}><span>Share</span></div>
-            <div className="button copy" onClick={this._onCopyClick}><span>Copy URL</span></div>
+        <div className="chrome">
+          <div className="buttons">
+            <div className="button text share" onClick={this._onShareClick}><span>Share</span></div>
+            <div className="button text copy" onClick={this._onCopyClick}><span>Copy URL</span></div>
             <div className="button icon twitter" onClick={this._onTwitterClick}><span>Twitter</span></div>
             <div className="button icon facebook" onClick={this._onFacebookClick}><span>Facebook</span></div>
           </div>
-          <div className="button-group-2">
-            <div className="button info" onClick={this._onInfoClick}><span>Info</span></div>
-            <div className="button about" onClick={this._onAboutClick}><span>About</span></div>
-            <div className="button help" onClick={this._onHelpClick}><span>Help</span></div>
+          <div className="buttons">
+            <div className="button text info" onClick={this._onInfoClick}><span>Info</span></div>
+            <div className="button text about" onClick={this._onAboutClick}><span>About</span></div>
+            <div className="button text help" onClick={this._onHelpClick}><span>Help</span></div>
           </div>
-          <div className="button-group-3">
-            <div className="button icon play" onClick={this._onPlayClick}><span>Play</span></div>
-            <div className="button icon pause" onClick={this._onPauseClick}><span>Pause</span></div>
+          <div className="buttons">
+            {playPauseButton}
           </div>
-          <div className="button-group-4">
+          <div className="buttons">
             <div className="button icon stop" onClick={this._onStopClick}><span>Stop</span></div>
           </div>
+          <div className="footer">
+            <a href="http://wmas.it" target="_blank">We Made This</a>
+          </div>
+          <div className="header">
+            <a href="http://madeon.fr" target="_blank">Madeon - Adventure</a>
+          </div>
+          <div className="looper" />
         </div>
-        <div className="footer">
-          <a href="http://wmas.it" target="_blank">We Made This</a>
-        </div>
-        <div className="header">
-          <a href="http://madeon.fr" target="_blank">Madeon - Adventure</a>
-        </div>
-        <div className="looper" />
         <div className="wizard">
           <div className="wizard-header">Welcome to Madeon's Adventure Machine</div>
           <div className="wizard-step">To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</div>
