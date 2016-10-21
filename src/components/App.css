@@ -475,14 +475,20 @@
   }
 }
 
-.wizard-header {
+.wizard h1 {
   margin: 100px 10px 0.5em;
   font-weight: 200;
   font-size: 2em;
   text-transform: uppercase;
 }
 
-.wizard-step {
+.wizard ol {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.wizard li {
   position: absolute;
   left: 0px;
   right: 0px;
@@ -491,28 +497,28 @@
   font-size: 1.5em;
 }
 
-.wizard-header,
-.wizard-step {
+.wizard h1,
+.wizard li {
   opacity: 0;
   transform: translateY(-50px);
-  transition: all 300ms ease-in-out;
+  transition: opacity 300ms linear, transform 300ms ease-in-out;
 }
 
-.show-wizard-step-1 .wizard-header,
-.show-wizard-step-2 .wizard-header,
-.show-wizard-step-3 .wizard-header,
-.show-wizard-step-4 .wizard-header,
-.show-wizard-step-1 .wizard-step:nth-child(2),
-.show-wizard-step-2 .wizard-step:nth-child(3),
-.show-wizard-step-3 .wizard-step:nth-child(4),
-.show-wizard-step-4 .wizard-step:nth-child(5) {
+.show-wizard-step-1 h1,
+.show-wizard-step-2 h1,
+.show-wizard-step-3 h1,
+.show-wizard-step-4 h1,
+.show-wizard-step-1 li:nth-child(1),
+.show-wizard-step-2 li:nth-child(2),
+.show-wizard-step-3 li:nth-child(3),
+.show-wizard-step-4 li:nth-child(4) {
   opacity: 1;
   transform: translateY(0px);
 }
 
-.show-wizard-step-2 .wizard-step:nth-child(-n+2),
-.show-wizard-step-3 .wizard-step:nth-child(-n+3),
-.show-wizard-step-4 .wizard-step:nth-child(-n+4) {
+.show-wizard-step-2 li:nth-child(-n+1),
+.show-wizard-step-3 li:nth-child(-n+2),
+.show-wizard-step-4 li:nth-child(-n+3) {
   transform: translateY(50px);
 }
 

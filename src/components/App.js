@@ -160,11 +160,13 @@ class App extends React.Component {
           <div className="looper" />
         </div>
         <div className="wizard">
-          <div className="wizard-header">Welcome to Madeon's Adventure Machine</div>
-          <div className="wizard-step">To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</div>
-          <div className="wizard-step">Now, press one of the red squares, these are the bass loops, only one will play at a time.</div>
-          <div className="wizard-step">Next, press one of the green squares, these are the sound loops, up to three can play at a time.</div>
-          <div className="wizard-step">Done, now go make some music!</div>
+          <h1>Welcome to Madeon's Adventure Machine</h1>
+          <ol>
+            <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
+            <li>Now, press one of the red squares, these are the bass loops, only one will play at a time.</li>
+            <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
+            <li>Done, now go make some music!</li>
+          </ol>
           <Grid onPlay={this._onWizardPlay} />
         </div>
         <div className="errors">
@@ -200,6 +202,9 @@ class App extends React.Component {
       case WizardState.step3:
         this.setState({ wizardState: WizardState.step4 });
         setTimeout(() => this.setState({ wizardState: WizardState.default }), 3000);
+        break;
+
+      default:
         break;
     }
   }
