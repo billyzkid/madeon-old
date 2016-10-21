@@ -6,7 +6,7 @@ import "./Grid.css";
 class Grid extends React.Component {
   render() {
     return (
-      <div className="grid">
+      <div className="grid" onClick={this.props.onPlay}>
         <GridButton audioType={AudioType.sound} />
         <GridButton audioType={AudioType.sound} />
         <GridButton audioType={AudioType.bass} />

@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { SupportFlags, AppState, ErrorType, WizardStep } from "../scripts/enums";
+import { SupportFlags, AppState, PlayerState, ErrorType, WizardStep } from "../scripts/enums";
 import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
@@ -10,15 +10,23 @@ class App extends React.Component {
     super(props);
 
     this._audioContext = null;
-    this._reload = this._reload.bind(this);
+    this._onGridPlay = this._onGridPlay.bind(this);
+    this._onShareClick = this._onShareClick.bind(this);
+    this._onInfoClick = this._onInfoClick.bind(this);
+    this._onReloadClick = this._onReloadClick.bind(this);
+    this._onPlayClick = this._onPlayClick.bind(this);
+    this._onPauseClick = this._onPauseClick.bind(this);
+    this._onStopClick = this._onStopClick.bind(this);
 
     this.state = {
       support: getSupport(),
       appState: AppState.default,
+      playerState: PlayerState.default,
       errorType: ErrorType.none,
       wizardStep: WizardStep.none,
-      animate: false,
-      playing: false
+      showButtonGroup1: false,
+      showButtonGroup2: false,
+      animate: false
     };
   }
 
@@ -34,17 +42,17 @@ class App extends React.Component {
     ]).then(loadAudioContext).then((audioContext) => {
       this._audioContext = audioContext;
       this.setState({ appState: AppState.loaded });
-    }).then(delay(500)).then(() => {
+    })/*.then(delay(500)).then(() => {
       this.setState({ errorType: ErrorType.loadAudioContext });
     }).then(delay(2000)).then(() => {
       this.setState({ errorType: ErrorType.loadImage });
-    }).then(delay(2000)).then(() => {
+    }).then(delay(1000)).then(() => {
       this.setState({ errorType: ErrorType.unknown });
-    }).then(delay(2000)).then(() => {
+    }).then(delay(1000)).then(() => {
       this.setState({ errorType: ErrorType.none });
-    }).then(delay(500)).then(() => {
+    })*/.then(delay(500)).then(() => {
       this.setState({ animate: true });
-    }).then(delay(5500)).then(() => {
+    })/*.then(delay(5500)).then(() => {
       this.setState({ wizardStep: WizardStep.first });
     }).then(delay(2000)).then(() => {
       this.setState({ wizardStep: WizardStep.second });
@@ -54,8 +62,8 @@ class App extends React.Component {
       this.setState({ wizardStep: WizardStep.last });
     }).then(delay(2000)).then(() => {
       this.setState({ wizardStep: WizardStep.none });
-    }).then(delay(500)).then(() => {
-      this.setState({ playing: true });
+    })*/.then(delay(500)).then(() => {
+      this.setState({ playerState: PlayerState.playing });
     }).catch((error) => {
       let errorType = ErrorType[error] || ErrorType.unknown;
       this.setState({ appState: AppState.failed, errorType: errorType });
@@ -65,6 +73,7 @@ class App extends React.Component {
   // shouldComponentUpdate(nextProps, nextState, nextContext) {
   //   return this.state.support !== nextState.support
   //     || this.state.appState !== nextState.appState
+  //     || this.state.playerState !== nextState.playerState
   //     || this.state.errorType !== nextState.errorType
   //     || this.state.wizardStep !== nextState.wizardStep;
   // }
@@ -76,18 +85,17 @@ class App extends React.Component {
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
       "failed": this.state.appState === AppState.failed,
+      "playing": this.state.playerState === PlayerState.playing,
+      "paused": this.state.playerState === PlayerState.paused,
       "show-error-1": this.state.errorType === ErrorType.loadAudioContext,
       "show-error-2": this.state.errorType === ErrorType.loadImage || this.state.errorType === ErrorType.unknown,
       "show-wizard-step-1": this.state.wizardStep === WizardStep.first,
       "show-wizard-step-2": this.state.wizardStep === WizardStep.second,
       "show-wizard-step-3": this.state.wizardStep === WizardStep.third,
       "show-wizard-step-4": this.state.wizardStep === WizardStep.last,
-      "show-button-group-1": false,
-      "show-button-group-2": false,
-      "show-button-group-3": false,
-      "show-button-group-4": false,
-      "animate": this.state.animate,
-      "playing": this.state.playing
+      "show-button-group-1": this.state.showButtonGroup1,
+      "show-button-group-2": this.state.showButtonGroup2,
+      "animate": this.state.animate
     });
 
     return (
@@ -103,26 +111,26 @@ class App extends React.Component {
               <div className="chevron-part" />
             </div>
           </div>
-          <Grid />
+          <Grid onPlay={this._onGridPlay} />
         </div>
         <div className="buttons">
           <div className="button-group-1">
-            <div className="button share"><span>Share</span></div>
+            <div className="button share" onClick={this._onShareClick}><span>Share</span></div>
             <div className="button copy"><span>Copy URL</span></div>
             <div className="button icon twitter"><span>Twitter</span></div>
             <div className="button icon facebook"><span>Facebook</span></div>
           </div>
           <div className="button-group-2">
-            <div className="button info"><span>Info</span></div>
+            <div className="button info" onClick={this._onInfoClick}><span>Info</span></div>
             <div className="button about"><span>About</span></div>
             <div className="button help"><span>Help</span></div>
           </div>
           <div className="button-group-3">
-            <div className="button icon play"><span>Play</span></div>
-            <div className="button icon pause"><span>Pause</span></div>
+            <div className="button icon play" onClick={this._onPlayClick}><span>Play</span></div>
+            <div className="button icon pause" onClick={this._onPauseClick}><span>Pause</span></div>
           </div>
           <div className="button-group-4">
-            <div className="button icon stop"><span>Stop</span></div>
+            <div className="button icon stop" onClick={this._onStopClick}><span>Stop</span></div>
           </div>
         </div>
         <div className="footer">
@@ -138,7 +146,7 @@ class App extends React.Component {
           <div className="wizard-step">Now, press one of the red squares, these are the bass loops, only one will play at a time.</div>
           <div className="wizard-step">Next, press one of the green squares, these are the sound loops, up to three can play at a time.</div>
           <div className="wizard-step">Done, now go make some music!</div>
-          <Grid />
+          <Grid onPlay={this._onGridPlay} />
         </div>
         <div className="errors">
           <div className="error">
@@ -147,14 +155,38 @@ class App extends React.Component {
           </div>
           <div className="error">
             <p>Something went horribly wrong.</p>
-            <p>Please <a onClick={this._reload}>reload</a> the page or try back later.</p>
+            <p>Please <a onClick={this._onReloadClick}>reload</a> the page or try back later.</p>
           </div>
         </div>
       </div>
     );
   }
 
-  _reload(event) {
+  _onGridPlay(event) {
+    this.setState({ playerState: PlayerState.playing });
+  }
+
+  _onShareClick(event) {
+    this.setState({ showButtonGroup1: !this.state.showButtonGroup1 });
+  }
+
+  _onInfoClick(event) {
+    this.setState({ showButtonGroup2: !this.state.showButtonGroup2 });
+  }
+
+  _onPlayClick(event) {
+    this.setState({ playerState: PlayerState.playing });
+  }
+
+  _onPauseClick(event) {
+    this.setState({ playerState: PlayerState.paused });
+  }
+
+  _onStopClick(event) {
+    this.setState({ playerState: PlayerState.default });
+  }
+
+  _onReloadClick(event) {
     event.preventDefault();
     window.location.reload(true);
   }

@@ -263,7 +263,13 @@
   text-transform: uppercase;
   color: #f8e9db;
   cursor: pointer;
+  user-select: none;
   opacity: 0;
+  visibility: hidden;
+}
+
+.button.pause {
+  position: absolute;
 }
 
 .button:hover,
@@ -274,13 +280,14 @@
 
 .button.share,
 .button.info,
-.button.play,
-.button.stop,
+.playing .button.pause,
+.playing .button.stop,
+.paused .button.play,
+.paused .button.stop,
 .show-button-group-1 .button-group-1 .button,
-.show-button-group-2 .button-group-2 .button,
-.show-button-group-3 .button-group-3 .button,
-.show-button-group-4 .button-group-4 .button {
+.show-button-group-2 .button-group-2 .button {
   opacity: 1;
+  visibility: visible;
 }
 
 .button::before {

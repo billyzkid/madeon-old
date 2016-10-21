@@ -11,6 +11,12 @@ export const AppState = {
   failed: "failed"
 };
 
+export const PlayerState = {
+  default: "default",
+  playing: "playing",
+  paused: "paused"
+};
+
 export const AudioType = {
   drum: "drum",
   bass: "bass",
