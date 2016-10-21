@@ -18,6 +18,14 @@ export const PlayerState = {
   paused: "paused"
 };
 
+export const WizardState = {
+  default: "default",
+  step1: "step1",
+  step2: "step2",
+  step3: "step3",
+  step4: "step4"
+};
+
 export const AudioType = {
   drum: "drum",
   bass: "bass",
@@ -29,12 +37,4 @@ export const ErrorType = {
   loadAudioContext: "loadAudioContext",
   loadImage: "loadImage",
   unknown: "unknown"
-};
-
-export const WizardStep = {
-  none: "none",
-  first: "first",
-  second: "second",
-  third: "third",
-  last: "last"
 };

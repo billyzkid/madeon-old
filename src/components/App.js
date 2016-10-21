@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { SupportFlags, AppState, PlayerState, ErrorType, WizardStep } from "../scripts/enums";
+import { SupportFlags, AppState, PlayerState, WizardState, ErrorType } from "../scripts/enums";
 import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
@@ -10,7 +10,8 @@ class App extends React.Component {
     super(props);
 
     this._audioContext = null;
-    this._onGridPlay = this._onGridPlay.bind(this);
+    this._onPlayerPlay = this._onPlayerPlay.bind(this);
+    this._onWizardPlay = this._onWizardPlay.bind(this);
     this._onShareClick = this._onShareClick.bind(this);
     this._onCopyClick = this._onCopyClick.bind(this);
     this._onTwitterClick = this._onTwitterClick.bind(this);
@@ -27,8 +28,8 @@ class App extends React.Component {
       support: getSupport(),
       appState: AppState.default,
       playerState: PlayerState.default,
+      wizardState: WizardState.default,
       errorType: ErrorType.none,
-      wizardStep: WizardStep.none,
       showShareButtons: false,
       showInfoButtons: false
     };
@@ -58,8 +59,8 @@ class App extends React.Component {
     return this.state.support !== nextState.support
       || this.state.appState !== nextState.appState
       || this.state.playerState !== nextState.playerState
+      || this.state.wizardState !== nextState.wizardState
       || this.state.errorType !== nextState.errorType
-      || this.state.wizardStep !== nextState.wizardStep
       || this.state.showShareButtons !== nextState.showShareButtons
       || this.state.showInfoButtons !== nextState.showInfoButtons;
   }
@@ -74,12 +75,12 @@ class App extends React.Component {
       "failed": this.state.appState === AppState.failed,
       "playing": this.state.playerState === PlayerState.playing,
       "paused": this.state.playerState === PlayerState.paused,
+      "show-wizard-step-1": this.state.wizardState === WizardState.step1,
+      "show-wizard-step-2": this.state.wizardState === WizardState.step2,
+      "show-wizard-step-3": this.state.wizardState === WizardState.step3,
+      "show-wizard-step-4": this.state.wizardState === WizardState.step4,
       "show-error-1": this.state.errorType === ErrorType.loadAudioContext,
       "show-error-2": this.state.errorType === ErrorType.loadImage || this.state.errorType === ErrorType.unknown,
-      "show-wizard-step-1": this.state.wizardStep === WizardStep.first,
-      "show-wizard-step-2": this.state.wizardStep === WizardStep.second,
-      "show-wizard-step-3": this.state.wizardStep === WizardStep.third,
-      "show-wizard-step-4": this.state.wizardStep === WizardStep.last,
       "show-buttons-1": this.state.showShareButtons,
       "show-buttons-2": this.state.showInfoButtons
     });
@@ -97,7 +98,7 @@ class App extends React.Component {
               <div className="chevron-part" />
             </div>
           </div>
-          <Grid onPlay={this._onGridPlay} />
+          <Grid onPlay={this._onPlayerPlay} />
         </div>
         <div className="chrome">
           <div className="buttons">
@@ -138,7 +139,7 @@ class App extends React.Component {
           <div className="wizard-step">Now, press one of the red squares, these are the bass loops, only one will play at a time.</div>
           <div className="wizard-step">Next, press one of the green squares, these are the sound loops, up to three can play at a time.</div>
           <div className="wizard-step">Done, now go make some music!</div>
-          <Grid onPlay={this._onGridPlay} />
+          <Grid onPlay={this._onWizardPlay} />
         </div>
         <div className="errors">
           <div className="error">
@@ -154,8 +155,27 @@ class App extends React.Component {
     );
   }
 
-  _onGridPlay(event) {
+  _onPlayerPlay(event) {
     this.setState({ playerState: PlayerState.playing });
+  }
+
+  _onWizardPlay(event) {
+    this.setState({ playerState: PlayerState.playing });
+
+    switch (this.state.wizardState) {
+      case WizardState.step1:
+        this.setState({ wizardState: WizardState.step2 });
+        break;
+
+      case WizardState.step2:
+        this.setState({ wizardState: WizardState.step3 });
+        break;
+
+      case WizardState.step3:
+        this.setState({ wizardState: WizardState.step4 });
+        setTimeout(() => this.setState({ wizardState: WizardState.default }), 3000);
+        break;
+    }
   }
 
   _onShareClick(event) {
@@ -183,7 +203,7 @@ class App extends React.Component {
   }
 
   _onHelpClick(event) {
-    this.setState({ wizardStep: WizardStep.first });
+    this.setState({ wizardState: WizardState.step1 });
   }
 
   _onPlayClick(event) {
