@@ -160,6 +160,9 @@ class App extends React.Component {
           <div className="looper" />
         </div>
         <div className="wizard">
+          <div className="player">
+            <Grid onPlay={this._onWizardPlay} />
+          </div>
           <h1>Welcome to Madeon's Adventure Machine</h1>
           <ol>
             <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
@@ -167,7 +170,6 @@ class App extends React.Component {
             <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
             <li>Done, now go make some music!</li>
           </ol>
-          <Grid onPlay={this._onWizardPlay} />
         </div>
         <div className="errors">
           <div className="error">
