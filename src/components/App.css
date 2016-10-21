@@ -9,8 +9,8 @@
   transition: opacity 500ms ease-in-out;
 }
 
-.app.loaded,
-.app.failed {
+.loaded,
+.failed {
   opacity: 1;
 }
 
@@ -79,12 +79,12 @@
   transform: translateX(-24px) scaleX(-1);
 }
 
-.app.loaded .chevron:nth-child(1) {
+.animate .chevron:nth-child(1) {
   opacity: 1;
   transform: translateX(-210px);
 }
 
-.app.loaded .chevron:nth-child(2) {
+.animate .chevron:nth-child(2) {
   opacity: 1;
   transform: translateX(210px) scaleX(-1);
 }
@@ -108,11 +108,11 @@
   background: url("../images/chevron-bottom.png") top/100% no-repeat;
 }
 
-.app.loaded .chevron-part {
+.animate .chevron-part {
   height: 50%;
 }
 
-.app.playing .chevron-part {
+.playing .chevron-part {
   animation: chevron-part-dance 4363.6363636364ms ease-out infinite;
 }
 
@@ -241,10 +241,10 @@
   transform: translateY(10px);
 }
 
-.app.loaded .button-group-1,
-.app.loaded .button-group-2,
-.app.loaded .button-group-3,
-.app.loaded .button-group-4 {
+.animate .button-group-1,
+.animate .button-group-2,
+.animate .button-group-3,
+.animate .button-group-4 {
   opacity: 1;
   transform: translateY(0px);
 }
@@ -397,7 +397,7 @@
   transform: translateX(-100%);
 }
 
-.app.playing .looper {
+.playing .looper {
   animation: looper-loop 4363.6363636364ms infinite ease-out;
 }
 
@@ -454,10 +454,10 @@
   transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
 }
 
-.app.show-wizard-step-1 .wizard,
-.app.show-wizard-step-2 .wizard,
-.app.show-wizard-step-3 .wizard,
-.app.show-wizard-step-4 .wizard {
+.show-wizard-step-1 .wizard,
+.show-wizard-step-2 .wizard,
+.show-wizard-step-3 .wizard,
+.show-wizard-step-4 .wizard {
   opacity: 1;
   visibility: visible;
   transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
@@ -498,21 +498,21 @@
   transition: all 300ms ease-in-out;
 }
 
-.app.show-wizard-step-1 .wizard-header,
-.app.show-wizard-step-2 .wizard-header,
-.app.show-wizard-step-3 .wizard-header,
-.app.show-wizard-step-4 .wizard-header,
-.app.show-wizard-step-1 .wizard-step:nth-child(2),
-.app.show-wizard-step-2 .wizard-step:nth-child(3),
-.app.show-wizard-step-3 .wizard-step:nth-child(4),
-.app.show-wizard-step-4 .wizard-step:nth-child(5) {
+.show-wizard-step-1 .wizard-header,
+.show-wizard-step-2 .wizard-header,
+.show-wizard-step-3 .wizard-header,
+.show-wizard-step-4 .wizard-header,
+.show-wizard-step-1 .wizard-step:nth-child(2),
+.show-wizard-step-2 .wizard-step:nth-child(3),
+.show-wizard-step-3 .wizard-step:nth-child(4),
+.show-wizard-step-4 .wizard-step:nth-child(5) {
   opacity: 1;
   transform: translateY(0px);
 }
 
-.app.show-wizard-step-2 .wizard-step:nth-child(-n+2),
-.app.show-wizard-step-3 .wizard-step:nth-child(-n+3),
-.app.show-wizard-step-4 .wizard-step:nth-child(-n+4) {
+.show-wizard-step-2 .wizard-step:nth-child(-n+2),
+.show-wizard-step-3 .wizard-step:nth-child(-n+3),
+.show-wizard-step-4 .wizard-step:nth-child(-n+4) {
   transform: translateY(50px);
 }
 
@@ -532,8 +532,8 @@
   transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
 }
 
-.app.show-error-1 .errors,
-.app.show-error-2 .errors {
+.show-error-1 .errors,
+.show-error-2 .errors {
   opacity: 1;
   visibility: visible;
   transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
@@ -551,8 +551,8 @@
   transition: transform 300ms ease-in-out 0ms;
 }
 
-.app.show-error-1 .error:nth-child(1),
-.app.show-error-2 .error:nth-child(2) {
+.show-error-1 .error:nth-child(1),
+.show-error-2 .error:nth-child(2) {
   transform: translateY(0%);
   transition: transform 300ms ease-in-out 300ms;
 }

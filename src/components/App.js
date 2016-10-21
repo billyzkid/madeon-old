@@ -30,7 +30,7 @@ class App extends React.Component {
     ]).then(loadAudioContext).then((audioContext) => {
       this._audioContext = audioContext;
       this.setState({ appState: AppState.loaded });
-    }).then(delay(5000)).then(() => {
+    }).then(delay(500)).then(() => {
       this.setState({ animate: true });
     }).catch((error) => {
       let errorType = ErrorType[error] || ErrorType.other;
