@@ -85,6 +85,32 @@ class App extends React.Component {
       "show-buttons-2": this.state.showInfoButtons
     });
 
+    // <div className="splash">
+    //   <div className="flippers">
+    //     <div className="flipper">
+    //       <div className="flipper-front" />
+    //       <div className="flipper-back" />
+    //     </div>
+    //     <div className="flipper">
+    //       <div className="flipper-front" />
+    //       <div className="flipper-back" />
+    //     </div>
+    //     <div className="flipper">
+    //       <div className="flipper-front" />
+    //       <div className="flipper-back" />
+    //     </div>
+    //     <div className="flipper">
+    //       <div className="flipper-front" />
+    //       <div className="flipper-back" />
+    //     </div>
+    //   </div>
+    //   <div class="messages">
+    //     <div className="message">Loading samples</div>
+    //     <div className="message">Please wait</div>
+    //     <div className="message">Tap to begin</div>
+    //   </div>
+    // </div>
+
     return (
       <div className={classNames}>
         <div className="player">
