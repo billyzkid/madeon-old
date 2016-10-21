@@ -263,8 +263,8 @@
 }
 
 .button:hover,
-.show-button-group-1 .button.share,
-.show-button-group-2 .button.info {
+.show-buttons-1 .button.share,
+.show-buttons-2 .button.info {
   color: #0e2236;
 }
 
@@ -274,8 +274,8 @@
 .playing .button.stop,
 .paused .button.play,
 .paused .button.stop,
-.show-button-group-1 .buttons:nth-child(1) .button,
-.show-button-group-2 .buttons:nth-child(2) .button {
+.show-buttons-1 .buttons:nth-child(1) .button,
+.show-buttons-2 .buttons:nth-child(2) .button {
   opacity: 1;
   visibility: visible;
 }
@@ -293,8 +293,8 @@
 }
 
 .button:hover::before,
-.show-button-group-1 .button.share::before,
-.show-button-group-2 .button.info::before {
+.show-buttons-1 .button.share::before,
+.show-buttons-2 .button.info::before {
   background: #f8e9db;
 }
 

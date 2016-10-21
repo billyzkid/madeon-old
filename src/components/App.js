@@ -29,8 +29,8 @@ class App extends React.Component {
       playerState: PlayerState.default,
       errorType: ErrorType.none,
       wizardStep: WizardStep.none,
-      showButtonGroup1: false,
-      showButtonGroup2: false,
+      showShareButtons: false,
+      showInfoButtons: false,
       animate: false
     };
   }
@@ -98,18 +98,10 @@ class App extends React.Component {
       "show-wizard-step-2": this.state.wizardStep === WizardStep.second,
       "show-wizard-step-3": this.state.wizardStep === WizardStep.third,
       "show-wizard-step-4": this.state.wizardStep === WizardStep.last,
-      "show-button-group-1": this.state.showButtonGroup1,
-      "show-button-group-2": this.state.showButtonGroup2,
+      "show-buttons-1": this.state.showShareButtons,
+      "show-buttons-2": this.state.showInfoButtons,
       "animate": this.state.animate
     });
-
-    let playPauseButton;
-
-    if (this.state.playerState === PlayerState.playing) {
-      playPauseButton = <div className="button icon pause" onClick={this._onPauseClick}><span>Pause</span></div>;
-    } else {
-      playPauseButton = <div className="button icon play" onClick={this._onPlayClick}><span>Play</span></div>;
-    }
 
     return (
       <div className={classNames}>
@@ -139,7 +131,14 @@ class App extends React.Component {
             <div className="button text help" onClick={this._onHelpClick}><span>Help</span></div>
           </div>
           <div className="buttons">
-            {playPauseButton}
+            {(() => {
+              switch (this.state.playerState) {
+                case PlayerState.playing:
+                  return <div className="button icon pause" onClick={this._onPauseClick}><span>Pause</span></div>;
+                default:
+                  return <div className="button icon play" onClick={this._onPlayClick}><span>Play</span></div>;
+              }
+            })()}
           </div>
           <div className="buttons">
             <div className="button icon stop" onClick={this._onStopClick}><span>Stop</span></div>
@@ -179,7 +178,7 @@ class App extends React.Component {
   }
 
   _onShareClick(event) {
-    this.setState({ showButtonGroup1: !this.state.showButtonGroup1 });
+    this.setState({ showShareButtons: !this.state.showShareButtons });
   }
 
   _onCopyClick(event) {
@@ -195,7 +194,7 @@ class App extends React.Component {
   }
 
   _onInfoClick(event) {
-    this.setState({ showButtonGroup2: !this.state.showButtonGroup2 });
+    this.setState({ showInfoButtons: !this.state.showInfoButtons });
   }
 
   _onAboutClick(event) {
