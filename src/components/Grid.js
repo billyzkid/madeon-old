@@ -12,4 +12,8 @@ class Grid extends React.Component {
   }
 }
 
+Grid.propTypes = {
+  song: React.PropTypes.arrayOf(React.PropTypes.object)
+};
+
 export default Grid;

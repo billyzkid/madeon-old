@@ -25,4 +25,8 @@ class GridButton extends React.Component {
   }
 }
 
+GridButton.propTypes = {
+  item: React.PropTypes.object
+};
+
 export default GridButton;

@@ -3,7 +3,6 @@ import classnames from "classnames";
 import Grid from "./Grid";
 import { SupportFlags, AppState, PlayerState, WizardState, ErrorType, GridButtonState } from "../scripts/enums";
 import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
-import { defaultSong } from "../scripts/songs";
 import "./App.css";
 
 class App extends React.Component {
@@ -277,12 +276,8 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
-  song: React.PropTypes.array
-};
-
-App.defaultProps = {
-  song: defaultSong
+Grid.propTypes = {
+  song: React.PropTypes.arrayOf(React.PropTypes.object)
 };
 
 export default App;
