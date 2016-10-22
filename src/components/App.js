@@ -140,9 +140,9 @@ class App extends React.Component {
             <div className="button text help" onClick={this._onHelpButtonClick}><span>Help</span></div>
           </div>
           <div className="buttons">
-            {(this.state.playerState === PlayerState.playing) ?
-              <div className="button icon pause" onClick={this._onPauseButtonClick}><span>Pause</span></div> :
-              <div className="button icon play" onClick={this._onPlayButtonClick}><span>Play</span></div>}
+            {(this.state.playerState === PlayerState.paused) ?
+              <div className="button icon play" onClick={this._onPlayButtonClick}><span>Pause</span></div> :
+              <div className="button icon pause" onClick={this._onPauseButtonClick}><span>Play</span></div>}
           </div>
           <div className="buttons">
             <div className="button icon stop" onClick={this._onStopButtonClick}><span>Stop</span></div>

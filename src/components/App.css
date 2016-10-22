@@ -213,7 +213,7 @@
   position: absolute;
   display: flex;
   opacity: 0;
-  transition: 500ms opacity ease-in-out 4840ms, 700ms transform ease-in-out 4840ms;
+  transition: opacity 500ms ease-in-out 4840ms, transform 700ms ease-in-out 4840ms;
 }
 
 .buttons:nth-child(1) {
@@ -265,12 +265,27 @@
   user-select: none;
   opacity: 0;
   visibility: hidden;
+  transition: opacity 500ms ease-in-out 0ms, visibility 0ms linear 500ms;
 }
 
-.button:hover,
-.show-buttons-1 .button.share,
-.show-buttons-2 .button.info {
-  color: #0e2236;
+.button.copy {
+  transition-delay: 600ms, 1100ms;
+}
+
+.button.twitter {
+  transition-delay: 400ms, 900ms;
+}
+
+.button.facebook {
+  transition-delay: 200ms, 700ms;
+}
+
+.button.about {
+  transition-delay: 400ms, 900ms;
+}
+
+.button.help {
+  transition-delay: 200ms, 700ms;
 }
 
 .button.share,
@@ -279,10 +294,40 @@
 .playing .button.stop,
 .paused .button.play,
 .paused .button.stop,
-.show-buttons-1 .buttons:nth-child(1) .button,
-.show-buttons-2 .buttons:nth-child(2) .button {
+.show-buttons-1 .button.copy,
+.show-buttons-1 .button.twitter,
+.show-buttons-1 .button.facebook,
+.show-buttons-2 .button.about,
+.show-buttons-2 .button.help {
   opacity: 1;
   visibility: visible;
+  transition-delay: 0ms, 0ms;
+}
+
+.show-buttons-1 .button.copy {
+  transition-delay: 200ms, 0ms;
+}
+
+.show-buttons-1 .button.twitter {
+  transition-delay: 400ms, 0ms;
+}
+
+.show-buttons-1 .button.facebook {
+  transition-delay: 600ms, 0ms;
+}
+
+.show-buttons-2 .button.about {
+  transition-delay: 200ms, 0ms;
+}
+
+.show-buttons-2 .button.help {
+  transition-delay: 400ms, 0ms;
+}
+
+.button:hover,
+.show-buttons-1 .button.share,
+.show-buttons-2 .button.info {
+  color: #0e2236;
 }
 
 .button::before {
@@ -294,7 +339,7 @@
   content: "";
   background: rgba(14, 34, 54, 0.61);
   transform: rotate(45deg);
-  transition: all 200ms linear;
+  transition: background 200ms linear;
 }
 
 .button:hover::before,
