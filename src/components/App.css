@@ -441,9 +441,9 @@
   top: 0px;
   left: 0px;
   right: 0px;
+  width: 0%;
   height: 3px;
   background: #f8e9db;
-  transform: translateX(-100%);
 }
 
 .playing .looper,
@@ -457,39 +457,39 @@
 
 @keyframes looper-loop {
   0% {
-    transform: translateX(-100%);
+    width: 0%;
   }
 
   12.5% {
-    transform: translateX(-87.5%);
+    width: 12.5%;
   }
 
   25% {
-    transform: translateX(-75%);
+    width: 25%;
   }
 
   37.5% {
-    transform: translateX(-62.5%);
+    width: 37.5%;
   }
 
   50% {
-    transform: translateX(-50%);
+    width: 50%;
   }
 
   62.5% {
-    transform: translateX(-37.5%);
+    width: 62.5%;
   }
 
   75% {
-    transform: translateX(-25%);
+    width: 75%;
   }
 
   87.5% {
-    transform: translateX(-12.5%);
+    width: 87.5%;
   }
 
   100% {
-    transform: translateX(0%);
+    width: 100%;
   }
 }
 
