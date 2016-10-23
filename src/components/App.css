@@ -310,7 +310,11 @@
 
 .button:hover,
 .show-buttons-1 .button.share,
-.show-buttons-2 .button.info {
+.show-buttons-2 .button.info,
+.show-wizard-step-1 .button.help,
+.show-wizard-step-2 .button.help,
+.show-wizard-step-3 .button.help,
+.show-wizard-step-4 .button.help {
   color: #0e2236;
 }
 
@@ -328,7 +332,11 @@
 
 .button:hover::before,
 .show-buttons-1 .button.share::before,
-.show-buttons-2 .button.info::before {
+.show-buttons-2 .button.info::before,
+.show-wizard-step-1 .button.help::before,
+.show-wizard-step-2 .button.help::before,
+.show-wizard-step-3 .button.help::before,
+.show-wizard-step-4 .button.help::before {
   background: #f8e9db;
 }
 
@@ -484,6 +492,7 @@
   left: 0;
   right: 0;
   background: rgba(14, 34, 54, 0.61);
+  pointer-events: none;
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
@@ -518,14 +527,14 @@
   }
 }
 
-.wizard h1 {
+.instructions h1 {
   margin: 0px 0px 0.5em;
   font-weight: 200;
   font-size: 2em;
   text-transform: uppercase;
 }
 
-.wizard ol {
+.instructions ol {
   list-style: none;
   padding: 0px;
   margin: 0px;
@@ -533,34 +542,34 @@
   font-size: 1.5em;
 }
 
-.wizard li {
+.instructions li {
   position: absolute;
   left: 0px;
   right: 0px;
 }
 
-.wizard h1,
-.wizard li {
+.instructions h1,
+.instructions li {
   opacity: 0;
   transform: translateY(-50px);
   transition: opacity 300ms linear, transform 300ms ease-in-out;
 }
 
-.show-wizard-step-1 h1,
-.show-wizard-step-2 h1,
-.show-wizard-step-3 h1,
-.show-wizard-step-4 h1,
-.show-wizard-step-1 li:nth-child(1),
-.show-wizard-step-2 li:nth-child(2),
-.show-wizard-step-3 li:nth-child(3),
-.show-wizard-step-4 li:nth-child(4) {
+.show-wizard-step-1 .instructions h1,
+.show-wizard-step-2 .instructions h1,
+.show-wizard-step-3 .instructions h1,
+.show-wizard-step-4 .instructions h1,
+.show-wizard-step-1 .instructions li:nth-child(1),
+.show-wizard-step-2 .instructions li:nth-child(2),
+.show-wizard-step-3 .instructions li:nth-child(3),
+.show-wizard-step-4 .instructions li:nth-child(4) {
   opacity: 1;
   transform: translateY(0px);
 }
 
-.show-wizard-step-2 li:nth-child(-n+1),
-.show-wizard-step-3 li:nth-child(-n+2),
-.show-wizard-step-4 li:nth-child(-n+3) {
+.show-wizard-step-2 .instructions li:nth-child(-n+1),
+.show-wizard-step-3 .instructions li:nth-child(-n+2),
+.show-wizard-step-4 .instructions li:nth-child(-n+3) {
   transform: translateY(50px);
 }
 

@@ -254,7 +254,11 @@ class App extends React.Component {
   }
 
   _onHelpButtonClick(event) {
-    this.setState({ wizardState: WizardState.step1 });
+    if (this.state.wizardState === WizardState.default) {
+      this.setState({ wizardState: WizardState.step1 });
+    } else {
+      this.setState({ wizardState: WizardState.default });
+    }
   }
 
   _onPlayButtonClick(event) {
