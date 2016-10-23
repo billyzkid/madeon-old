@@ -35,7 +35,7 @@ export function loadAudioContext() {
 }
 
 export function loadImage(src) {
-  let image = new Image();
+  const image = new Image();
   return new Promise((resolve, reject) => {
     image.onload = (event) => resolve(image);
     image.onerror = (event) => reject(ErrorType.loadImage);

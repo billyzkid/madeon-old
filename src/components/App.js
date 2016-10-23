@@ -50,7 +50,7 @@ class App extends React.Component {
     }).then(delay(500)).then(() => {
       this.setState({ appState: AppState.ready });
     }).catch((error) => {
-      let errorType = ErrorType[error] || ErrorType.unknown;
+      const errorType = ErrorType[error] || ErrorType.unknown;
       this.setState({ appState: AppState.failed, errorType: errorType });
     });
   }
@@ -66,7 +66,7 @@ class App extends React.Component {
   // }
 
   render() {
-    let classNames = classnames("app", {
+    const classNames = classnames("app", {
       "no-audio": (this.state.support & SupportFlags.audio) !== SupportFlags.audio,
       "no-touch": (this.state.support & SupportFlags.touch) !== SupportFlags.touch,
       "loading": this.state.appState === AppState.loading,

@@ -269,22 +269,14 @@
 }
 
 .button.copy {
-  transition-delay: 600ms, 1100ms;
-}
-
-.button.twitter {
   transition-delay: 400ms, 900ms;
 }
 
-.button.facebook {
+.button.twitter {
   transition-delay: 200ms, 700ms;
 }
 
 .button.about {
-  transition-delay: 400ms, 900ms;
-}
-
-.button.help {
   transition-delay: 200ms, 700ms;
 }
 
@@ -304,24 +296,16 @@
   transition-delay: 0ms, 0ms;
 }
 
-.show-buttons-1 .button.copy {
-  transition-delay: 200ms, 0ms;
-}
-
 .show-buttons-1 .button.twitter {
-  transition-delay: 400ms, 0ms;
+  transition-delay: 200ms, 0ms;
 }
 
 .show-buttons-1 .button.facebook {
-  transition-delay: 600ms, 0ms;
-}
-
-.show-buttons-2 .button.about {
-  transition-delay: 200ms, 0ms;
+  transition-delay: 400ms, 0ms;
 }
 
 .show-buttons-2 .button.help {
-  transition-delay: 400ms, 0ms;
+  transition-delay: 200ms, 0ms;
 }
 
 .button:hover,
