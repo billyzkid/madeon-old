@@ -516,7 +516,7 @@
 
 .instructions {
   position: relative;
-  margin: 100px 10px;
+  margin: 100px 10px 0px;
   font-size: 10px;
   text-align: center;
   color: #f8e9db;
