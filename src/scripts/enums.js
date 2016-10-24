@@ -18,6 +18,12 @@ export const PlayerState = {
   paused: "paused"
 };
 
+export const OverlayState = {
+  default: "default",
+  section1: "section1",
+  section2: "section2"
+};
+
 export const WizardState = {
   default: "default",
   step1: "step1",

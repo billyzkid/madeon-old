@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { SupportFlags, AppState, PlayerState, WizardState, ErrorType, GridButtonState } from "../scripts/enums";
+import { SupportFlags, AppState, PlayerState, OverlayState, WizardState, ErrorType, GridButtonState } from "../scripts/enums";
 import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
@@ -22,12 +22,14 @@ class App extends React.Component {
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
+    this._onLaunchpadLinkClick = this._onLaunchpadLinkClick.bind(this);
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
       support: getSupport(),
       appState: AppState.default,
       playerState: PlayerState.default,
+      overlayState: OverlayState.default,
       wizardState: WizardState.default,
       errorType: ErrorType.none,
       showShareButtons: false,
@@ -59,6 +61,7 @@ class App extends React.Component {
   //   return this.state.support !== nextState.support
   //     || this.state.appState !== nextState.appState
   //     || this.state.playerState !== nextState.playerState
+  //     || this.state.overlayState !== nextState.overlayState
   //     || this.state.wizardState !== nextState.wizardState
   //     || this.state.errorType !== nextState.errorType
   //     || this.state.showShareButtons !== nextState.showShareButtons
@@ -75,6 +78,8 @@ class App extends React.Component {
       "failed": this.state.appState === AppState.failed,
       "playing": this.state.playerState === PlayerState.playing,
       "paused": this.state.playerState === PlayerState.paused,
+      "show-overlay-section-1": this.state.overlayState === OverlayState.section1,
+      "show-overlay-section-2": this.state.overlayState === OverlayState.section2,
       "show-wizard-step-1": this.state.wizardState === WizardState.step1,
       "show-wizard-step-2": this.state.wizardState === WizardState.step2,
       "show-wizard-step-3": this.state.wizardState === WizardState.step3,
@@ -125,6 +130,23 @@ class App extends React.Component {
             </div>
           </div>
           <Grid song={this.props.song} onClick={this._onPlayerGridClick} />
+          <div className="overlay">
+            <section>
+              <h1>About</h1>
+              <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
+              <a onClick={this._onLaunchpadLinkClick}>Got a launchpad?</a>
+            </section>
+            <section>
+              <h1>Connect Your Launchpad</h1>
+              <ol>
+                <li>Turn on Web MIDI API</li>
+                <li>Plug in your launchpad</li>
+                <li>Restart your browser</li>
+                <li>Revisit this page</li>
+                <li>Make your mix</li>
+              </ol>
+            </section>
+          </div>
         </div>
         <div className="chrome">
           <div className="buttons">
@@ -250,7 +272,11 @@ class App extends React.Component {
   }
 
   _onAboutButtonClick(event) {
-    debugger;
+    if (this.state.overlayState === OverlayState.default) {
+      this.setState({ overlayState: OverlayState.section1 });
+    } else {
+      this.setState({ overlayState: OverlayState.default });
+    }
   }
 
   _onHelpButtonClick(event) {
@@ -272,6 +298,11 @@ class App extends React.Component {
   _onStopButtonClick(event) {
     this.props.song.forEach((item) => item.state = GridButtonState.default);
     this.setState({ playerState: PlayerState.default });
+  }
+
+  _onLaunchpadLinkClick(event) {
+    event.preventDefault();
+    this.setState({ overlayState: OverlayState.section2 });
   }
 
   _onReloadLinkClick(event) {
