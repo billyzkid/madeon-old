@@ -17,12 +17,14 @@ class App extends React.Component {
     this._onTwitterButtonClick = this._onTwitterButtonClick.bind(this);
     this._onFacebookButtonClick = this._onFacebookButtonClick.bind(this);
     this._onInfoButtonClick = this._onInfoButtonClick.bind(this);
+    this._onTourButtonClick = this._onTourButtonClick.bind(this);
     this._onAboutButtonClick = this._onAboutButtonClick.bind(this);
-    this._onHelpButtonClick = this._onHelpButtonClick.bind(this);
+    this._onLaunchpadButtonClick = this._onLaunchpadButtonClick.bind(this);
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
     this._onLaunchpadLinkClick = this._onLaunchpadLinkClick.bind(this);
+    this._onCloseLinkClick = this._onCloseLinkClick.bind(this);
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
@@ -133,18 +135,19 @@ class App extends React.Component {
           <div className="overlay">
             <section>
               <h1>About</h1>
-              <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
-              <a onClick={this._onLaunchpadLinkClick}>Got a launchpad?</a>
+              <p>Make your own mix with samples<br /> from Madeon's debut album Adventure</p>
+              <a className="launchpad" onClick={this._onLaunchpadLinkClick}>Got a Launchpad?</a>
             </section>
             <section>
               <h1>Connect Your Launchpad</h1>
               <ol>
-                <li>Turn on Web MIDI API</li>
-                <li>Plug in your launchpad</li>
-                <li>Restart your browser</li>
-                <li>Revisit this page</li>
-                <li>Make your mix</li>
+                <li><span>Turn on the Web MIDI API</span></li>
+                <li><span>Plug in your Launchpad</span></li>
+                <li><span>Restart your browser</span></li>
+                <li><span>Revisit this page</span></li>
+                <li><span>Make your mix</span></li>
               </ol>
+              <a className="close" onClick={this._onCloseLinkClick}>Close</a>
             </section>
           </div>
         </div>
@@ -157,8 +160,9 @@ class App extends React.Component {
           </div>
           <div className="buttons">
             <div className="button text info" onClick={this._onInfoButtonClick}><span>Info</span></div>
+            <div className="button text tour" onClick={this._onTourButtonClick}><span>Tour</span></div>
             <div className="button text about" onClick={this._onAboutButtonClick}><span>About</span></div>
-            <div className="button text help" onClick={this._onHelpButtonClick}><span>Help</span></div>
+            <div className="button icon launchpad" onClick={this._onLaunchpadButtonClick}><span>Launchpad</span></div>
           </div>
           <div className="buttons">
             {(this.state.playerState === PlayerState.paused) ?
@@ -271,19 +275,27 @@ class App extends React.Component {
     this.setState({ showInfoButtons: !this.state.showInfoButtons });
   }
 
+  _onTourButtonClick(event) {
+    if (this.state.wizardState !== WizardState.step1) {
+      this.setState({ overlayState: OverlayState.default, wizardState: WizardState.step1 });
+    } else {
+      this.setState({ wizardState: WizardState.default });
+    }
+  }
+
   _onAboutButtonClick(event) {
-    if (this.state.overlayState === OverlayState.default) {
-      this.setState({ overlayState: OverlayState.section1 });
+    if (this.state.overlayState !== OverlayState.section1) {
+      this.setState({ wizardState: WizardState.default, overlayState: OverlayState.section1 });
     } else {
       this.setState({ overlayState: OverlayState.default });
     }
   }
 
-  _onHelpButtonClick(event) {
-    if (this.state.wizardState === WizardState.default) {
-      this.setState({ wizardState: WizardState.step1 });
+  _onLaunchpadButtonClick(event) {
+    if (this.state.overlayState !== OverlayState.section2) {
+      this.setState({ wizardState: WizardState.default, overlayState: OverlayState.section2 });
     } else {
-      this.setState({ wizardState: WizardState.default });
+      this.setState({ overlayState: OverlayState.default });
     }
   }
 
@@ -303,6 +315,11 @@ class App extends React.Component {
   _onLaunchpadLinkClick(event) {
     event.preventDefault();
     this.setState({ overlayState: OverlayState.section2 });
+  }
+
+  _onCloseLinkClick(event) {
+    event.preventDefault();
+    this.setState({ overlayState: OverlayState.default });
   }
 
   _onReloadLinkClick(event) {

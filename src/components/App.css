@@ -276,6 +276,10 @@
   transition-delay: 200ms, 700ms;
 }
 
+.button.tour {
+  transition-delay: 400ms, 900ms;
+}
+
 .button.about {
   transition-delay: 200ms, 700ms;
 }
@@ -289,8 +293,9 @@
 .show-buttons-1 .button.copy,
 .show-buttons-1 .button.twitter,
 .show-buttons-1 .button.facebook,
+.show-buttons-2 .button.tour,
 .show-buttons-2 .button.about,
-.show-buttons-2 .button.help {
+.show-buttons-2 .button.launchpad {
   opacity: 1;
   visibility: visible;
   transition-delay: 0ms, 0ms;
@@ -304,19 +309,23 @@
   transition-delay: 400ms, 0ms;
 }
 
-.show-buttons-2 .button.help {
+.show-buttons-2 .button.about {
   transition-delay: 200ms, 0ms;
+}
+
+.show-buttons-2 .button.launchpad {
+  transition-delay: 400ms, 0ms;
 }
 
 .button:hover,
 .show-buttons-1 .button.share,
 .show-buttons-2 .button.info,
 .show-overlay-section-1 .button.about,
-.show-overlay-section-2 .button.about,
-.show-wizard-step-1 .button.help,
-.show-wizard-step-2 .button.help,
-.show-wizard-step-3 .button.help,
-.show-wizard-step-4 .button.help {
+.show-overlay-section-2 .button.launchpad,
+.show-wizard-step-1 .button.tour,
+.show-wizard-step-2 .button.tour,
+.show-wizard-step-3 .button.tour,
+.show-wizard-step-4 .button.tour {
   color: #0e2236;
 }
 
@@ -336,11 +345,11 @@
 .show-buttons-1 .button.share::before,
 .show-buttons-2 .button.info::before,
 .show-overlay-section-1 .button.about::before,
-.show-overlay-section-2 .button.about::before,
-.show-wizard-step-1 .button.help::before,
-.show-wizard-step-2 .button.help::before,
-.show-wizard-step-3 .button.help::before,
-.show-wizard-step-4 .button.help::before {
+.show-overlay-section-2 .button.launchpad::before,
+.show-wizard-step-1 .button.tour::before,
+.show-wizard-step-2 .button.tour::before,
+.show-wizard-step-3 .button.tour::before,
+.show-wizard-step-4 .button.tour::before {
   background: #f8e9db;
 }
 
@@ -376,6 +385,10 @@
 
 .button.icon.facebook::after {
   content: "\f09a";
+}
+
+.button.icon.launchpad::after {
+  content: "\f287";
 }
 
 .button.icon.play::after {
@@ -628,13 +641,6 @@
   cursor: pointer;
 }
 
-
-
-
-
-
-
-
 .overlay {
   position: absolute;
   top: 50%;
@@ -667,15 +673,16 @@
 
 .overlay section {
   position: absolute;
+  top: 0px;
+  bottom: 0px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  background: red;
+  width: 230px;
   font-size: 10px;
-  color: #0e2236;
   text-align: center;
+  color: #0e2236;
   opacity: 0;
   visibility: hidden;
+  transform: translateX(-50%);
 }
 
 .show-overlay-section-1 .overlay section:nth-child(1),
@@ -685,22 +692,102 @@
 }
 
 .overlay h1 {
-  margin: 10px 0px 0px;
+  width: 130px;
+  margin: 0px auto;
   font-weight: 200;
   font-size: 2em;
-  line-height: 1em;
   text-transform: uppercase;
 }
 
 .overlay p {
-  margin: 1em 0px;
-  font-size: 1.3em;
-  line-height: 1.5em;
+  margin: 1em 0px 0px;
+  font-size: 1.25em;
+  line-height: 1.6em;
 }
 
 .overlay a {
+  position: absolute;
+  width: 100%;
   font-size: 1.5em;
-  color: #0e2236;
   text-decoration: underline;
   cursor: pointer;
+  transform: translate(-50%,-50%);
+}
+
+.overlay a.launchpad {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.overlay a.close {
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%,0%);
+}
+
+.overlay ol {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  counter-reset: steps;
+}
+
+.overlay li {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 96px;
+  height: 96px;
+  color: #0e2236;
+}
+
+.overlay li:nth-child(1) {
+  transform: translate(-189.5px,-50%);
+}
+
+.overlay li:nth-child(2) {
+  transform: translate(-118.75px,22.75px);
+}
+
+.overlay li:nth-child(3) {
+  transform: translate(-50%,-50%);
+}
+
+.overlay li:nth-child(4) {
+  transform: translate(22.75px,22.75px);
+}
+
+.overlay li:nth-child(5) {
+  transform: translate(93.5px,-50%);
+}
+
+.overlay li::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.overlay li::after {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  font-weight: bold;
+  font-size: 1.5em;
+  counter-increment: steps;
+  content: counter(steps);
+  transform: translateX(-50%);
+}
+
+.overlay li span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  transform: translate(-50%,-50%);
 }
