@@ -405,6 +405,10 @@
   content: "\f04d";
 }
 
+.button.icon.close::after {
+  content: "\f00d";
+}
+
 .header {
   position: absolute;
   top: 35px;
@@ -708,23 +712,25 @@
 }
 
 .overlay a {
-  position: absolute;
-  width: 100%;
-  font-size: 1.5em;
   text-decoration: underline;
   cursor: pointer;
-  transform: translate(-50%,-50%);
 }
 
-.overlay a.launchpad {
+.overlay section:nth-child(1) > a {
+  position: absolute;
   top: 50%;
   left: 50%;
+  width: 100%;
+  font-size: 1.5em;
   transform: translate(-50%,-50%);
 }
 
-.overlay a.close {
+.overlay section:nth-child(2) > a {
+  position: absolute;
   bottom: 0%;
   left: 50%;
+  width: 100%;
+  font-size: 1.5em;
   transform: translate(-50%,0%);
 }
 
@@ -796,4 +802,45 @@
   left: 50%;
   width: 64px;
   transform: translate(-50%,-50%);
+}
+
+.dialogs {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  background: rgba(14, 34, 54, 0.61);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
+}
+
+.show-dialog-1 .dialogs,
+.show-dialog-2 .dialogs {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
+}
+
+.dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 20px;
+  text-align: center;
+  color: #0e2236;
+  background: #f8e9db;
+  visibility: hidden;
+  transform: translate(-50%,-50%);
+}
+
+.show-dialog-1 .dialog:nth-child(1),
+.show-dialog-2 .dialog:nth-child(2) {
+  visibility: visible;
 }

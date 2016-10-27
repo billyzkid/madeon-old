@@ -32,6 +32,12 @@ export const WizardState = {
   step4: "step4"
 };
 
+export const DialogState = {
+  default: "default",
+  dialog1: "dialog1",
+  dialog2: "dialog2"
+};
+
 export const ErrorType = {
   none: "none",
   loadAudioContext: "loadAudioContext",

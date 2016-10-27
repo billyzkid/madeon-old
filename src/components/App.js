@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { SupportFlags, AppState, PlayerState, OverlayState, WizardState, ErrorType, GridButtonState } from "../scripts/enums";
+import { SupportFlags, AppState, PlayerState, OverlayState, WizardState, DialogState, ErrorType, GridButtonState } from "../scripts/enums";
 import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
@@ -23,8 +23,10 @@ class App extends React.Component {
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
-    this._onLaunchpadLinkClick = this._onLaunchpadLinkClick.bind(this);
-    this._onCloseLinkClick = this._onCloseLinkClick.bind(this);
+    this._onMidiLinkClick = this._onMidiLinkClick.bind(this);
+    this._onOverlayLaunchpadLinkClick = this._onOverlayLaunchpadLinkClick.bind(this);
+    this._onOverlayCloseLinkClick = this._onOverlayCloseLinkClick.bind(this);
+    this._onDialogCloseButtonClick = this._onDialogCloseButtonClick.bind(this);
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
@@ -33,6 +35,7 @@ class App extends React.Component {
       playerState: PlayerState.default,
       overlayState: OverlayState.default,
       wizardState: WizardState.default,
+      dialogState: DialogState.default,
       errorType: ErrorType.none,
       showShareButtons: false,
       showInfoButtons: false
@@ -65,6 +68,7 @@ class App extends React.Component {
   //     || this.state.playerState !== nextState.playerState
   //     || this.state.overlayState !== nextState.overlayState
   //     || this.state.wizardState !== nextState.wizardState
+  //     || this.state.dialogState !== nextState.dialogState
   //     || this.state.errorType !== nextState.errorType
   //     || this.state.showShareButtons !== nextState.showShareButtons
   //     || this.state.showInfoButtons !== nextState.showInfoButtons;
@@ -86,6 +90,8 @@ class App extends React.Component {
       "show-wizard-step-2": this.state.wizardState === WizardState.step2,
       "show-wizard-step-3": this.state.wizardState === WizardState.step3,
       "show-wizard-step-4": this.state.wizardState === WizardState.step4,
+      "show-dialog-1": this.state.dialogState === DialogState.dialog1,
+      "show-dialog-2": this.state.dialogState === DialogState.dialog2,
       "show-error-1": this.state.errorType === ErrorType.loadAudioContext,
       "show-error-2": this.state.errorType === ErrorType.loadImage || this.state.errorType === ErrorType.unknown,
       "show-buttons-1": this.state.showShareButtons,
@@ -136,18 +142,18 @@ class App extends React.Component {
             <section>
               <h1>About</h1>
               <p>Make your own mix with samples<br /> from Madeon's debut album Adventure</p>
-              <a className="launchpad" onClick={this._onLaunchpadLinkClick}>Got a Launchpad?</a>
+              <a onClick={this._onOverlayLaunchpadLinkClick}>Got a Launchpad?</a>
             </section>
             <section>
               <h1>Connect Your Launchpad</h1>
               <ol>
-                <li><span>Turn on the Web MIDI API</span></li>
+                <li><span><a onClick={this._onMidiLinkClick}>Enable the Web MIDI API</a></span></li>
                 <li><span>Plug in your Launchpad</span></li>
                 <li><span>Restart your browser</span></li>
                 <li><span>Revisit this page</span></li>
                 <li><span>Make your mix</span></li>
               </ol>
-              <a className="close" onClick={this._onCloseLinkClick}>Close</a>
+              <a onClick={this._onOverlayCloseLinkClick}>Close</a>
             </section>
           </div>
         </div>
@@ -192,6 +198,20 @@ class App extends React.Component {
               <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
               <li>Done, now go make some music!</li>
             </ol>
+          </div>
+        </div>
+        <div className="dialogs">
+          <div className="dialog">
+            <h1>Your Mix URL</h1>
+            <p>Copy the following URL, and then share it with the world.</p>
+            <input type="url" value={window.location.href} />
+            <div className="button icon close" onClick={this._onDialogCloseButtonClick}><span>Close</span></div>
+          </div>
+          <div className="dialog">
+            <h1>Enable Web MIDI API</h1>
+            <p>Copy and paste the following URL into a new tab, press enter, and then click enable.</p>
+            <input type="url" value="chrome://flags/#enable-web-midi" />
+            <div className="button icon close" onClick={this._onDialogCloseButtonClick}><span>Close</span></div>
           </div>
         </div>
         <div className="errors">
@@ -260,7 +280,7 @@ class App extends React.Component {
   }
 
   _onCopyButtonClick(event) {
-    debugger;
+    this.setState({ dialogState: DialogState.dialog1 });
   }
 
   _onTwitterButtonClick(event) {
@@ -312,14 +332,23 @@ class App extends React.Component {
     this.setState({ playerState: PlayerState.default });
   }
 
-  _onLaunchpadLinkClick(event) {
+  _onMidiLinkClick(event) {
+    event.preventDefault();
+    this.setState({ dialogState: DialogState.dialog2 });
+  }
+
+  _onOverlayLaunchpadLinkClick(event) {
     event.preventDefault();
     this.setState({ overlayState: OverlayState.section2 });
   }
 
-  _onCloseLinkClick(event) {
+  _onOverlayCloseLinkClick(event) {
     event.preventDefault();
     this.setState({ overlayState: OverlayState.default });
+  }
+
+  _onDialogCloseButtonClick(event) {
+    this.setState({ dialogState: DialogState.default });
   }
 
   _onReloadLinkClick(event) {
