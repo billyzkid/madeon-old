@@ -1,5 +1,14 @@
 import { SupportFlags, ErrorType } from "./enums";
 
+export function getUrl() {
+  try {
+    // Throws an error in node test environment
+    return window.location.href;
+  } catch (error) {
+    return "";
+  }
+}
+
 export function getSupport() {
   let support = SupportFlags.none;
 
@@ -10,16 +19,14 @@ export function getSupport() {
   if (window.ontouchstart || window.onmsgesturechange) {
     support |= SupportFlags.touch;
   }
-  
+
   return support;
 }
 
-export function delay(ms, value) {
-  return function (value) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(value), ms);
-    });
-  };
+export function delay(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  });
 }
 
 export function loadAudioContext() {

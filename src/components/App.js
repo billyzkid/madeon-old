@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
 import { SupportFlags, AppState, PlayerState, OverlayState, WizardState, DialogState, ErrorType, GridButtonState } from "../scripts/enums";
-import { getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
+import { getUrl, getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
 import "./App.css";
 
 class App extends React.Component {
@@ -51,10 +51,14 @@ class App extends React.Component {
       loadImage(require("../images/chevron-bottom.png")),
       loadImage(require("../images/chevron-top.png")),
       loadImage(require("../images/logo.png"))
-    ]).then(loadAudioContext).then((audioContext) => {
+    ]).then(() => {
+      return loadAudioContext();
+    }).then((audioContext) => {
       this._audioContext = audioContext;
       this.setState({ appState: AppState.loaded });
-    }).then(delay(500)).then(() => {
+    }).then(() => {
+      return delay(500)
+    }).then(() => {
       this.setState({ appState: AppState.ready });
     }).catch((error) => {
       const errorType = ErrorType[error] || ErrorType.unknown;
@@ -204,13 +208,13 @@ class App extends React.Component {
           <div className="dialog">
             <h1>Your Mix URL</h1>
             <p>Copy the following URL, and then share it with the world.</p>
-            <input type="url" value={window.location.href} />
+            <input type="url" value={getUrl()} readOnly />
             <div className="button icon close" onClick={this._onDialogCloseButtonClick}><span>Close</span></div>
           </div>
           <div className="dialog">
             <h1>Enable Web MIDI API</h1>
             <p>Copy and paste the following URL into a new tab, press enter, and then click enable.</p>
-            <input type="url" value="chrome://flags/#enable-web-midi" />
+            <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
             <div className="button icon close" onClick={this._onDialogCloseButtonClick}><span>Close</span></div>
           </div>
         </div>
