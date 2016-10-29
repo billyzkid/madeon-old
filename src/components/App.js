@@ -1,8 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 import Grid from "./Grid";
-import { SupportFlags, AppState, PlayerState, OverlayState, WizardState, DialogState, ErrorType, GridButtonState } from "../scripts/enums";
-import { getUrl, getSupport, delay, loadAudioContext, loadImage } from "../scripts/functions";
+import { SupportFlags, AppState, PlayerState, GridButtonState, OverlayState, WizardState, DialogState, ErrorState, Errors } from "../scripts/constants";
+import { getUrl, getSupport, delay, loadImage, loadAudioContext } from "../scripts/functions";
 import "./App.css";
 
 class App extends React.Component {
@@ -36,7 +36,7 @@ class App extends React.Component {
       overlayState: OverlayState.default,
       wizardState: WizardState.default,
       dialogState: DialogState.default,
-      errorType: ErrorType.none,
+      errorState: ErrorState.default,
       showShareButtons: false,
       showInfoButtons: false
     };
@@ -61,8 +61,15 @@ class App extends React.Component {
     }).then(() => {
       this.setState({ appState: AppState.ready });
     }).catch((error) => {
-      const errorType = ErrorType[error] || ErrorType.unknown;
-      this.setState({ appState: AppState.failed, errorType: errorType });
+      switch (error) {
+        case Errors.audioContextUnsupported:
+          this.setState({ appState: AppState.failed, errorState: ErrorState.error1 });
+          break;
+
+        default:
+          this.setState({ appState: AppState.failed, errorState: ErrorState.error2 });
+          break;
+      }
     });
   }
 
@@ -73,10 +80,10 @@ class App extends React.Component {
   //     || this.state.overlayState !== nextState.overlayState
   //     || this.state.wizardState !== nextState.wizardState
   //     || this.state.dialogState !== nextState.dialogState
-  //     || this.state.errorType !== nextState.errorType
+  //     || this.state.errorState !== nextState.errorState
   //     || this.state.showShareButtons !== nextState.showShareButtons
   //     || this.state.showInfoButtons !== nextState.showInfoButtons;
-  // }
+  // }   
 
   render() {
     const classNames = classnames("app", {
@@ -84,8 +91,8 @@ class App extends React.Component {
       "no-touch": (this.state.support & SupportFlags.touch) !== SupportFlags.touch,
       "loading": this.state.appState === AppState.loading,
       "loaded": this.state.appState === AppState.loaded,
-      "ready": this.state.appState === AppState.ready,
       "failed": this.state.appState === AppState.failed,
+      "ready": this.state.appState === AppState.ready,
       "playing": this.state.playerState === PlayerState.playing,
       "paused": this.state.playerState === PlayerState.paused,
       "show-overlay-section-1": this.state.overlayState === OverlayState.section1,
@@ -96,8 +103,8 @@ class App extends React.Component {
       "show-wizard-step-4": this.state.wizardState === WizardState.step4,
       "show-dialog-1": this.state.dialogState === DialogState.dialog1,
       "show-dialog-2": this.state.dialogState === DialogState.dialog2,
-      "show-error-1": this.state.errorType === ErrorType.loadAudioContext,
-      "show-error-2": this.state.errorType === ErrorType.loadImage || this.state.errorType === ErrorType.unknown,
+      "show-error-1": this.state.errorState === ErrorState.error1,
+      "show-error-2": this.state.errorState === ErrorState.error2,
       "show-buttons-1": this.state.showShareButtons,
       "show-buttons-2": this.state.showInfoButtons
     });

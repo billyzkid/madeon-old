@@ -1,4 +1,4 @@
-import { SupportFlags, ErrorType } from "./enums";
+import { SupportFlags, Errors } from "./constants";
 
 export function getUrl() {
   try {
@@ -29,6 +29,19 @@ export function delay(ms) {
   });
 }
 
+export function loadImage(src) {
+  const image = new Image();
+  return new Promise((resolve, reject) => {
+    image.onload = (event) => resolve(image);
+    image.onerror = (event) => reject(Errors.imageError);
+    image.src = src;
+  }, function () {
+    image.onload = null;
+    image.onerror = null;
+    image.src = "";
+  });
+}
+
 export function loadAudioContext() {
   return new Promise((resolve, reject) => {
     if (window.AudioContext) {
@@ -36,20 +49,7 @@ export function loadAudioContext() {
     } else if (window.webkitAudioContext) {
       resolve(new window.webkitAudioContext());
     } else {
-      reject(ErrorType.loadAudioContext);
+      reject(Errors.audioContextUnsupported);
     }
-  });
-}
-
-export function loadImage(src) {
-  const image = new Image();
-  return new Promise((resolve, reject) => {
-    image.onload = (event) => resolve(image);
-    image.onerror = (event) => reject(ErrorType.loadImage);
-    image.src = src;
-  }, function () {
-    image.onload = null;
-    image.onerror = null;
-    image.src = "";
   });
 }

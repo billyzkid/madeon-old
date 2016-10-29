@@ -508,145 +508,6 @@
   }
 }
 
-.wizard {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(14, 34, 54, 0.61);
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
-}
-
-.show-wizard-step-1 .wizard,
-.show-wizard-step-2 .wizard,
-.show-wizard-step-3 .wizard,
-.show-wizard-step-4 .wizard {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
-}
-
-.instructions {
-  position: relative;
-  margin: 100px 10px 0px;
-  font-size: 10px;
-  text-align: center;
-  color: #f8e9db;
-}
-
-@media (min-width: 1500px) and (min-height: 900px) {
-  .instructions {
-    font-size: 14px;
-  }
-}
-
-@media (min-width: 1500px) and (min-height: 1400px) {
-  .instructions {
-    font-size: 18px;
-  }
-}
-
-.instructions h1 {
-  margin: 0px 0px 0.5em;
-  font-weight: 200;
-  font-size: 2em;
-  text-transform: uppercase;
-}
-
-.instructions ol {
-  list-style: none;
-  padding: 0px;
-  margin: 0px;
-  font-weight: bold;
-  font-size: 1.5em;
-}
-
-.instructions li {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-}
-
-.instructions h1,
-.instructions li {
-  opacity: 0;
-  transform: translateY(-50px);
-  transition: opacity 300ms linear, transform 300ms ease-in-out;
-}
-
-.show-wizard-step-1 .instructions h1,
-.show-wizard-step-2 .instructions h1,
-.show-wizard-step-3 .instructions h1,
-.show-wizard-step-4 .instructions h1,
-.show-wizard-step-1 .instructions li:nth-child(1),
-.show-wizard-step-2 .instructions li:nth-child(2),
-.show-wizard-step-3 .instructions li:nth-child(3),
-.show-wizard-step-4 .instructions li:nth-child(4) {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.show-wizard-step-2 .instructions li:nth-child(-n+1),
-.show-wizard-step-3 .instructions li:nth-child(-n+2),
-.show-wizard-step-4 .instructions li:nth-child(-n+3) {
-  transform: translateY(50px);
-}
-
-.errors {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  background: rgba(14, 34, 54, 0.61);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
-}
-
-.show-error-1 .errors,
-.show-error-2 .errors {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
-}
-
-.error {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  padding: 10px;
-  text-align: center;
-  color: #fff;
-  background: #d4214f;
-  transform: translateY(-100%);
-  transition: transform 300ms ease-in-out 0ms;
-}
-
-.show-error-1 .error:nth-child(1),
-.show-error-2 .error:nth-child(2) {
-  transform: translateY(0%);
-  transition: transform 300ms ease-in-out 300ms;
-}
-
-.error p {
-  margin: 0px;
-}
-
-.error a {
-  color: #fff;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .overlay {
   position: absolute;
   top: 50%;
@@ -804,6 +665,94 @@
   transform: translate(-50%,-50%);
 }
 
+.wizard {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(14, 34, 54, 0.61);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
+}
+
+.show-wizard-step-1 .wizard,
+.show-wizard-step-2 .wizard,
+.show-wizard-step-3 .wizard,
+.show-wizard-step-4 .wizard {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
+}
+
+.instructions {
+  position: relative;
+  margin: 100px 10px 0px;
+  font-size: 10px;
+  text-align: center;
+  color: #f8e9db;
+}
+
+@media (min-width: 1500px) and (min-height: 900px) {
+  .instructions {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1500px) and (min-height: 1400px) {
+  .instructions {
+    font-size: 18px;
+  }
+}
+
+.instructions h1 {
+  margin: 0px 0px 0.5em;
+  font-weight: 200;
+  font-size: 2em;
+  text-transform: uppercase;
+}
+
+.instructions ol {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.instructions li {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+}
+
+.instructions h1,
+.instructions li {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 300ms linear, transform 300ms ease-in-out;
+}
+
+.show-wizard-step-1 .instructions h1,
+.show-wizard-step-2 .instructions h1,
+.show-wizard-step-3 .instructions h1,
+.show-wizard-step-4 .instructions h1,
+.show-wizard-step-1 .instructions li:nth-child(1),
+.show-wizard-step-2 .instructions li:nth-child(2),
+.show-wizard-step-3 .instructions li:nth-child(3),
+.show-wizard-step-4 .instructions li:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.show-wizard-step-2 .instructions li:nth-child(-n+1),
+.show-wizard-step-3 .instructions li:nth-child(-n+2),
+.show-wizard-step-4 .instructions li:nth-child(-n+3) {
+  transform: translateY(50px);
+}
+
 .dialogs {
   position: absolute;
   top: 0;
@@ -843,4 +792,55 @@
 .show-dialog-1 .dialog:nth-child(1),
 .show-dialog-2 .dialog:nth-child(2) {
   visibility: visible;
+}
+
+.errors {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  background: rgba(14, 34, 54, 0.61);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms linear 0ms, visibility 0ms linear 200ms;
+}
+
+.show-error-1 .errors,
+.show-error-2 .errors {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
+}
+
+.error {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  background: #d4214f;
+  transform: translateY(-100%);
+  transition: transform 300ms ease-in-out 0ms;
+}
+
+.show-error-1 .error:nth-child(1),
+.show-error-2 .error:nth-child(2) {
+  transform: translateY(0%);
+  transition: transform 300ms ease-in-out 300ms;
+}
+
+.error p {
+  margin: 0px;
+}
+
+.error a {
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
 }

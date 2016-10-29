@@ -1,4 +1,4 @@
-import { GridButtonState } from "./enums";
+import { GridButtonState } from "./constants";
 
 export const defaultSong = [
   { id: "1", type: "sound", key: 1, tempo: 3, level: 1, index: 1, state: GridButtonState.default },

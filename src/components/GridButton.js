@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import { GridButtonState } from "../scripts/enums";
+import { GridButtonState } from "../scripts/constants";
 import "./GridButton.css";
 
 class GridButton extends React.Component {
