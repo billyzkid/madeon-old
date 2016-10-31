@@ -3,7 +3,7 @@ import classnames from "classnames";
 import Grid from "./Grid";
 import { SupportFlags, AppState, PlayerState, GridButtonState, OverlayState, WizardState, DialogState, ErrorState, Errors } from "../scripts/constants";
 import { getUrl, getSupport, delay, loadImage, loadAudioContext } from "../scripts/functions";
-import "./App.css";
+import "./App.scss";
 
 class App extends React.Component {
   constructor(props) {

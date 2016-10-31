@@ -13,6 +13,9 @@
   },
   "devDependencies": {
     "gh-pages": "^0.11.0",
+    "mathsass": "^0.9.5",
+    "node-sass": "^3.10.1",
+    "sass-loader": "^4.0.2",
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
     "babel-eslint": "7.0.0",
@@ -72,7 +75,7 @@
     ],
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>\\config\\jest\\FileStub.js",
-      "^.+\\.css$": "<rootDir>\\config\\jest\\CSSStub.js"
+      "^.+\\.(css|scss)$": "<rootDir>\\config\\jest\\CSSStub.js"
     },
     "setupFiles": [
       "<rootDir>\\config\\polyfills.js"
