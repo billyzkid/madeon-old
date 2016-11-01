@@ -8,7 +8,7 @@
 }
 
 @mixin show-button($index, $delay) {
-  .madeon-button:nth-child(#{$index}) {
+  .button:nth-child(#{$index}) {
     opacity: 1;
     visibility: visible;
     transition: background 200ms linear 0ms, opacity 500ms linear $delay, visibility 0ms linear $delay;
@@ -16,10 +16,26 @@
 }
 
 @mixin hide-button($index, $delay) {
-  .madeon-button:nth-child(#{$index}) {
+  .button:nth-child(#{$index}) {
     opacity: 0;
     visibility: hidden;
     transition: background 200ms linear 0ms, opacity 500ms linear $delay, visibility 0ms linear $delay + 500ms;
+  }
+}
+
+@mixin show-dialog($index, $delay) {
+  .dialog:nth-child(#{$index}) {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 200ms linear $delay, visibility 0ms linear $delay;
+  }
+}
+
+@mixin hide-dialog($index, $delay) {
+  .dialog:nth-child(#{$index}) {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms linear $delay, visibility 0ms linear $delay + 200ms;
   }
 }
 
@@ -445,12 +461,10 @@
       .app.playing &,
       .app.paused & {
         @include show-button(1, 0ms);
-        @include show-button(2, 0ms);
       }
 
       .app:not(.playing):not(.paused) & {
         @include hide-button(1, 0ms);
-        @include hide-button(2, 0ms);
       }
     }
 
@@ -470,44 +484,6 @@
 
       .app:not(.playing):not(.paused) & {
         @include hide-button(1, 0ms);
-      }
-    }
-
-    .madeon-button {
-      position: relative;
-      width: 44px;
-      height: 44px;
-      margin: 13px;
-      font-weight: bold;
-      font-size: 9px;
-      line-height: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #f8e9db;
-      background: rgba(14, 34, 54, 0.61);
-      transform: rotate(45deg);
-      transition: background 200ms linear 0ms;
-
-      &:hover {
-        color: #0e2236;
-        background: #f8e9db;
-      }
-
-      &::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%) rotate(-45deg);
-      }
-
-      &[label]::before {
-        content: attr(label);
-      }
-
-      &[icon]::before {
-        font: 14px FontAwesome;
-        letter-spacing: normal;
-        content: attr(icon);
       }
     }
   }
@@ -700,14 +676,10 @@
 
 .dialogs {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
   background: rgba(14, 34, 54, 0.61);
   opacity: 0;
   visibility: hidden;
@@ -720,22 +692,20 @@
     transition: opacity 200ms linear 0ms, visibility 0ms linear 0ms;
   }
 
-  .dialog {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    padding: 20px;
-    text-align: center;
-    color: #0e2236;
-    background: #f8e9db;
-    visibility: hidden;
-    transform: translate(-50%,-50%);
+  .app.show-dialog-1 & {
+    @include show-dialog(1, 0ms);
+  }
 
-    .app.show-dialog-1 &:nth-child(1),
-    .app.show-dialog-2 &:nth-child(2) {
-      visibility: visible;
-    }
+  .app:not(.show-dialog-1) & {
+    @include hide-dialog(1, 0ms);
+  }
+
+  .app.show-dialog-2 & {
+    @include show-dialog(2, 0ms);
+  }
+
+  .app:not(.show-dialog-2) & {
+    @include hide-dialog(2, 0ms);
   }
 }
 

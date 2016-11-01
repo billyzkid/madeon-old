@@ -1,0 +1,24 @@
+.dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 20px;
+    margin: 0px;
+    border: none;
+    font: inherit;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    color: #0e2236;
+    background: #f8e9db;
+    transform: translate(-50%,-50%);
+
+    .button {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      transform: rotate(-45deg);
+    }
+}

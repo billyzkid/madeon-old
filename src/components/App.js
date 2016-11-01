@@ -1,6 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import Button from "./Button";
+import Dialog from "./Dialog";
 import Grid from "./Grid";
 import { SupportFlags, AppState, PlayerState, GridButtonState, OverlayState, WizardState, DialogState, ErrorState, Errors } from "../scripts/constants";
 import { getUrl, getSupport, delay, loadImage, loadAudioContext } from "../scripts/functions";
@@ -15,6 +16,8 @@ class App extends React.Component {
     this._onWizardGridClick = this._onWizardGridClick.bind(this);
     this._onShareButtonClick = this._onShareButtonClick.bind(this);
     this._onUrlButtonClick = this._onUrlButtonClick.bind(this);
+    this._onUrlDialogOpen = this._onUrlDialogOpen.bind(this);
+    this._onUrlDialogClose = this._onUrlDialogClose.bind(this);
     this._onTwitterButtonClick = this._onTwitterButtonClick.bind(this);
     this._onFacebookButtonClick = this._onFacebookButtonClick.bind(this);
     this._onInfoButtonClick = this._onInfoButtonClick.bind(this);
@@ -25,9 +28,10 @@ class App extends React.Component {
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
     this._onMidiLinkClick = this._onMidiLinkClick.bind(this);
+    this._onMidiDialogOpen = this._onMidiDialogOpen.bind(this);
+    this._onMidiDialogClose = this._onMidiDialogClose.bind(this);
     this._onOverlayLaunchpadLinkClick = this._onOverlayLaunchpadLinkClick.bind(this);
     this._onOverlayCloseLinkClick = this._onOverlayCloseLinkClick.bind(this);
-    this._onDialogCloseButtonClick = this._onDialogCloseButtonClick.bind(this);
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
@@ -169,73 +173,63 @@ class App extends React.Component {
             </section>
           </div>
         </div>
-        <div className="chrome">
-          <div className="buttons">
-            <Button label="Share" onClick={this._onShareButtonClick} />
-            <Button icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
-            <Button icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
-            <Button icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
-          </div>
-          <div className="buttons">
-            <Button label="Info" onClick={this._onInfoButtonClick} />
-            <Button label="Tour" onClick={this._onTourButtonClick} />
-            <Button label="About" onClick={this._onAboutButtonClick} />
-            <Button icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
-          </div>
-          <div className="buttons">
-            {(this.state.playerState === PlayerState.paused) ?
-              <Button icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} /> :
-              <Button icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />}
-          </div>
-          <div className="buttons">
-            <Button icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
-          </div>
-          <div className="footer">
-            <a href="http://wmas.it" target="_blank">We Made This</a>
-          </div>
-          <div className="header">
-            <a href="http://madeon.fr" target="_blank">Madeon - Adventure</a>
-          </div>
-          <div className="looper" />
-        </div>
-        <div className="wizard">
-          <div className="player">
-            <Grid song={this.props.song} onClick={this._onWizardGridClick} />
-          </div>
-          <div className="instructions">
-            <h1>Welcome to Madeon's Adventure Machine</h1>
-            <ol>
-              <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
-              <li>Now, press one of the red squares, these are the bass loops, only one will play at a time.</li>
-              <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
-              <li>Done, now go make some music!</li>
-            </ol>
-          </div>
-        </div>
-        <div className="dialogs">
-          <div className="dialog">
-            <h1>Your Mix URL</h1>
-            <p>Copy the following URL, and then share it with the world.</p>
-            <input type="url" value={getUrl()} readOnly />
-            <Button label="Close" onClick={this._onDialogCloseButtonClick} />
-          </div>
-          <div className="dialog">
-            <h1>Enable Web MIDI API</h1>
-            <p>Copy and paste the following URL into a new tab, press enter, and then click enable.</p>
-            <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
-            <Button label="Close" onClick={this._onDialogCloseButtonClick} />
-          </div>
-        </div>
-        <div className="errors">
-          <div className="error">
-            <p>This browser does not support the fancy new Web Audio API.</p>
-            <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
-          </div>
-          <div className="error">
-            <p>Something went horribly wrong.</p>
-            <p>Please <a onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
-          </div>
-        </div>
+        <header>
+          <a href="http://madeon.fr" target="_blank">Madeon - Adventure</a>
+        </header>
+        <footer>
+          <a href="http://wmas.it" target="_blank">We Made This</a>
+        </footer>
+        <section>
+          <Button label="Share" onClick={this._onShareButtonClick} />
+          <Button icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
+          <Button icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
+          <Button icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
+        </section>
+        <section>
+          <Button label="Info" onClick={this._onInfoButtonClick} />
+          <Button label="Tour" onClick={this._onTourButtonClick} />
+          <Button label="About" onClick={this._onAboutButtonClick} />
+          <Button icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
+        </section>
+        <section>
+          <Button icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
+          <Button icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
+        </section>
+        <section>
+          <Button icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
+        </section>
+        <div className="looper" />
+
+        <Wizard isVisible={this.state.isWizardVisible} onShow={this._onWizardShow} onHide={this._onWizardHide}>
+          <h1>Welcome to Madeon's Adventure Machine</h1>
+          <ol>
+            <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
+            <li>Now, press one of the red squares, these are the bass loops, only one will play at a time.</li>
+            <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
+            <li>Done, now go make some music!</li>
+          </ol>
+          <Grid song={this.props.song} onClick={this._onWizardGridClick} />
+        </Wizard>
+        <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onAudioContextUnsupportedErrorShow} onHide={this._onAudioContextUnsupportedErrorHide}>
+          <p>This browser does not support the fancy new Web Audio API.</p>
+          <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
+        </Error>
+        <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
+          <p>Something went horribly wrong.</p>
+          <p>Please <a onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
+        </Error>
+        <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
+          <h1>Your Mix URL</h1>
+          <p>Copy the following URL, and then share it with the world.</p>
+          <input type="url" value={getUrl()} readOnly />
+          <Button icon="&#xf00d;" title="Close" onClick={this._onCloseButtonClick} />
+        </Dialog>
+        <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
+          <h1>Enable Web MIDI API</h1>
+          <p>Copy and paste the following URL into a new tab, press enter, and then click enable.</p>
+          <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
+          <Button icon="&#xf00d;" title="Close" onClick={this._onCloseButtonClick} />
+        </Dialog>
       </div>
     );
   }
@@ -295,6 +289,14 @@ class App extends React.Component {
     this.setState({ dialogState: DialogState.dialog1 });
   }
 
+  _onUrlDialogOpen(event) {
+    // TODO
+  }
+
+  _onUrlDialogClose(event) {
+    // TODO
+  }
+
   _onTwitterButtonClick(event) {
     debugger;
   }
@@ -349,6 +351,14 @@ class App extends React.Component {
     this.setState({ dialogState: DialogState.dialog2 });
   }
 
+  _onMidiDialogOpen(event) {
+    // TODO
+  }
+
+  _onMidiDialogClose(event) {
+    // TODO
+  }
+
   _onOverlayLaunchpadLinkClick(event) {
     event.preventDefault();
     this.setState({ overlayState: OverlayState.section2 });
@@ -357,10 +367,6 @@ class App extends React.Component {
   _onOverlayCloseLinkClick(event) {
     event.preventDefault();
     this.setState({ overlayState: OverlayState.default });
-  }
-
-  _onDialogCloseButtonClick(event) {
-    this.setState({ dialogState: DialogState.default });
   }
 
   _onReloadLinkClick(event) {

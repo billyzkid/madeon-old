@@ -10,9 +10,9 @@ class Button extends React.Component {
 
   render() {
     if (this.props.icon) {
-      return <button className="madeon-button" icon={this.props.icon} title={this.props.title} onClick={this._onClick} />;
+      return <button className="button" icon={this.props.icon} title={this.props.title} onClick={this._onClick} />;
     } else {
-      return <button className="madeon-button" label={this.props.label} title={this.props.title} onClick={this._onClick} />;
+      return <button className="button" label={this.props.label} title={this.props.title} onClick={this._onClick} />;
     }
   }
 
