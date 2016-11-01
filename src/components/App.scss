@@ -1,5 +1,28 @@
 @import "../../node_modules/mathsass/dist/math";
 
+@mixin show-buttons($delay) {
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 700ms ease-in-out $delay, opacity 500ms linear $delay, visibility 0ms linear $delay;
+}
+
+@mixin show-button($index, $delay) {
+  .madeon-button:nth-child(#{$index}) {
+    opacity: 1;
+    visibility: visible;
+    transition: background 200ms linear 0ms, opacity 500ms linear $delay, visibility 0ms linear $delay;
+  }
+}
+
+@mixin hide-button($index, $delay) {
+  .madeon-button:nth-child(#{$index}) {
+    opacity: 0;
+    visibility: hidden;
+    transition: background 200ms linear 0ms, opacity 500ms linear $delay, visibility 0ms linear $delay + 500ms;
+  }
+}
+
 .app {
   position: relative;
   width: 100%;
@@ -359,45 +382,98 @@
 
 .chrome {
   .buttons {
-    position: absolute;
     display: flex;
+    flex-flow: column;
+    position: absolute;
     opacity: 0;
-    transition: opacity 500ms ease-in-out 4840ms, transform 700ms ease-in-out 4840ms;
+    visibility: hidden;
+    transition: transform 700ms ease-in-out 0ms, opacity 500ms linear 0ms, visibility 0ms linear 700ms;
 
     &:nth-child(1) {
       top: 18px;
       left: 18px;
-      flex-flow: column;
       transform: translateY(-10px);
+
+      .app.ready & {
+        @include show-buttons(4840ms);
+      }
+
+      .app.show-buttons-1 & {
+        @include show-button(2, 0ms);
+        @include show-button(3, 200ms);
+        @include show-button(4, 400ms);
+      }
+
+      .app:not(.show-buttons-1) & {
+        @include hide-button(2, 400ms);
+        @include hide-button(3, 200ms);
+        @include hide-button(4, 0ms);
+      }
     }
 
     &:nth-child(2) {
       top: 18px;
       right: 18px;
-      flex-flow: column;
       transform: translateY(-10px);
+
+      .app.ready & {
+        @include show-buttons(4840ms);
+      }
+
+      .app.show-buttons-2 & {
+        @include show-button(2, 0ms);
+        @include show-button(3, 200ms);
+        @include show-button(4, 400ms);
+      }
+
+      .app:not(.show-buttons-2) & {
+        @include hide-button(2, 400ms);
+        @include hide-button(3, 200ms);
+        @include hide-button(4, 0ms);
+      }
     }
 
     &:nth-child(3) {
       bottom: 18px;
       left: 18px;
-      flex-flow: row;
       transform: translateY(10px);
+
+      .app.ready & {
+        @include show-buttons(4840ms);
+      }
+
+      .app.playing &,
+      .app.paused & {
+        @include show-button(1, 0ms);
+        @include show-button(2, 0ms);
+      }
+
+      .app:not(.playing):not(.paused) & {
+        @include hide-button(1, 0ms);
+        @include hide-button(2, 0ms);
+      }
     }
 
     &:nth-child(4) {
       bottom: 18px;
       right: 18px;
-      flex-flow: row;
       transform: translateY(10px);
+
+      .app.ready & {
+        @include show-buttons(4840ms);
+      }
+
+      .app.playing &,
+      .app.paused & {
+        @include show-button(1, 0ms);
+      }
+
+      .app:not(.playing):not(.paused) & {
+        @include hide-button(1, 0ms);
+      }
     }
 
-    .app.ready & {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-
-    .button {
+    .madeon-button {
       position: relative;
       width: 44px;
       height: 44px;
@@ -406,152 +482,32 @@
       font-size: 9px;
       line-height: 11px;
       letter-spacing: 2px;
-      text-align: center;
       text-transform: uppercase;
       color: #f8e9db;
-      cursor: pointer;
-      user-select: none;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 500ms ease-in-out 0ms, visibility 0ms linear 500ms;
+      background: rgba(14, 34, 54, 0.61);
+      transform: rotate(45deg);
+      transition: background 200ms linear 0ms;
 
-      &.copy {
-        transition-delay: 400ms, 900ms;
-      }
-
-      &.twitter {
-        transition-delay: 200ms, 700ms;
-      }
-
-      &.tour {
-        transition-delay: 400ms, 900ms;
-      }
-
-      &.about {
-        transition-delay: 200ms, 700ms;
-      }
-
-      &.share,
-      &.info,
-      .app.playing &.pause,
-      .app.playing &.stop,
-      .app.paused &.play,
-      .app.paused &.stop,
-      .app.show-buttons-1 &.copy,
-      .app.show-buttons-1 &.twitter,
-      .app.show-buttons-1 &.facebook,
-      .app.show-buttons-2 &.tour,
-      .app.show-buttons-2 &.about,
-      .app.show-buttons-2 &.launchpad {
-        opacity: 1;
-        visibility: visible;
-        transition-delay: 0ms, 0ms;
-      }
-
-      .app.show-buttons-1 &.twitter {
-        transition-delay: 200ms, 0ms;
-      }
-
-      .app.show-buttons-1 &.facebook {
-        transition-delay: 400ms, 0ms;
-      }
-
-      .app.show-buttons-2 &.about {
-        transition-delay: 200ms, 0ms;
-      }
-
-      .app.show-buttons-2 &.launchpad {
-        transition-delay: 400ms, 0ms;
-      }
-
-      &:hover,
-      .app.show-buttons-1 &.share,
-      .app.show-buttons-2 &.info,
-      .app.show-overlay-section-1 &.about,
-      .app.show-overlay-section-2 &.launchpad,
-      .app.show-wizard-step-1 &.tour,
-      .app.show-wizard-step-2 &.tour,
-      .app.show-wizard-step-3 &.tour,
-      .app.show-wizard-step-4 &.tour {
+      &:hover {
         color: #0e2236;
+        background: #f8e9db;
       }
 
       &::before {
         position: absolute;
-        top: 0px;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        content: "";
-        background: rgba(14, 34, 54, 0.61);
-        transform: rotate(45deg);
-        transition: background 200ms linear;
-      }
-
-      &:hover::before,
-      .app.show-buttons-1 &.share::before,
-      .app.show-buttons-2 &.info::before,
-      .app.show-overlay-section-1 &.about::before,
-      .app.show-overlay-section-2 &.launchpad::before,
-      .app.show-wizard-step-1 &.tour::before,
-      .app.show-wizard-step-2 &.tour::before,
-      .app.show-wizard-step-3 &.tour::before,
-      .app.show-wizard-step-4 &.tour::before {
-        background: #f8e9db;
-      }
-
-      &.text span {
-        position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%) rotate(-45deg);
       }
 
-      &.icon {
+      &[label]::before {
+        content: attr(label);
+      }
+
+      &[icon]::before {
         font: 14px FontAwesome;
-        letter-spacing: 0px;
-      }
-
-      &.icon span {
-        display: block;
-        text-indent: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
-      &.icon::after {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-      }
-
-      &.icon.twitter::after {
-        content: "\f099";
-      }
-
-      &.icon.facebook::after {
-        content: "\f09a";
-      }
-
-      &.icon.launchpad::after {
-        content: "\f287";
-      }
-
-      &.icon.play::after {
-        content: "\f04b";
-      }
-
-      &.icon.pause::after {
-        content: "\f04c";
-      }
-
-      &.icon.stop::after {
-        content: "\f04d";
-      }
-
-      &.icon.close::after {
-        content: "\f00d";
+        letter-spacing: normal;
+        content: attr(icon);
       }
     }
   }

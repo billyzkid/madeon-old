@@ -1,5 +1,6 @@
 import React from "react";
 import classnames from "classnames";
+import Button from "./Button";
 import Grid from "./Grid";
 import { SupportFlags, AppState, PlayerState, GridButtonState, OverlayState, WizardState, DialogState, ErrorState, Errors } from "../scripts/constants";
 import { getUrl, getSupport, delay, loadImage, loadAudioContext } from "../scripts/functions";
@@ -13,7 +14,7 @@ class App extends React.Component {
     this._onPlayerGridClick = this._onPlayerGridClick.bind(this);
     this._onWizardGridClick = this._onWizardGridClick.bind(this);
     this._onShareButtonClick = this._onShareButtonClick.bind(this);
-    this._onCopyButtonClick = this._onCopyButtonClick.bind(this);
+    this._onUrlButtonClick = this._onUrlButtonClick.bind(this);
     this._onTwitterButtonClick = this._onTwitterButtonClick.bind(this);
     this._onFacebookButtonClick = this._onFacebookButtonClick.bind(this);
     this._onInfoButtonClick = this._onInfoButtonClick.bind(this);
@@ -170,24 +171,24 @@ class App extends React.Component {
         </div>
         <div className="chrome">
           <div className="buttons">
-            <div className="button text share" onClick={this._onShareButtonClick}><span>Share</span></div>
-            <div className="button text copy" onClick={this._onCopyButtonClick}><span>Copy URL</span></div>
-            <div className="button icon twitter" onClick={this._onTwitterButtonClick}><span>Twitter</span></div>
-            <div className="button icon facebook" onClick={this._onFacebookButtonClick}><span>Facebook</span></div>
+            <Button label="Share" onClick={this._onShareButtonClick} />
+            <Button icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
+            <Button icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
+            <Button icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
           </div>
           <div className="buttons">
-            <div className="button text info" onClick={this._onInfoButtonClick}><span>Info</span></div>
-            <div className="button text tour" onClick={this._onTourButtonClick}><span>Tour</span></div>
-            <div className="button text about" onClick={this._onAboutButtonClick}><span>About</span></div>
-            <div className="button icon launchpad" onClick={this._onLaunchpadButtonClick}><span>Launchpad</span></div>
+            <Button label="Info" onClick={this._onInfoButtonClick} />
+            <Button label="Tour" onClick={this._onTourButtonClick} />
+            <Button label="About" onClick={this._onAboutButtonClick} />
+            <Button icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
           </div>
           <div className="buttons">
             {(this.state.playerState === PlayerState.paused) ?
-              <div className="button icon play" onClick={this._onPlayButtonClick}><span>Pause</span></div> :
-              <div className="button icon pause" onClick={this._onPauseButtonClick}><span>Play</span></div>}
+              <Button icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} /> :
+              <Button icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />}
           </div>
           <div className="buttons">
-            <div className="button icon stop" onClick={this._onStopButtonClick}><span>Stop</span></div>
+            <Button icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
           </div>
           <div className="footer">
             <a href="http://wmas.it" target="_blank">We Made This</a>
@@ -216,13 +217,13 @@ class App extends React.Component {
             <h1>Your Mix URL</h1>
             <p>Copy the following URL, and then share it with the world.</p>
             <input type="url" value={getUrl()} readOnly />
-            <div className="button icon close" onClick={this._onDialogCloseButtonClick}><span>Close</span></div>
+            <Button label="Close" onClick={this._onDialogCloseButtonClick} />
           </div>
           <div className="dialog">
             <h1>Enable Web MIDI API</h1>
             <p>Copy and paste the following URL into a new tab, press enter, and then click enable.</p>
             <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
-            <div className="button icon close" onClick={this._onDialogCloseButtonClick}><span>Close</span></div>
+            <Button label="Close" onClick={this._onDialogCloseButtonClick} />
           </div>
         </div>
         <div className="errors">
@@ -290,7 +291,7 @@ class App extends React.Component {
     this.setState({ showShareButtons: !this.state.showShareButtons });
   }
 
-  _onCopyButtonClick(event) {
+  _onUrlButtonClick(event) {
     this.setState({ dialogState: DialogState.dialog1 });
   }
 
@@ -369,7 +370,7 @@ class App extends React.Component {
 }
 
 Grid.propTypes = {
-  song: React.PropTypes.arrayOf(React.PropTypes.object)
+  label: React.PropTypes.arrayOf(React.PropTypes.object)
 };
 
 export default App;
