@@ -14,11 +14,8 @@ class Dialog extends React.Component {
 Dialog.propTypes = {
   isOpen: React.PropTypes.bool,
   onOpen: React.PropTypes.func,
-  onClose: React.PropTypes.func
-};
-
-Dialog.defaultProps = {
-  isOpen: false
+  onClose: React.PropTypes.func,
+  children: React.PropTypes.node
 };
 
 export default Dialog;

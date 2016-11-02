@@ -1,2 +1,8 @@
-.error {
+.wizard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  background: blue;
+  transform: translate(-50%,-50%);
 }

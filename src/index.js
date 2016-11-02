@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import { defaultSong } from "./scripts/songs";
+import { defaultSamples } from "./scripts/samples";
 import "./index.css";
 
-ReactDOM.render(<App song={defaultSong} />, document.getElementById("app-container"));
+ReactDOM.render(<App samples={defaultSamples} />, document.getElementById("app-container"));

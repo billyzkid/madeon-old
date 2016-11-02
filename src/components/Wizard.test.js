@@ -1,7 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Error from "./Error";
+import Wizard from "./Wizard";
 
-it("renders without crashing", () => {
-  ReactDOM.render(<Error />, document.createElement("div"));
+it("renders", () => {
+  ReactDOM.render(<Wizard />, document.createElement("div"));
+});
+
+it("renders single child", () => {
+  ReactDOM.render(<Wizard isVisible={true} onShow={(event) => {}} onHide={(event) => {}}>Foo</Wizard>, document.createElement("div"));
+});
+
+it("renders multiple children", () => {
+  ReactDOM.render(<Wizard isVisible={true} onShow={(event) => {}} onHide={(event) => {}}><h1>Foo</h1><p>Bar</p></Wizard>, document.createElement("div"));
 });

@@ -14,11 +14,8 @@ class Wizard extends React.Component {
 Wizard.propTypes = {
   isVisible: React.PropTypes.bool,
   onShow: React.PropTypes.func,
-  onHide: React.PropTypes.func
-};
-
-Wizard.defaultProps = {
-  isVisible: false
+  onHide: React.PropTypes.func,
+  children: React.PropTypes.node
 };
 
 export default Wizard;

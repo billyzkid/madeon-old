@@ -30,15 +30,11 @@ export function delay(ms) {
 }
 
 export function loadImage(src) {
-  const image = new Image();
   return new Promise((resolve, reject) => {
-    image.onload = (event) => resolve(image);
-    image.onerror = (event) => reject(Errors.imageError);
+    const image = new Image();
+    image.onload = resolve;
+    image.onerror = reject;
     image.src = src;
-  }, function () {
-    image.onload = null;
-    image.onerror = null;
-    image.src = "";
   });
 }
 

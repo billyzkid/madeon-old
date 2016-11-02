@@ -1,46 +1,27 @@
 .button {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  padding: 0px;
-  margin: 13px;
-  border: none;
+  padding: 10px;
+  margin: 2px;
+  border: 2px solid blue;
   font: inherit;
-  font-weight: bold;
-  font-size: 9px;
-  line-height: 11px;
-  letter-spacing: 2px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #f8e9db;
-  background: rgba(14, 34, 54, 0.61);
-  cursor: pointer;
-  transform: rotate(45deg);
-  transition: background 200ms linear 0ms;
-
-  &:focus {
-    outline: none;
-  }
+  color: blue;
+  background: aqua;
 
   &:hover {
-    color: #0e2236;
-    background: #f8e9db;
+    color: aqua;
+    background: blue;
   }
 
-  &::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) rotate(-45deg);
+  &:focus {
+    outline: 1px dashed blue;
+    outline-offset: 1px;
   }
-
-  &[label]::before {
-    content: attr(label);
-  }
-
+  
   &[icon]::before {
-    font: 14px FontAwesome;
-    letter-spacing: normal;
+    font: 14px/1em FontAwesome;
     content: attr(icon);
+  }
+
+  &[label]::after {
+    content: attr(label);
   }
 }

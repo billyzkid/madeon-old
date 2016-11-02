@@ -52,7 +52,5 @@ export const ErrorState = {
 };
 
 export const Errors = {
-  imageError: "Image failed to load.",
-  audioError: "Audio failed to load.",
   audioContextUnsupported: "Audio context unsupported."
-}; 
+};

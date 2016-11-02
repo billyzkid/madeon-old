@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { defaultSong } from "../scripts/songs";
+import { defaultSamples } from "../scripts/samples";
 
-it("renders without crashing", () => {
-  ReactDOM.render(<App song={defaultSong} />, document.createElement("div"));
+it("renders", () => {
+  ReactDOM.render(<App />, document.createElement("div"));
+});
+
+it("renders samples", () => {
+  ReactDOM.render(<App samples={defaultSamples} />, document.createElement("div"));
 });
