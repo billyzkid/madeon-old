@@ -158,12 +158,28 @@ class App extends React.Component {
     );
   }
 
+  // <Portal
+  //   closeOnEsc
+  //   closeOnOutsideClick
+  //   isOpened={this.state.isMidiDialogOpen}
+  //   onOpen={this._onMidiDialogOpen}
+  //   onClose={this._onMidiDialogClose}>
+
+  //   <Dialog name="midiDialog">
+  //     <h1>Enable the Web MIDI API</h1>
+  //     <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
+  //     <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
+  //     <Button icon="&#xf00d;" title="Close" onClick={this._onMidiDialogCloseButtonClick} />
+  //   </Dialog>
+
+  // </Portal>
+
   _onPlayerClick(event, sample) {
     debugger;
   }
 
   _onShareButtonClick(event) {
-    debugger;
+    this.setState({ isMidiDialogOpen: true });
   }
 
   _onUrlButtonClick(event) {
