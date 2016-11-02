@@ -1,5 +1,29 @@
 import { SupportFlags, Errors } from "./constants";
 
+export function getClassNames() {
+  var classNames = [];
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    var arg = arguments[i];
+    if (arg) {
+      var argType = typeof arg;
+      if (argType === "string" || argType === "number") {
+        classNames.push(arg);
+      } else if (Array.isArray(arg)) {
+        classNames.push(getClassNames.apply(null, arg));
+      } else if (argType === "object") {
+        for (var key in arg) {
+          if (arg.hasOwnProperty(key) && arg[key]) {
+            classNames.push(key);
+          }
+        }
+      }
+    }
+  }
+
+  return classNames.join(" ");
+}
+
 export function getUrl() {
   try {
     // Throws an error in node test environment

@@ -167,7 +167,7 @@ class App extends React.Component {
   }
 
   _onUrlButtonClick(event) {
-    debugger;
+    this.setState({ isUrlDialogOpen: true });
   }
 
   _onTwitterButtonClick(event) {
@@ -247,7 +247,7 @@ class App extends React.Component {
   }
 
   _onLaunchpadOverlayMidiLinkClick(event) {
-    debugger;
+    this.setState({ isMidiDialogOpen: true });
   }
 
   _onLaunchpadOverlayCloseButtonClick(event) {
@@ -286,28 +286,28 @@ class App extends React.Component {
     debugger;
   }
 
-  _onUrlDialogOpen(event) {
-    debugger;
+  _onUrlDialogOpen() {
+    this.setState({ isUrlDialogOpen: true });
   }
 
-  _onUrlDialogClose(event) {
-    debugger;
+  _onUrlDialogClose() {
+    this.setState({ isUrlDialogOpen: false });
   }
 
   _onUrlDialogCloseButtonClick(event) {
-    debugger;
+    this.setState({ isUrlDialogOpen: false });
   }
 
-  _onMidiDialogOpen(event) {
-    debugger;
+  _onMidiDialogOpen() {
+    this.setState({ isMidiDialogOpen: true });
   }
 
-  _onMidiDialogClose(event) {
-    debugger;
+  _onMidiDialogClose() {
+    this.setState({ isMidiDialogOpen: false });
   }
 
   _onMidiDialogCloseButtonClick(event) {
-    debugger;
+    this.setState({ isMidiDialogOpen: false });
   }
 }
 
