@@ -142,13 +142,13 @@ class App extends React.Component {
           <p>Something went horribly wrong.</p>
           <p>Please <a onClick={this._onLoadErrorReloadLinkClick}>reload</a> the page or try back later.</p>
         </Error>
-        <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
+        <Dialog name="urlDialog" isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
           <h1>Your mix URL</h1>
           <p>Copy the following URL, and then share it with the world.</p>
           <input type="url" value={getUrl()} readOnly />
           <Button icon="&#xf00d;" title="Close" onClick={this._onUrlDialogCloseButtonClick} />
         </Dialog>
-        <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
+        <Dialog name="midiDialog" isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
           <h1>Enable the Web MIDI API</h1>
           <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
           <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
@@ -287,26 +287,32 @@ class App extends React.Component {
   }
 
   _onUrlDialogOpen() {
+    console.log("_onUrlDialogOpen");
     this.setState({ isUrlDialogOpen: true });
   }
 
   _onUrlDialogClose() {
+    console.log("_onUrlDialogClose");
     this.setState({ isUrlDialogOpen: false });
   }
 
   _onUrlDialogCloseButtonClick(event) {
+    console.log("_onUrlDialogCloseButtonClick");
     this.setState({ isUrlDialogOpen: false });
   }
 
   _onMidiDialogOpen() {
+    console.log("_onMidiDialogOpen");
     this.setState({ isMidiDialogOpen: true });
   }
 
   _onMidiDialogClose() {
+    console.log("_onMidiDialogClose");
     this.setState({ isMidiDialogOpen: false });
   }
 
   _onMidiDialogCloseButtonClick(event) {
+    console.log("_onMidiDialogCloseButtonClick");
     this.setState({ isMidiDialogOpen: false });
   }
 }

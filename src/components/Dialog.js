@@ -8,39 +8,33 @@ class Dialog extends React.Component {
     super(props);
 
     this._onKeyDown = this._onKeyDown.bind(this);
-
-    this.state = {
-      isOpen: props.isOpen
-    };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ isOpen: nextProps.isOpen });
+    if (!this.props.isOpen && nextProps.isOpen) {
+      this._open();
+    } else if (this.props.isOpen && !nextProps.isOpen) {
+      this._close();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.isOpen !== nextState.isOpen;
+    return this.props.isOpen !== nextProps.isOpen;
   }
 
-  componentDidUpdate() {
-    if (this.state.isOpen) {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isOpen && !prevProps.isOpen) {
       this.refs.self.focus();
-      if (this.props.onOpen) {
-        this.props.onOpen();
-      }
-    } else {
+    } else if (!this.props.isOpen && prevProps.isOpen) {
       this.refs.self.blur();
-      if (this.props.onClose) {
-        this.props.onClose();
-      }
     }
   }
 
   render() {
-    console.log("render", this);
+    console.log("render", this.props.name);
 
     const classNames = getClassNames("dialog", {
-      open: this.state.isOpen
+      open: this.props.isOpen
     });
 
     return (
@@ -50,10 +44,22 @@ class Dialog extends React.Component {
     );
   }
 
+  _open() {
+    if (this.props.onOpen) {
+      this.props.onOpen();
+    }
+  }
+
+  _close() {
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
+  }
+
   _onKeyDown(event) {
     if (event.keyCode === 27) {
       event.preventDefault();
-      this.setState({ isOpen: false });
+      this._close();
     }
   }
 }

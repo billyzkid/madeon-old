@@ -13,7 +13,9 @@ class PlayerButton extends React.Component {
   }
 
   _onClick(event) {
-    this.props.onClick(event, this.props.sample);
+    if (this.props.onClick) {
+      this.props.onClick(event, this.props.sample);
+    }
   }
 }
 
