@@ -109,7 +109,7 @@ class App extends React.Component {
         <Overlay isVisible={this.state.isAboutOverlayVisible} onShow={this._onAboutOverlayShow} onHide={this._onAboutOverlayHide}>
           <h1>About</h1>
           <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
-          <a onClick={this._onAboutOverlayLaunchpadLinkClick}>Got a Launchpad?</a>
+          <p><a onClick={this._onAboutOverlayLaunchpadLinkClick}>Got a Launchpad?</a></p>
           <Button label="Close" onClick={this._onAboutOverlayCloseButtonClick} />
         </Overlay>
         <Overlay isVisible={this.state.isLaunchpadOverlayVisible} onShow={this._onLaunchpadOverlayShow} onHide={this._onLaunchpadOverlayHide}>
@@ -157,7 +157,7 @@ class App extends React.Component {
       </div>
     );
   }
-  
+
   _onPlayerClick(event, sample) {
     debugger;
   }
