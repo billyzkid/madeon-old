@@ -45,6 +45,10 @@ export const DialogState = {
   dialog2: 1
 };
 
+export const KeyCodes = {
+  escape: 27
+};
+
 export const ErrorState = {
   default: 0,
   error1: 1,

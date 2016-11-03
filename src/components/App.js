@@ -15,6 +15,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    // document.body.addEventListener("click", (event) => console.log("click"));
+    // document.body.addEventListener("keydown", (event) => console.log("keydown"));
+
     this._onPlayerClick = this._onPlayerClick.bind(this);
     this._onShareButtonClick = this._onShareButtonClick.bind(this);
     this._onUrlButtonClick = this._onUrlButtonClick.bind(this);
@@ -49,10 +52,8 @@ class App extends React.Component {
     this._onLoadErrorReloadLinkClick = this._onLoadErrorReloadLinkClick.bind(this);
     this._onUrlDialogOpen = this._onUrlDialogOpen.bind(this);
     this._onUrlDialogClose = this._onUrlDialogClose.bind(this);
-    this._onUrlDialogCloseButtonClick = this._onUrlDialogCloseButtonClick.bind(this);
     this._onMidiDialogOpen = this._onMidiDialogOpen.bind(this);
     this._onMidiDialogClose = this._onMidiDialogClose.bind(this);
-    this._onMidiDialogCloseButtonClick = this._onMidiDialogCloseButtonClick.bind(this);
 
     this.state = {
       isLoadingOverlayVisible: false,
@@ -142,37 +143,19 @@ class App extends React.Component {
           <p>Something went horribly wrong.</p>
           <p>Please <a onClick={this._onLoadErrorReloadLinkClick}>reload</a> the page or try back later.</p>
         </Error>
-        <Dialog name="urlDialog" isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
+        <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose} closeOnEscape closeOnClick closeOnButtonClick>
           <h1>Your mix URL</h1>
           <p>Copy the following URL, and then share it with the world.</p>
           <input type="url" value={getUrl()} readOnly />
-          <Button icon="&#xf00d;" title="Close" onClick={this._onUrlDialogCloseButtonClick} />
         </Dialog>
-        <Dialog name="midiDialog" isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
+        <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose} closeOnEscape closeOnClick closeOnButtonClick>
           <h1>Enable the Web MIDI API</h1>
           <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
           <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
-          <Button icon="&#xf00d;" title="Close" onClick={this._onMidiDialogCloseButtonClick} />
         </Dialog>
       </div>
     );
   }
-
-  // <Portal
-  //   closeOnEsc
-  //   closeOnOutsideClick
-  //   isOpened={this.state.isMidiDialogOpen}
-  //   onOpen={this._onMidiDialogOpen}
-  //   onClose={this._onMidiDialogClose}>
-
-  //   <Dialog name="midiDialog">
-  //     <h1>Enable the Web MIDI API</h1>
-  //     <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
-  //     <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
-  //     <Button icon="&#xf00d;" title="Close" onClick={this._onMidiDialogCloseButtonClick} />
-  //   </Dialog>
-
-  // </Portal>
 
   _onPlayerClick(event, sample) {
     debugger;
@@ -312,11 +295,6 @@ class App extends React.Component {
     this.setState({ isUrlDialogOpen: false });
   }
 
-  _onUrlDialogCloseButtonClick(event) {
-    console.log("_onUrlDialogCloseButtonClick");
-    this.setState({ isUrlDialogOpen: false });
-  }
-
   _onMidiDialogOpen() {
     console.log("_onMidiDialogOpen");
     this.setState({ isMidiDialogOpen: true });
@@ -324,11 +302,6 @@ class App extends React.Component {
 
   _onMidiDialogClose() {
     console.log("_onMidiDialogClose");
-    this.setState({ isMidiDialogOpen: false });
-  }
-
-  _onMidiDialogCloseButtonClick(event) {
-    console.log("_onMidiDialogCloseButtonClick");
     this.setState({ isMidiDialogOpen: false });
   }
 }

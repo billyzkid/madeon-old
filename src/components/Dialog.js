@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "./Button";
+import { KeyCodes } from "../scripts/constants";
 import { getClassNames } from "../scripts/functions";
 import "./Dialog.scss";
 
@@ -8,6 +10,8 @@ class Dialog extends React.Component {
     super(props);
 
     this._onKeyDown = this._onKeyDown.bind(this);
+    this._onClick = this._onClick.bind(this);
+    this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,15 +35,19 @@ class Dialog extends React.Component {
   }
 
   render() {
-    console.log("render", this.props.name);
-
     const classNames = getClassNames("dialog", {
-      open: this.props.isOpen
+      open: this.props.isOpen,
+
     });
 
+    if (this.props.closeOnButtonClick) {
+      
+    }
+
     return (
-      <div ref="self" className={classNames} tabIndex={-1} onKeyDown={this._onKeyDown}>
-        {this.props.children}
+      <div ref="self" className={classNames} tabIndex={-1} onKeyDown={this._onKeyDown} onClick={this._onClick}>
+        <div className="content">{this.props.children}</div>
+        {this.props.closeOnButtonClick ? <Button icon="&#xf00d;" title="Close" onClick={this._onCloseButtonClick} /> : null}
       </div>
     );
   }
@@ -57,8 +65,20 @@ class Dialog extends React.Component {
   }
 
   _onKeyDown(event) {
-    if (event.keyCode === 27) {
+    if (this.props.closeOnEscape && event.keyCode === KeyCodes.escape) {
       event.preventDefault();
+      this._close();
+    }
+  }
+
+  _onClick(event) {
+    if (this.props.closeOnClick && event.target === this.refs.self) {
+      this._close();
+    }
+  }
+
+  _onCloseButtonClick(event) {
+    if (this.props.closeOnButtonClick) {
       this._close();
     }
   }
@@ -68,6 +88,9 @@ Dialog.propTypes = {
   isOpen: React.PropTypes.bool,
   onOpen: React.PropTypes.func,
   onClose: React.PropTypes.func,
+  closeOnEscape: React.PropTypes.bool,
+  closeOnClick: React.PropTypes.bool,
+  closeOnButtonClick: React.PropTypes.bool,
   children: React.PropTypes.node
 };
 
