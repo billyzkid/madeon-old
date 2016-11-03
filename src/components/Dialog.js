@@ -36,13 +36,8 @@ class Dialog extends React.Component {
 
   render() {
     const classNames = getClassNames("dialog", {
-      open: this.props.isOpen,
-
+      open: this.props.isOpen
     });
-
-    if (this.props.closeOnButtonClick) {
-      
-    }
 
     return (
       <div ref="self" className={classNames} tabIndex={-1} onKeyDown={this._onKeyDown} onClick={this._onClick}>
