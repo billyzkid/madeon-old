@@ -57,23 +57,25 @@ export default class App extends React.Component {
           <a href="http://wmas.it" target="_blank">We Made This</a>
         </div>
         <div className="buttons">
-          <Button label="Share" onClick={this._onShareButtonClick} />
-          <Button icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
-          <Button icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
-          <Button icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
-        </div>
-        <div className="buttons">
-          <Button label="Info" onClick={this._onInfoButtonClick} />
-          <Button label="About" onClick={this._onAboutButtonClick} />
-          <Button icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
-          <Button icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
-        </div>
-        <div className="buttons">
-          <Button icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
-          <Button icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
-        </div>
-        <div className="buttons">
-          <Button icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
+          <section>
+            <Button label="Share" onClick={this._onShareButtonClick} />
+            <Button icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
+            <Button icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
+            <Button icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
+          </section>
+          <section>
+            <Button label="Info" onClick={this._onInfoButtonClick} />
+            <Button label="About" onClick={this._onAboutButtonClick} />
+            <Button icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
+            <Button icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
+          </section>
+          <section>
+            <Button icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
+            <Button icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
+          </section>
+          <section>
+            <Button icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
+          </section>
         </div>
         <Looper />
         <Dancer />
