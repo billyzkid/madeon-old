@@ -1,12 +1,10 @@
 import React from "react";
 import "./Splash.scss";
 
-class Splash extends React.Component {
+export default class Splash extends React.Component {
   render() {
     return (
-      <div className="splash">
-        {this.props.children}
-      </div>
+      <div className="splash">{this.props.children}</div>
     );
   }
 }
@@ -17,5 +15,3 @@ Splash.propTypes = {
   onHide: React.PropTypes.func,
   children: React.PropTypes.node
 };
-
-export default Splash;

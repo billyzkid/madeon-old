@@ -7,6 +7,6 @@ it("renders", () => {
   ReactDOM.render(<App />, document.createElement("div"));
 });
 
-it("renders samples", () => {
+it("renders props", () => {
   ReactDOM.render(<App samples={defaultSamples} />, document.createElement("div"));
 });

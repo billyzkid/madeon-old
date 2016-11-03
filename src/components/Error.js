@@ -1,14 +1,20 @@
 import React from "react";
+import Overlay from "./Overlay";
 import "./Error.scss";
 
-class Error extends React.Component {
+export default class Error extends React.Component {
   render() {
     return (
-      <div className="error">
-        {this.props.children}
-      </div>
+      <Overlay isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
+        <div className="error">{this.props.children}</div>
+      </Overlay>
     );
   }
 }
 
-export default Error;
+Error.propTypes = {
+  isVisible: React.PropTypes.bool,
+  onShow: React.PropTypes.func,
+  onHide: React.PropTypes.func,
+  children: React.PropTypes.node
+};

@@ -1,31 +1,12 @@
-@import "../styles/includes.scss";
-
 .dialog {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  background: rgba(14, 34, 54, 0.61);
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  background: dimgray;
+  transform: translate(-50%,-50%);
 
-  &.open {
-    @include fade-in();
-  }
-
-  &:not(.open) {
-    @include fade-out();
-  }
-
-  .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    background: dimgray;
-    transform: translate(-50%,-50%);
-  }
-
-  .button {
+  & + .button {
     position: absolute;
     top: 10px;
     right: 10px;

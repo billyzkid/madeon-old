@@ -1,5 +1,27 @@
 import { SupportFlags, Errors } from "./constants";
 
+export function getUrl() {
+  try {
+    return window.location.href;
+  } catch (error) {
+    return "";
+  }
+}
+
+export function getSupport() {
+  let support = SupportFlags.none;
+
+  if (window.AudioContext || window.webkitAudioContext) {
+    support |= SupportFlags.audio;
+  }
+
+  if (window.ontouchstart || window.onmsgesturechange) {
+    support |= SupportFlags.touch;
+  }
+
+  return support;
+}
+
 export function getClassNames() {
   var classNames = [];
 
@@ -22,29 +44,6 @@ export function getClassNames() {
   }
 
   return classNames.join(" ");
-}
-
-export function getUrl() {
-  try {
-    // Throws an error in node test environment
-    return window.location.href;
-  } catch (error) {
-    return "";
-  }
-}
-
-export function getSupport() {
-  let support = SupportFlags.none;
-
-  if (window.AudioContext || window.webkitAudioContext) {
-    support |= SupportFlags.audio;
-  }
-
-  if (window.ontouchstart || window.onmsgesturechange) {
-    support |= SupportFlags.touch;
-  }
-
-  return support;
 }
 
 export function delay(ms) {

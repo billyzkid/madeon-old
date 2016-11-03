@@ -1,7 +1,7 @@
 import React from "react";
 import "./PlayerButton.scss";
 
-class PlayerButton extends React.Component {
+export default class PlayerButton extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,5 +23,3 @@ PlayerButton.propTypes = {
   sample: React.PropTypes.object,
   onClick: React.PropTypes.func
 };
-
-export default PlayerButton;

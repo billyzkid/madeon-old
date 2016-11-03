@@ -7,6 +7,6 @@ it("renders", () => {
   ReactDOM.render(<PlayerButton />, document.createElement("div"));
 });
 
-it("renders sample", () => {
+it("renders props", () => {
   ReactDOM.render(<PlayerButton sample={defaultSamples[0]} onClick={(event, sample) => {}} />, document.createElement("div"));
 });

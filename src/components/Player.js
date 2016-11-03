@@ -2,7 +2,7 @@ import React from "react";
 import PlayerButton from "./PlayerButton";
 import "./Player.scss";
 
-class Player extends React.Component {
+export default class Player extends React.Component {
   render() {
     return (
       <div className="player">
@@ -20,5 +20,3 @@ Player.propTypes = {
 Player.defaultProps = {
   samples: []
 };
-
-export default Player;
