@@ -1,8 +1,18 @@
 .help {
   position: absolute;
-  top: 50%;
+  top: 100px;
   left: 50%;
-  width: 600px;
-  background: blue;
-  transform: translate(-50%,-50%);
+  text-align: center;
+  transform: translate(-50%, 0%);
+
+  ol {
+    list-style: none;
+    padding: 0px;
+  }
+  
+  + .button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 }

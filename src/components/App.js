@@ -16,6 +16,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this._showHelp = this._showHelp.bind(this);
+    this._hideHelp = this._hideHelp.bind(this);
     this._openUrlDialog = this._openUrlDialog.bind(this);
     this._closeUrlDialog = this._closeUrlDialog.bind(this);
     this._openMidiDialog = this._openMidiDialog.bind(this);
@@ -40,6 +42,7 @@ export default class App extends React.Component {
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
+      isHelpVisible: false,
       isUrlDialogOpen: false,
       isMidiDialogOpen: false,
       isLoadErrorVisible: false,
@@ -49,6 +52,7 @@ export default class App extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.props.samples !== nextProps.samples
+      || this.state.isHelpVisible !== nextState.isHelpVisible
       || this.state.isUrlDialogOpen !== nextState.isUrlDialogOpen
       || this.state.isMidiDialogOpen !== nextState.isMidiDialogOpen
       || this.state.isLoadErrorVisible !== nextState.isLoadErrorVisible
@@ -117,8 +121,8 @@ export default class App extends React.Component {
             </ol>
           </section>
         </Info>
-        <Help>
-        <Player samples={this.props.samples} onClick={this._onPlayerClick} />
+        <Help isVisible={this.state.isHelpVisible} onShow={this._showHelp} onHide={this._hideHelp}>
+          { /* <Player samples={this.props.samples} onClick={this._onPlayerClick} /> */ }
           <h1>Welcome to Madeon's Adventure Machine</h1>
           <ol>
             <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
@@ -147,6 +151,14 @@ export default class App extends React.Component {
         </Error>
       </div>
     );
+  }
+
+  _showHelp() {
+    this.setState({ isHelpVisible: true });
+  }
+
+  _hideHelp() {
+    this.setState({ isHelpVisible: false });
   }
 
   _openUrlDialog() {
@@ -214,7 +226,7 @@ export default class App extends React.Component {
   }
 
   _onHelpButtonClick(event) {
-    debugger;
+    this._showHelp();
   }
 
   _onPlayButtonClick(event) {

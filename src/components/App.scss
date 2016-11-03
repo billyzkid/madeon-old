@@ -20,41 +20,43 @@
 
   .header {
     position: absolute;
-    top: 0px;
+    top: 35px;
     left: 50%;
-    transform: translate(-50%, 35px);
+    transform: translate(-50%, 0%);
   }
 
   .footer {
     position: absolute;
-    bottom: 0px;
+    bottom: 10px;
     left: 50%;
-    transform: translate(-50%,-10px);
+    transform: translate(-50%, 0%);
   }
 
-  .buttons > section {
-    position: absolute;
-    display: flex;
-    flex-flow: column;
+  .buttons {
+    > section {
+      position: absolute;
+      display: flex;
+      flex-flow: column;
 
-    &:nth-child(1) {
-      top: 18px;
-      left: 18px;
-    }
+      &:nth-child(1) {
+        top: 18px;
+        left: 18px;
+      }
 
-    &:nth-child(2) {
-      top: 18px;
-      right: 18px;
-    }
+      &:nth-child(2) {
+        top: 18px;
+        right: 18px;
+      }
 
-    &:nth-child(3) {
-      bottom: 18px;
-      left: 18px;
-    }
+      &:nth-child(3) {
+        bottom: 18px;
+        left: 18px;
+      }
 
-    &:nth-child(4) {
-      bottom: 18px;
-      right: 18px;
+      &:nth-child(4) {
+        bottom: 18px;
+        right: 18px;
+      }
     }
   }
 }
