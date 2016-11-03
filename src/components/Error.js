@@ -5,7 +5,7 @@ import "./Error.scss";
 export default class Error extends React.Component {
   render() {
     return (
-      <Overlay isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
+      <Overlay isInitialFocusEnabled isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
         <div className="error">{this.props.children}</div>
       </Overlay>
     );
