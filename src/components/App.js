@@ -4,10 +4,11 @@ import Dancer from "./Dancer";
 import Dialog from "./Dialog";
 import Error from "./Error";
 import Flipper from "./Flipper";
+import Help from "./Help";
+import Info from "./Info";
 import Looper from "./Looper";
-import Overlay from "./Overlay";
 import Player from "./Player";
-import Wizard from "./Wizard";
+import Splash from "./Splash";
 import { getUrl } from "../scripts/functions";
 import "./App.scss";
 
@@ -17,6 +18,11 @@ class App extends React.Component {
 
     // document.body.addEventListener("click", (event) => console.log("click"));
     // document.body.addEventListener("keydown", (event) => console.log("keydown"));
+
+    this._openUrlDialog = this._openUrlDialog.bind(this);
+    this._closeUrlDialog = this._closeUrlDialog.bind(this);
+    this._openMidiDialog = this._openMidiDialog.bind(this);
+    this._closeMidiDialog = this._closeMidiDialog.bind(this);
 
     this._onPlayerClick = this._onPlayerClick.bind(this);
     this._onShareButtonClick = this._onShareButtonClick.bind(this);
@@ -30,39 +36,8 @@ class App extends React.Component {
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
-    this._onLoadingOverlayShow = this._onLoadingOverlayShow.bind(this);
-    this._onLoadingOverlayHide = this._onLoadingOverlayHide.bind(this);
-    this._onTouchOverlayShow = this._onTouchOverlayShow.bind(this);
-    this._onTouchOverlayHide = this._onTouchOverlayHide.bind(this);
-    this._onAboutOverlayShow = this._onAboutOverlayShow.bind(this);
-    this._onAboutOverlayHide = this._onAboutOverlayHide.bind(this);
-    this._onAboutOverlayLaunchpadLinkClick = this._onAboutOverlayLaunchpadLinkClick.bind(this);
-    this._onAboutOverlayCloseButtonClick = this._onAboutOverlayCloseButtonClick.bind(this);
-    this._onLaunchpadOverlayShow = this._onLaunchpadOverlayShow.bind(this);
-    this._onLaunchpadOverlayHide = this._onLaunchpadOverlayHide.bind(this);
-    this._onLaunchpadOverlayMidiLinkClick = this._onLaunchpadOverlayMidiLinkClick.bind(this);
-    this._onLaunchpadOverlayCloseButtonClick = this._onLaunchpadOverlayCloseButtonClick.bind(this);
-    this._onHelpWizardShow = this._onHelpWizardShow.bind(this);
-    this._onHelpWizardHide = this._onHelpWizardHide.bind(this);
-    this._onHelpWizardCloseButtonClick = this._onHelpWizardCloseButtonClick.bind(this);
-    this._onAudioContextUnsupportedErrorShow = this._onAudioContextUnsupportedErrorShow.bind(this);
-    this._onAudioContextUnsupportedErrorHide = this._onAudioContextUnsupportedErrorHide.bind(this);
-    this._onLoadErrorShow = this._onLoadErrorShow.bind(this);
-    this._onLoadErrorHide = this._onLoadErrorHide.bind(this);
-    this._onLoadErrorReloadLinkClick = this._onLoadErrorReloadLinkClick.bind(this);
-    this._onUrlDialogOpen = this._onUrlDialogOpen.bind(this);
-    this._onUrlDialogClose = this._onUrlDialogClose.bind(this);
-    this._onMidiDialogOpen = this._onMidiDialogOpen.bind(this);
-    this._onMidiDialogClose = this._onMidiDialogClose.bind(this);
 
     this.state = {
-      isLoadingOverlayVisible: false,
-      isTouchOverlayVisible: false,
-      isAboutOverlayVisible: false,
-      isLaunchpadOverlayVisible: false,
-      isHelpWizardVisible: false,
-      isAudioContextUnsupportedErrorVisible: false,
-      isLoadErrorVisible: false,
       isUrlDialogOpen: false,
       isMidiDialogOpen: false
     };
@@ -99,32 +74,34 @@ class App extends React.Component {
         <Looper />
         <Dancer />
         <Player samples={this.props.samples} onClick={this._onPlayerClick} />
-        <Overlay isVisible={this.state.isLoadingOverlayVisible} onShow={this._onLoadingOverlayShow} onHide={this._onLoadingOverlayHide}>
-          <Flipper />
-          <h1>Loading samples</h1>
-          <h2>Please wait</h2>
-        </Overlay>
-        <Overlay isVisible={this.state.isTouchOverlayVisible} onShow={this._onTouchOverlayShow} onHide={this._onTouchOverlayHide}>
-          <h1>Tap to begin</h1>
-        </Overlay>
-        <Overlay isVisible={this.state.isAboutOverlayVisible} onShow={this._onAboutOverlayShow} onHide={this._onAboutOverlayHide}>
-          <h1>About</h1>
-          <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
-          <p><a onClick={this._onAboutOverlayLaunchpadLinkClick}>Got a Launchpad?</a></p>
-          <Button label="Close" onClick={this._onAboutOverlayCloseButtonClick} />
-        </Overlay>
-        <Overlay isVisible={this.state.isLaunchpadOverlayVisible} onShow={this._onLaunchpadOverlayShow} onHide={this._onLaunchpadOverlayHide}>
-          <h1>Connect your Launchpad</h1>
-          <ol>
-            <li><a onClick={this._onLaunchpadOverlayMidiLinkClick}>Enable the Web MIDI API</a></li>
-            <li>Plug in your Launchpad</li>
-            <li>Restart your browser</li>
-            <li>Revisit this page</li>
-            <li>Make your mix</li>
-          </ol>
-          <Button label="Close" onClick={this._onLaunchpadOverlayCloseButtonClick} />
-        </Overlay>
-        <Wizard isVisible={this.state.isHelpWizardVisible} onShow={this._onHelpWizardShow} onHide={this._onHelpWizardHide}>
+        <Splash>
+          <section>
+            <Flipper />
+            <h1>Loading samples</h1>
+            <h2>Please wait</h2>
+          </section>
+          <section>
+            <h1>Tap to begin</h1>
+          </section>
+        </Splash>
+        <Info>
+          <section>
+            <h1>About</h1>
+            <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
+            <p><a>Got a Launchpad?</a></p>
+          </section>
+          <section>
+            <h1>Connect your Launchpad</h1>
+            <ol>
+              <li><a>Enable the Web MIDI API</a></li>
+              <li>Plug in your Launchpad</li>
+              <li>Restart your browser</li>
+              <li>Revisit this page</li>
+              <li>Make your mix</li>
+            </ol>
+          </section>
+        </Info>
+        <Help>
           <Player samples={this.props.samples} onClick={this._onPlayerClick} />
           <h1>Welcome to Madeon's Adventure Machine</h1>
           <ol>
@@ -133,22 +110,21 @@ class App extends React.Component {
             <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
             <li>Done, now go make some music!</li>
           </ol>
-          <Button label="Close" onClick={this._onHelpWizardCloseButtonClick} />
-        </Wizard>
-        <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onAudioContextUnsupportedErrorShow} onHide={this._onAudioContextUnsupportedErrorHide}>
+        </Help>
+        <Error>
           <p>This browser does not support the fancy new Web Audio API.</p>
           <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
         </Error>
-        <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
+        <Error>
           <p>Something went horribly wrong.</p>
-          <p>Please <a onClick={this._onLoadErrorReloadLinkClick}>reload</a> the page or try back later.</p>
+          <p>Please <a>reload</a> the page or try back later.</p>
         </Error>
-        <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose} closeOnEscape closeOnClick closeOnButtonClick>
+        <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._openUrlDialog} onClose={this._closeUrlDialog} closeOnEscape closeOnClick closeOnButtonClick>
           <h1>Your mix URL</h1>
           <p>Copy the following URL, and then share it with the world.</p>
           <input type="url" value={getUrl()} readOnly />
         </Dialog>
-        <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose} closeOnEscape closeOnClick closeOnButtonClick>
+        <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._openMidiDialog} onClose={this._closeMidiDialog} closeOnEscape closeOnClick closeOnButtonClick>
           <h1>Enable the Web MIDI API</h1>
           <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
           <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
@@ -157,16 +133,32 @@ class App extends React.Component {
     );
   }
 
+  _openUrlDialog() {
+    this.setState({ isUrlDialogOpen: true });
+  }
+
+  _closeUrlDialog() {
+    this.setState({ isUrlDialogOpen: false });
+  }
+
+  _openMidiDialog() {
+    this.setState({ isMidiDialogOpen: true });
+  }
+
+  _closeMidiDialog() {
+    this.setState({ isMidiDialogOpen: false });
+  }
+
   _onPlayerClick(event, sample) {
     debugger;
   }
 
   _onShareButtonClick(event) {
-    this.setState({ isMidiDialogOpen: true });
+    debugger;
   }
 
   _onUrlButtonClick(event) {
-    this.setState({ isUrlDialogOpen: true });
+    this._openUrlDialog();
   }
 
   _onTwitterButtonClick(event) {
@@ -203,106 +195,6 @@ class App extends React.Component {
 
   _onStopButtonClick(event) {
     debugger;
-  }
-
-  _onLoadingOverlayShow(event) {
-    debugger;
-  }
-
-  _onLoadingOverlayHide(event) {
-    debugger;
-  }
-
-  _onTouchOverlayShow(event) {
-    debugger;
-  }
-
-  _onTouchOverlayHide(event) {
-    debugger;
-  }
-
-  _onAboutOverlayShow(event) {
-    debugger;
-  }
-
-  _onAboutOverlayHide(event) {
-    debugger;
-  }
-
-  _onAboutOverlayLaunchpadLinkClick(event) {
-    debugger;
-  }
-
-  _onAboutOverlayCloseButtonClick(event) {
-    debugger;
-  }
-
-  _onLaunchpadOverlayShow(event) {
-    debugger;
-  }
-
-  _onLaunchpadOverlayHide(event) {
-    debugger;
-  }
-
-  _onLaunchpadOverlayMidiLinkClick(event) {
-    this.setState({ isMidiDialogOpen: true });
-  }
-
-  _onLaunchpadOverlayCloseButtonClick(event) {
-    debugger;
-  }
-
-  _onHelpWizardShow(event) {
-    debugger;
-  }
-
-  _onHelpWizardHide(event) {
-    debugger;
-  }
-
-  _onHelpWizardCloseButtonClick(event) {
-    debugger;
-  }
-
-  _onAudioContextUnsupportedErrorShow(event) {
-    debugger;
-  }
-
-  _onAudioContextUnsupportedErrorHide(event) {
-    debugger;
-  }
-
-  _onLoadErrorShow(event) {
-    debugger;
-  }
-
-  _onLoadErrorHide(event) {
-    debugger;
-  }
-
-  _onLoadErrorReloadLinkClick(event) {
-    debugger;
-  }
-
-  _onUrlDialogOpen() {
-    console.log("_onUrlDialogOpen");
-    this.setState({ isUrlDialogOpen: true });
-  }
-
-  _onUrlDialogClose() {
-    console.log("_onUrlDialogClose");
-    this.setState({ isUrlDialogOpen: false });
-  }
-
-  _onMidiDialogOpen() {
-    console.log("_onMidiDialogOpen");
-    this.setState({ isMidiDialogOpen: true });
-  }
-
-  _onMidiDialogClose() {
-    console.log("_onMidiDialogClose");
-    this.setState({ isMidiDialogOpen: false });
   }
 }
 
