@@ -56,6 +56,8 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log("render", this.constructor.name);
+
     return (
       <div className="app">
         <div className="header">
