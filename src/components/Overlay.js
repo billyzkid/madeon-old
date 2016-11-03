@@ -4,7 +4,7 @@ import { KeyCodes } from "../scripts/constants";
 import { getClassNames } from "../scripts/functions";
 import "./Overlay.scss";
 
-export default class Overlay extends React.Component {
+export default class Overlay extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -19,13 +19,10 @@ export default class Overlay extends React.Component {
       this._hide();
     }
   }
-
-  // TODO: Extend React.PureComponent?
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.isVisible !== nextProps.isVisible;
-  }
-
+  
   render() {
+    console.log("render", this.props.name);
+
     // See https://github.com/davidtheclark/focus-trap-react
     const focusTrapOptions = {
       initialFocus: this.props.isInitialFocusEnabled ? null : ".overlay",
@@ -71,6 +68,7 @@ export default class Overlay extends React.Component {
 }
 
 Overlay.propTypes = {
+  name: React.PropTypes.string,
   isInitialFocusEnabled: React.PropTypes.bool,
   isEscapeEnabled: React.PropTypes.bool,
   isDismissEnabled: React.PropTypes.bool,

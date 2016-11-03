@@ -47,6 +47,14 @@ export default class App extends React.Component {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.samples !== nextProps.samples
+      || this.state.isUrlDialogOpen !== nextState.isUrlDialogOpen
+      || this.state.isMidiDialogOpen !== nextState.isMidiDialogOpen
+      || this.state.isLoadErrorVisible !== nextState.isLoadErrorVisible
+      || this.state.isAudioContextUnsupportedErrorVisible !== nextState.isAudioContextUnsupportedErrorVisible;
+  }
+
   render() {
     return (
       <div className="app">
@@ -108,7 +116,7 @@ export default class App extends React.Component {
           </section>
         </Info>
         <Help>
-          <Player samples={this.props.samples} onClick={this._onPlayerClick} />
+        <Player samples={this.props.samples} onClick={this._onPlayerClick} />
           <h1>Welcome to Madeon's Adventure Machine</h1>
           <ol>
             <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
@@ -117,21 +125,21 @@ export default class App extends React.Component {
             <li>Done, now go make some music!</li>
           </ol>
         </Help>
-        <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._openUrlDialog} onClose={this._closeUrlDialog}>
+        <Dialog name="UrlDialog" isOpen={this.state.isUrlDialogOpen} onOpen={this._openUrlDialog} onClose={this._closeUrlDialog}>
           <h1>Your mix URL</h1>
           <p>Copy the following URL, and then share it with the world.</p>
           <input type="url" value={getUrl()} readOnly />
         </Dialog>
-        <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._openMidiDialog} onClose={this._closeMidiDialog}>
+        <Dialog name="MidiDialog" isOpen={this.state.isMidiDialogOpen} onOpen={this._openMidiDialog} onClose={this._closeMidiDialog}>
           <h1>Enable the Web MIDI API</h1>
           <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
           <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
         </Dialog>
-        <Error isVisible={this.state.isLoadErrorVisible} onShow={this._showLoadError} onHide={this._hideLoadError}>
+        <Error name="LoadError" isVisible={this.state.isLoadErrorVisible} onShow={this._showLoadError} onHide={this._hideLoadError}>
           <p>Something went horribly wrong.</p>
           <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
         </Error>
-        <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._showAudioContextUnsupportedError} onHide={this._hideAudioContextUnsupportedError}>
+        <Error name="AudioContextUnsupportedError" isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._showAudioContextUnsupportedError} onHide={this._hideAudioContextUnsupportedError}>
           <p>This browser does not support the fancy new Web Audio API.</p>
           <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
         </Error>

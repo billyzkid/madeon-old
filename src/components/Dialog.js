@@ -3,10 +3,12 @@ import Button from "./Button";
 import Overlay from "./Overlay";
 import "./Dialog.scss";
 
-export default class Dialog extends React.Component {
+export default class Dialog extends React.PureComponent {
   render() {
+    console.log("render", this.props.name);
+    
     return (
-      <Overlay isInitialFocusEnabled isEscapeEnabled isDismissEnabled isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose}>
+      <Overlay name={this.props.name + "Overlay"} isInitialFocusEnabled isEscapeEnabled isDismissEnabled isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose}>
         <div className="dialog">{this.props.children}</div>
         <Button icon="&#xf00d;" title="Close" onClick={this.props.onClose} />
       </Overlay>
@@ -15,6 +17,7 @@ export default class Dialog extends React.Component {
 }
 
 Dialog.propTypes = {
+  name: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
   onOpen: React.PropTypes.func,
   onClose: React.PropTypes.func,

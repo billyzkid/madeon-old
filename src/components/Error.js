@@ -2,10 +2,12 @@ import React from "react";
 import Overlay from "./Overlay";
 import "./Error.scss";
 
-export default class Error extends React.Component {
+export default class Error extends React.PureComponent {
   render() {
+    console.log("render", this.props.name);
+
     return (
-      <Overlay isInitialFocusEnabled isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
+      <Overlay name={this.props.name + "Overlay"} isInitialFocusEnabled isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
         <div className="error">{this.props.children}</div>
       </Overlay>
     );
@@ -13,6 +15,7 @@ export default class Error extends React.Component {
 }
 
 Error.propTypes = {
+  name: React.PropTypes.string,
   isVisible: React.PropTypes.bool,
   onShow: React.PropTypes.func,
   onHide: React.PropTypes.func,
