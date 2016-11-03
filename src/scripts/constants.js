@@ -1,3 +1,7 @@
+export const KeyCodes = {
+  escape: 27
+};
+
 export const SupportFlags = {
   none: 0,
   audio: 1,
@@ -43,10 +47,6 @@ export const DialogState = {
   default: 0,
   dialog1: 1,
   dialog2: 1
-};
-
-export const KeyCodes = {
-  escape: 27
 };
 
 export const ErrorState = {

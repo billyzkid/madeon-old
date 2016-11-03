@@ -129,7 +129,7 @@ export default class App extends React.Component {
         </Dialog>
         <Error isVisible={this.state.isLoadErrorVisible} onShow={this._showLoadError} onHide={this._hideLoadError}>
           <p>Something went horribly wrong.</p>
-          <p>Please <a onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
+          <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
         </Error>
         <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._showAudioContextUnsupportedError} onHide={this._hideAudioContextUnsupportedError}>
           <p>This browser does not support the fancy new Web Audio API.</p>
@@ -176,7 +176,7 @@ export default class App extends React.Component {
   }
 
   _onShareButtonClick(event) {
-    debugger;
+    this._showLoadError();
   }
 
   _onUrlButtonClick(event) {

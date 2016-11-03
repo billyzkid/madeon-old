@@ -1,4 +1,5 @@
 import React from "react";
+import FocusTrap from "focus-trap-react";
 import { KeyCodes } from "../scripts/constants";
 import { getClassNames } from "../scripts/functions";
 import "./Overlay.scss";
@@ -19,16 +20,9 @@ export default class Overlay extends React.Component {
     }
   }
 
+  // TODO: Extend React.PureComponent?
   shouldComponentUpdate(nextProps, nextState) {
     return this.props.isVisible !== nextProps.isVisible;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.isVisible && !prevProps.isVisible) {
-      this.refs.self.focus();
-    } else if (!this.props.isVisible && prevProps.isVisible) {
-      this.refs.self.blur();
-    }
   }
 
   render() {
@@ -37,7 +31,9 @@ export default class Overlay extends React.Component {
     });
 
     return (
-      <div ref="self" className={classNames} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex={-1}>{this.props.children}</div>
+      <FocusTrap active={this.props.isVisible} focusTrapOptions={{ escapeDeactivates: false }}>
+        <div ref="overlay" className={classNames} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex={this.props.isInitialFocusEnabled ? -1 : 0}>{this.props.children}</div>
+      </FocusTrap>
     );
   }
 
@@ -54,22 +50,23 @@ export default class Overlay extends React.Component {
   }
 
   _onKeyDown(event) {
-    if (this.props.canEscape && event.keyCode === KeyCodes.escape) {
+    if (this.props.isEscapeEnabled && event.keyCode === KeyCodes.escape) {
       event.preventDefault();
       this._hide();
     }
   }
 
   _onClick(event) {
-    if (this.props.canDismiss && event.target === this.refs.self) {
+    if (this.props.isDismissEnabled && event.target === this.refs.overlay) {
       this._hide();
     }
   }
 }
 
 Overlay.propTypes = {
-  canEscape: React.PropTypes.bool,
-  canDismiss: React.PropTypes.bool,
+  isInitialFocusEnabled: React.PropTypes.bool,
+  isEscapeEnabled: React.PropTypes.bool,
+  isDismissEnabled: React.PropTypes.bool,
   isVisible: React.PropTypes.bool,
   onShow: React.PropTypes.func,
   onHide: React.PropTypes.func,
