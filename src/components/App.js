@@ -16,6 +16,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this._showSplash = this._showSplash.bind(this);
+    this._hideSplash = this._hideSplash.bind(this);
+    this._showInfo = this._showInfo.bind(this);
+    this._hideInfo = this._hideInfo.bind(this);
     this._showHelp = this._showHelp.bind(this);
     this._hideHelp = this._hideHelp.bind(this);
     this._openUrlDialog = this._openUrlDialog.bind(this);
@@ -26,7 +30,6 @@ export default class App extends React.Component {
     this._hideLoadError = this._hideLoadError.bind(this);
     this._showAudioContextUnsupportedError = this._showAudioContextUnsupportedError.bind(this);
     this._hideAudioContextUnsupportedError = this._hideAudioContextUnsupportedError.bind(this);
-
     this._onPlayerClick = this._onPlayerClick.bind(this);
     this._onShareButtonClick = this._onShareButtonClick.bind(this);
     this._onUrlButtonClick = this._onUrlButtonClick.bind(this);
@@ -39,11 +42,12 @@ export default class App extends React.Component {
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
-
     this._onMidiLinkClick = this._onMidiLinkClick.bind(this);
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
+      isSplashVisible: false,
+      isInfoVisible: false,
       isHelpVisible: false,
       isUrlDialogOpen: false,
       isMidiDialogOpen: false,
@@ -54,6 +58,8 @@ export default class App extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.props.samples !== nextProps.samples
+      || this.state.isSplashVisible !== nextState.isSplashVisible
+      || this.state.isInfoVisible !== nextState.isInfoVisible
       || this.state.isHelpVisible !== nextState.isHelpVisible
       || this.state.isUrlDialogOpen !== nextState.isUrlDialogOpen
       || this.state.isMidiDialogOpen !== nextState.isMidiDialogOpen
@@ -96,7 +102,7 @@ export default class App extends React.Component {
         <Looper />
         <Dancer />
         <Player samples={this.props.samples} onClick={this._onPlayerClick} />
-        <Splash>
+        <Splash isVisible={this.state.isSplashVisible} onShow={this._showSplash} onHide={this._hideSplash}>
           <section>
             <Flipper />
             <h1>Loading samples</h1>
@@ -106,7 +112,7 @@ export default class App extends React.Component {
             <h1>Tap to begin</h1>
           </section>
         </Splash>
-        <Info>
+        <Info isVisible={this.state.isInfoVisible} onShow={this._showInfo} onHide={this._hideInfo}>
           <section>
             <h1>About</h1>
             <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
@@ -155,6 +161,22 @@ export default class App extends React.Component {
     );
   }
 
+  _showSplash() {
+    this.setState({ isSplashVisible: true });
+  }
+
+  _hideSplash() {
+    this.setState({ isSplashVisible: false });
+  }
+
+  _showInfo() {
+    this.setState({ isInfoVisible: true });
+  }
+
+  _hideInfo() {
+    this.setState({ isInfoVisible: false });
+  }
+
   _showHelp() {
     this.setState({ isHelpVisible: true });
   }
@@ -196,7 +218,7 @@ export default class App extends React.Component {
   }
 
   _onPlayerClick(event, sample) {
-    debugger;
+    this._showSplash();
   }
 
   _onShareButtonClick(event) {
@@ -220,11 +242,11 @@ export default class App extends React.Component {
   }
 
   _onAboutButtonClick(event) {
-    debugger;
+    this._showInfo();
   }
 
   _onLaunchpadButtonClick(event) {
-    debugger;
+    this._showInfo();
   }
 
   _onHelpButtonClick(event) {

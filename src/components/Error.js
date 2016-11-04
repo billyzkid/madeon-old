@@ -8,7 +8,7 @@ export default class Error extends React.PureComponent {
     const classNames = getClassNames("error", this.props.className);
 
     return (
-      <Overlay className={classNames} isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide} initialFocusEnabled>
+      <Overlay className={classNames} isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
         <div className="content">{this.props.children}</div>
       </Overlay>
     );
