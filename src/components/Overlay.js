@@ -21,17 +21,22 @@ export default class Overlay extends React.PureComponent {
   }
 
   render() {
-    const containerClassNames = getClassNames("container", { visible: this.props.isVisible });
-    const container = <div ref="container" className={containerClassNames} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex="-1">{this.props.children}</div>;
-    
     // See https://github.com/davidtheclark/focus-trap-react
     const focusTrapOptions = {
-      initialFocus: this.props.initialFocusEnabled ? null : container,
-      fallbackFocus: container,
+      initialFocus: this.props.initialFocusEnabled ? null : ".container",
+      fallbackFocus: ".container",
       escapeDeactivates: false
     };
 
-    return <FocusTrap className={this.props.className} active={this.props.isVisible} focusTrapOptions={focusTrapOptions}>{container}</FocusTrap>;
+    const containerClassNames = getClassNames("container", {
+      visible: this.props.isVisible
+    });
+
+    return (
+      <FocusTrap className={this.props.className} active={this.props.isVisible} focusTrapOptions={focusTrapOptions}>
+        <div ref="container" className={containerClassNames} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex="-1">{this.props.children}</div>
+      </FocusTrap>
+    );
   }
 
   _show() {
