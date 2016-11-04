@@ -5,11 +5,9 @@ import "./Dialog.scss";
 
 export default class Dialog extends React.PureComponent {
   render() {
-    console.log("render", this.props.name);
-    
     return (
-      <Overlay name={this.props.name + "Overlay"} isInitialFocusEnabled isEscapeEnabled isDismissEnabled isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose}>
-        <div className="dialog">{this.props.children}</div>
+      <Overlay className={this.props.className} isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose} initialFocusEnabled escapeEnabled dismissEnabled>
+        <div className="content">{this.props.children}</div>
         <Button icon="&#xf00d;" title="Close" onClick={this.props.onClose} />
       </Overlay>
     );
@@ -17,9 +15,13 @@ export default class Dialog extends React.PureComponent {
 }
 
 Dialog.propTypes = {
-  name: React.PropTypes.string,
+  className: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
   onOpen: React.PropTypes.func,
   onClose: React.PropTypes.func,
   children: React.PropTypes.node
+};
+
+Dialog.defaultProps = {
+  className: "dialog"
 };

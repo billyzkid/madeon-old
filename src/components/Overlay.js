@@ -19,26 +19,19 @@ export default class Overlay extends React.PureComponent {
       this._hide();
     }
   }
-  
-  render() {
-    console.log("render", this.props.name);
 
+  render() {
+    const containerClassNames = getClassNames("container", { visible: this.props.isVisible });
+    const container = <div ref="container" className={containerClassNames} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex="-1">{this.props.children}</div>;
+    
     // See https://github.com/davidtheclark/focus-trap-react
     const focusTrapOptions = {
-      initialFocus: this.props.isInitialFocusEnabled ? null : ".overlay",
-      fallbackFocus: ".overlay",
+      initialFocus: this.props.initialFocusEnabled ? null : container,
+      fallbackFocus: container,
       escapeDeactivates: false
     };
 
-    const classNames = getClassNames("overlay", {
-      visible: this.props.isVisible
-    });
-
-    return (
-      <FocusTrap active={this.props.isVisible} focusTrapOptions={focusTrapOptions}>
-        <div ref="overlay" className={classNames} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex="-1">{this.props.children}</div>
-      </FocusTrap>
-    );
+    return <FocusTrap className={this.props.className} active={this.props.isVisible} focusTrapOptions={focusTrapOptions}>{container}</FocusTrap>;
   }
 
   _show() {
@@ -54,26 +47,30 @@ export default class Overlay extends React.PureComponent {
   }
 
   _onKeyDown(event) {
-    if (this.props.isEscapeEnabled && event.keyCode === KeyCodes.escape) {
+    if (this.props.escapeEnabled && event.keyCode === KeyCodes.escape) {
       event.preventDefault();
       this._hide();
     }
   }
 
   _onClick(event) {
-    if (this.props.isDismissEnabled && event.target === this.refs.overlay) {
+    if (this.props.dismissEnabled && event.target === this.refs.container) {
       this._hide();
     }
   }
 }
 
 Overlay.propTypes = {
-  name: React.PropTypes.string,
-  isInitialFocusEnabled: React.PropTypes.bool,
-  isEscapeEnabled: React.PropTypes.bool,
-  isDismissEnabled: React.PropTypes.bool,
+  className: React.PropTypes.string,
   isVisible: React.PropTypes.bool,
   onShow: React.PropTypes.func,
   onHide: React.PropTypes.func,
+  initialFocusEnabled: React.PropTypes.bool,
+  escapeEnabled: React.PropTypes.bool,
+  dismissEnabled: React.PropTypes.bool,
   children: React.PropTypes.node
+};
+
+Overlay.defaultProps = {
+  className: "overlay"
 };

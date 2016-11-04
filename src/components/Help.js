@@ -5,11 +5,9 @@ import "./Help.scss";
 
 export default class Help extends React.PureComponent {
   render() {
-    console.log("render", this.constructor.name);
-    
     return (
-      <Overlay name={this.constructor.name + "Overlay"} isEscapeEnabled isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
-        <div className="help">{this.props.children}</div>
+      <Overlay className={this.props.className} isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide} escapeEnabled>
+        <div className="content">{this.props.children}</div>
         <Button icon="&#xf00d;" title="Close" onClick={this.props.onHide} />
       </Overlay>
     );
@@ -17,8 +15,13 @@ export default class Help extends React.PureComponent {
 }
 
 Help.propTypes = {
+  className: React.PropTypes.string,
   isVisible: React.PropTypes.bool,
   onShow: React.PropTypes.func,
   onHide: React.PropTypes.func,
   children: React.PropTypes.node
+};
+
+Help.defaultProps = {
+  className: "help"
 };
