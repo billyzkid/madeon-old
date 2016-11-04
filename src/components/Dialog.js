@@ -7,12 +7,14 @@ import "./Dialog.scss";
 export default class Dialog extends React.PureComponent {
   render() {
     const classNames = getClassNames("dialog", this.props.className);
-
+    
     return (
-      <Overlay className={classNames} isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose} initialFocusEnabled escapeEnabled dismissEnabled>
-        <div className="content">{this.props.children}</div>
-        <Button icon="&#xf00d;" title="Close" onClick={this.props.onClose} />
-      </Overlay>
+      <div className={classNames}>
+        <Overlay isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose} initialFocusEnabled dismissEnabled escapeEnabled>
+          <div className="content">{this.props.children}</div>
+          <Button icon="&#xf00d;" title="Close" onClick={this.props.onClose} />
+        </Overlay>
+      </div>
     );
   }
 }

@@ -9,10 +9,12 @@ export default class Info extends React.PureComponent {
     const classNames = getClassNames("info", this.props.className);
 
     return (
-      <Overlay className={classNames} isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide} escapeEnabled>
-        <div className="content">{this.props.children}</div>
-        <Button icon="&#xf00d;" title="Close" onClick={this.props.onHide} />
-      </Overlay>
+      <div className={classNames}>
+        <Overlay isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide} escapeEnabled>
+          <div className="content">{this.props.children}</div>
+          <Button icon="&#xf00d;" title="Close" onClick={this.props.onHide} />
+        </Overlay>
+      </div>
     );
   }
 }

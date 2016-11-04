@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import FocusTrap from "focus-trap-react";
 import { KeyCodes } from "../scripts/constants";
 import { getClassNames } from "../scripts/functions";
@@ -9,8 +8,8 @@ export default class Overlay extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._onKeyDown = this._onKeyDown.bind(this);
     this._onClick = this._onClick.bind(this);
+    this._onKeyDown = this._onKeyDown.bind(this);
 
     // See https://github.com/davidtheclark/focus-trap-react
     this._focusTrapOptions = {
@@ -19,17 +18,21 @@ export default class Overlay extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (!this.props.initialFocusEnabled) {
-      const node = ReactDOM.findDOMNode(this);
-      this._focusTrapOptions.initialFocus = node;
-      this._focusTrapOptions.fallbackFocus = node;
+    this._updateFocusTrapOptions();
+
+    if (this.props.isVisible) {
+      this._show();
+    } else {
+      this._hide();
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.isVisible && nextProps.isVisible) {
+  componentDidUpdate(prevProps, prevState) {
+    this._updateFocusTrapOptions();
+
+    if (!prevProps.isVisible && this.props.isVisible) {
       this._show();
-    } else if (this.props.isVisible && !nextProps.isVisible) {
+    } else if (prevProps.isVisible && !this.props.isVisible) {
       this._hide();
     }
   }
@@ -39,11 +42,19 @@ export default class Overlay extends React.PureComponent {
       visible: this.props.isVisible
     });
 
+    // Explicit truthy/falsy conversion required
+    const isFocusTrapActive = !!this.props.isVisible;
+
     return (
-      <FocusTrap className={classNames} active={this.props.isVisible} focusTrapOptions={this._focusTrapOptions} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex="-1">
+      <FocusTrap ref="focusTrap" className={classNames} active={isFocusTrapActive} focusTrapOptions={this._focusTrapOptions} onClick={this._onClick} onKeyDown={this._onKeyDown} tabIndex="-1">
         {this.props.children}
       </FocusTrap>
     );
+  }
+
+  _updateFocusTrapOptions() {
+    this._focusTrapOptions.initialFocus = !this.props.initialFocusEnabled ? this.refs.focusTrap.node : null;
+    this._focusTrapOptions.fallbackFocus = this.refs.focusTrap.node;
   }
 
   _show() {
@@ -58,15 +69,15 @@ export default class Overlay extends React.PureComponent {
     }
   }
 
-  _onKeyDown(event) {
-    if (this.props.escapeEnabled && event.keyCode === KeyCodes.escape) {
-      event.preventDefault();
+  _onClick(event) {
+    if (this.props.dismissEnabled && event.target === this.refs.focusTrap.node) {
       this._hide();
     }
   }
 
-  _onClick(event) {
-    if (this.props.dismissEnabled && event.target === ReactDOM.findDOMNode(this)) {
+  _onKeyDown(event) {
+    if (this.props.escapeEnabled && event.keyCode === KeyCodes.escape) {
+      event.preventDefault();
       this._hide();
     }
   }
@@ -78,7 +89,7 @@ Overlay.propTypes = {
   onShow: React.PropTypes.func,
   onHide: React.PropTypes.func,
   initialFocusEnabled: React.PropTypes.bool,
-  escapeEnabled: React.PropTypes.bool,
   dismissEnabled: React.PropTypes.bool,
+  escapeEnabled: React.PropTypes.bool,
   children: React.PropTypes.node
 };

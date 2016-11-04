@@ -8,9 +8,11 @@ export default class Splash extends React.PureComponent {
     const classNames = getClassNames("splash", this.props.className);
 
     return (
-      <Overlay className={classNames} isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
-        <div className="content">{this.props.children}</div>
-      </Overlay>
+      <div className={classNames}>
+        <Overlay isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
+          <div className="content">{this.props.children}</div>
+        </Overlay>
+      </div>
     );
   }
 }

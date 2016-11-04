@@ -42,6 +42,7 @@ export default class App extends React.Component {
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
+    this._onLaunchpadLinkClick = this._onLaunchpadLinkClick.bind(this);
     this._onMidiLinkClick = this._onMidiLinkClick.bind(this);
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
@@ -116,7 +117,7 @@ export default class App extends React.Component {
           <section>
             <h1>About</h1>
             <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
-            <p><a>Got a Launchpad?</a></p>
+            <p><a href="" onClick={this._onLaunchpadLinkClick}>Got a Launchpad?</a></p>
           </section>
           <section>
             <h1>Connect your Launchpad</h1>
@@ -139,21 +140,21 @@ export default class App extends React.Component {
             <li>Done, now go make some music!</li>
           </ol>
         </Help>
-        <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._openUrlDialog} onClose={this._closeUrlDialog}>
+        <Dialog className="url-dialog" isOpen={this.state.isUrlDialogOpen} onOpen={this._openUrlDialog} onClose={this._closeUrlDialog}>
           <h1>Your mix URL</h1>
           <p>Copy the following URL, and then share it with the world.</p>
           <input type="url" value={getUrl()} readOnly />
         </Dialog>
-        <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._openMidiDialog} onClose={this._closeMidiDialog}>
+        <Dialog className="midi-dialog" isOpen={this.state.isMidiDialogOpen} onOpen={this._openMidiDialog} onClose={this._closeMidiDialog}>
           <h1>Enable the Web MIDI API</h1>
           <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
           <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
         </Dialog>
-        <Error isVisible={this.state.isLoadErrorVisible} onShow={this._showLoadError} onHide={this._hideLoadError}>
+        <Error className="load-error" isVisible={this.state.isLoadErrorVisible} onShow={this._showLoadError} onHide={this._hideLoadError}>
           <p>Something went horribly wrong.</p>
           <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
         </Error>
-        <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._showAudioContextUnsupportedError} onHide={this._hideAudioContextUnsupportedError}>
+        <Error className="audio-context-unsupported-error" isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._showAudioContextUnsupportedError} onHide={this._hideAudioContextUnsupportedError}>
           <p>This browser does not support the fancy new Web Audio API.</p>
           <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
         </Error>
@@ -263,6 +264,11 @@ export default class App extends React.Component {
 
   _onStopButtonClick(event) {
     debugger;
+  }
+
+  _onLaunchpadLinkClick(event) {
+    event.preventDefault();
+    this._showInfo();
   }
 
   _onMidiLinkClick(event) {
