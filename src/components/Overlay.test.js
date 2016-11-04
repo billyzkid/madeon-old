@@ -7,5 +7,5 @@ it("renders", () => {
 });
 
 it("renders props", () => {
-  ReactDOM.render(<Overlay isInitialFocusEnabled isEscapeEnabled isDismissEnabled isVisible onShow={() => {}} onHide={() => {}}>Foo</Overlay>, document.createElement("div"));
+  ReactDOM.render(<Overlay isVisible onShow={() => {}} onHide={() => {}} initialFocusEnabled escapeEnabled dismissEnabled>Foo</Overlay>, document.createElement("div"));
 });

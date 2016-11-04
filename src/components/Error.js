@@ -1,11 +1,14 @@
 import React from "react";
 import Overlay from "./Overlay";
+import { getClassNames } from "../scripts/functions";
 import "./Error.scss";
 
 export default class Error extends React.PureComponent {
   render() {
+    const classNames = getClassNames("error", this.props.className);
+
     return (
-      <Overlay className={this.props.className} isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide} initialFocusEnabled>
+      <Overlay className={classNames} isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide} initialFocusEnabled>
         <div className="content">{this.props.children}</div>
       </Overlay>
     );
@@ -18,8 +21,4 @@ Error.propTypes = {
   onShow: React.PropTypes.func,
   onHide: React.PropTypes.func,
   children: React.PropTypes.node
-};
-
-Error.defaultProps = {
-  className: "error"
 };

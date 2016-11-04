@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import FocusTrap from "focus-trap-react";
 import { KeyCodes } from "../scripts/constants";
 import { getClassNames } from "../scripts/functions";
@@ -10,6 +11,19 @@ export default class Overlay extends React.PureComponent {
 
     this._onKeyDown = this._onKeyDown.bind(this);
     this._onClick = this._onClick.bind(this);
+
+    // See https://github.com/davidtheclark/focus-trap-react
+    this._focusTrapOptions = {
+      escapeDeactivates: false
+    };
+  }
+
+  componentDidMount() {
+    if (!this.props.initialFocusEnabled) {
+      const node = ReactDOM.findDOMNode(this);
+      this._focusTrapOptions.initialFocus = node;
+      this._focusTrapOptions.fallbackFocus = node;
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,20 +35,13 @@ export default class Overlay extends React.PureComponent {
   }
 
   render() {
-    // See https://github.com/davidtheclark/focus-trap-react
-    const focusTrapOptions = {
-      initialFocus: this.props.initialFocusEnabled ? null : ".container",
-      fallbackFocus: ".container",
-      escapeDeactivates: false
-    };
-
-    const containerClassNames = getClassNames("container", {
+    const classNames = getClassNames("overlay", this.props.className, {
       visible: this.props.isVisible
     });
 
     return (
-      <FocusTrap className={this.props.className} active={this.props.isVisible} focusTrapOptions={focusTrapOptions}>
-        <div ref="container" className={containerClassNames} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex="-1">{this.props.children}</div>
+      <FocusTrap className={classNames} active={this.props.isVisible} focusTrapOptions={this._focusTrapOptions} onKeyDown={this._onKeyDown} onClick={this._onClick} tabIndex="-1">
+        {this.props.children}
       </FocusTrap>
     );
   }
@@ -59,7 +66,7 @@ export default class Overlay extends React.PureComponent {
   }
 
   _onClick(event) {
-    if (this.props.dismissEnabled && event.target === this.refs.container) {
+    if (this.props.dismissEnabled && event.target === ReactDOM.findDOMNode(this)) {
       this._hide();
     }
   }
@@ -74,8 +81,4 @@ Overlay.propTypes = {
   escapeEnabled: React.PropTypes.bool,
   dismissEnabled: React.PropTypes.bool,
   children: React.PropTypes.node
-};
-
-Overlay.defaultProps = {
-  className: "overlay"
 };
