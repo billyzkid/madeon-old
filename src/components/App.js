@@ -1,12 +1,13 @@
 import React from "react";
 import Button from "./Button";
 import Dancer from "./Dancer";
-import Dialog from "./Dialog";
-import Error from "./Error";
-import Flipper from "./Flipper";
+import { UrlDialog, MidiDialog } from "./Dialog";
+import { LoadError, AudioContextUnsupportedError } from "./Error";
+// import Flipper from "./Flipper";
 import Help from "./Help";
 import Info from "./Info";
 import Looper from "./Looper";
+// import Overlay from "./Overlay";
 import Player from "./Player";
 import Splash from "./Splash";
 import { getUrl } from "../scripts/functions";
@@ -47,6 +48,7 @@ export default class App extends React.Component {
     this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
 
     this.state = {
+      url: getUrl(),
       isSplashVisible: false,
       isInfoVisible: false,
       isHelpVisible: false,
@@ -59,6 +61,7 @@ export default class App extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.props.samples !== nextProps.samples
+      || this.state.url !== nextState.Url
       || this.state.isSplashVisible !== nextState.isSplashVisible
       || this.state.isInfoVisible !== nextState.isInfoVisible
       || this.state.isHelpVisible !== nextState.isHelpVisible
@@ -103,61 +106,13 @@ export default class App extends React.Component {
         <Looper />
         <Dancer />
         <Player samples={this.props.samples} onClick={this._onPlayerClick} />
-        <Splash isVisible={this.state.isSplashVisible} onShow={this._showSplash} onHide={this._hideSplash}>
-          <section>
-            <Flipper />
-            <h1>Loading samples</h1>
-            <h2>Please wait</h2>
-          </section>
-          <section>
-            <h1>Tap to begin</h1>
-          </section>
-        </Splash>
-        <Info isVisible={this.state.isInfoVisible} onShow={this._showInfo} onHide={this._hideInfo}>
-          <section>
-            <h1>About</h1>
-            <p>Make your own mix with samples from Madeon's debut album Adventure.</p>
-            <p><a href="" onClick={this._onLaunchpadLinkClick}>Got a Launchpad?</a></p>
-          </section>
-          <section>
-            <h1>Connect your Launchpad</h1>
-            <ol>
-              <li><a href="" onClick={this._onMidiLinkClick}>Enable the Web MIDI API</a></li>
-              <li>Plug in your Launchpad</li>
-              <li>Restart your browser</li>
-              <li>Revisit this page</li>
-              <li>Make your mix</li>
-            </ol>
-          </section>
-        </Info>
-        <Help isVisible={this.state.isHelpVisible} onShow={this._showHelp} onHide={this._hideHelp}>
-          {/* <Player samples={this.props.samples} onClick={this._onPlayerClick} /> */}
-          <h1>Welcome to Madeon's Adventure Machine</h1>
-          <ol>
-            <li>To begin, press one of the blue squares, these are the drum loops, only one will play at a time.</li>
-            <li>Now, press one of the red squares, these are the bass loops, only one will play at a time.</li>
-            <li>Next, press one of the green squares, these are the sound loops, up to three can play at a time.</li>
-            <li>Done, now go make some music!</li>
-          </ol>
-        </Help>
-        <Dialog className="url-dialog" isOpen={this.state.isUrlDialogOpen} onOpen={this._openUrlDialog} onClose={this._closeUrlDialog}>
-          <h1>Your mix URL</h1>
-          <p>Copy the following URL, and then share it with the world.</p>
-          <input type="url" value={getUrl()} readOnly />
-        </Dialog>
-        <Dialog className="midi-dialog" isOpen={this.state.isMidiDialogOpen} onOpen={this._openMidiDialog} onClose={this._closeMidiDialog}>
-          <h1>Enable the Web MIDI API</h1>
-          <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
-          <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
-        </Dialog>
-        <Error className="load-error" isVisible={this.state.isLoadErrorVisible} onShow={this._showLoadError} onHide={this._hideLoadError}>
-          <p>Something went horribly wrong.</p>
-          <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
-        </Error>
-        <Error className="audio-context-unsupported-error" isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._showAudioContextUnsupportedError} onHide={this._hideAudioContextUnsupportedError}>
-          <p>This browser does not support the fancy new Web Audio API.</p>
-          <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
-        </Error>
+        <Splash isVisible={this.state.isSplashVisible} onShow={this._showSplash} onHide={this._hideSplash} />
+        <Info isVisible={this.state.isInfoVisible} onShow={this._showInfo} onHide={this._hideInfo} />
+        <Help isVisible={this.state.isHelpVisible} onShow={this._showHelp} onHide={this._hideHelp} />
+        <UrlDialog url={this.state.url} isOpen={this.state.isUrlDialogOpen} onOpen={this._openUrlDialog} onClose={this._closeUrlDialog} />
+        <MidiDialog isOpen={this.state.isMidiDialogOpen} onOpen={this._openMidiDialog} onClose={this._closeMidiDialog} />
+        <LoadError isVisible={this.state.isLoadErrorVisible} onShow={this._showLoadError} onHide={this._hideLoadError} />
+        <AudioContextUnsupportedError isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._showAudioContextUnsupportedError} onHide={this._hideAudioContextUnsupportedError} />
       </div>
     );
   }
