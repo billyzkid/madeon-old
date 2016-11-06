@@ -1,3 +1,17 @@
+export const Actions = {
+  share: "share",
+  url: "url",
+  twitter: "twitter",
+  facebook: "facebook",
+  info: "info",
+  about: "about",
+  launchpad: "launchpad",
+  help: "help",
+  play: "play",
+  pause: "pause",
+  stop: "stop"
+}
+
 export const KeyCodes = {
   escape: 27
 };
