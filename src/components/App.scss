@@ -17,4 +17,18 @@
     outline: lime dashed 2px;
     outline-offset: 1px;
   }
+
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  .header {
+    align-self: flex-start;
+  }
+
+  .footer {
+    align-self: flex-end;
+  }
 }
