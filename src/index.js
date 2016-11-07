@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import { defaultSamples } from "./scripts/samples";
-import "./index.css";
+import "./index.scss";
 
-ReactDOM.render(<App samples={defaultSamples} />, document.getElementById("app-container"));
+ReactDOM.render(<App />, document.getElementById("madeon"));

@@ -1,27 +1,3 @@
-import { SupportFlags, Errors } from "./constants";
-
-export function getUrl() {
-  try {
-    return window.location.href;
-  } catch (error) {
-    return "";
-  }
-}
-
-export function getSupport() {
-  let support = SupportFlags.none;
-
-  if (window.AudioContext || window.webkitAudioContext) {
-    support |= SupportFlags.audio;
-  }
-
-  if (window.ontouchstart || window.onmsgesturechange) {
-    support |= SupportFlags.touch;
-  }
-
-  return support;
-}
-
 export function getClassNames() {
   var classNames = [];
 
@@ -46,31 +22,4 @@ export function getClassNames() {
   }
 
   return classNames.join(" ");
-}
-
-export function delay(ms) {
-  return new Promise((resolve, reject) => {
-    setTimeout(resolve, ms);
-  });
-}
-
-export function loadImage(src) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = resolve;
-    image.onerror = reject;
-    image.src = src;
-  });
-}
-
-export function loadAudioContext() {
-  return new Promise((resolve, reject) => {
-    if (window.AudioContext) {
-      resolve(new window.AudioContext());
-    } else if (window.webkitAudioContext) {
-      resolve(new window.webkitAudioContext());
-    } else {
-      reject(Errors.audioContextUnsupported);
-    }
-  });
 }
